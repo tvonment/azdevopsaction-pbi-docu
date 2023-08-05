@@ -1,0 +1,45 @@
+{
+    "id": "44f4b8eb-9ff8-43bf-aacd-dac82bae1a76",
+    "name": "pbiCreateWiki",
+    "friendlyName": "PBI Create Wiki",
+    "description": "Create Wiki from exported JSON",
+    "author": "Thomas",
+    "helpMarkDown": "Ask Thomas",
+    "category": "Utility",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "demands": [],
+    "version": {
+        "Major": "1",
+        "Minor": "0",
+        "Patch": "1"
+    },
+    "minimumAgentVersion": "1.83.0",
+    "instanceNameFormat": "PBI Create Wiki $(message)",
+    "inputs": [
+        {
+            "name": "workDir",
+            "type": "string",
+            "label": "Working Directory",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Working Directory"
+        },
+        {
+            "name": "pat",
+            "type": "string",
+            "label": "PAT",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "TODO"
+        }
+    ],
+    "execution": {
+        "Node": {
+            "target": "myscript.js",
+            "argumentFormat": ""
+        }
+    }
+}

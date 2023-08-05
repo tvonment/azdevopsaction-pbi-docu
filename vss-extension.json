@@ -1,0 +1,56 @@
+{
+    "manifestVersion": 1,
+    "id": "cosopbidocumenter",
+    "name": "CoSo Power BI Documenter",
+    "version": "1.0.0",
+    "publisher": "CorporateSoftwareOnline",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "description": "This extension contains tasks to export Power BI reports and create a wiki page with the exported reports.",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "icon.png"
+    },
+    "content": {
+        "details": {
+            "path": "README.md"
+        }
+    },
+    "contributions": [
+        {
+            "id": "pbiExport",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "pbiExport"
+            }
+        },
+        {
+            "id": "pbiCreateWiki",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "pbiCreateWiki"
+            }
+        }
+    ],
+    "files": [
+        {
+            "path": "pbiExport",
+            "addressable": true
+        },
+        {
+            "path": "pbiCreateWiki",
+            "addressable": true
+        }
+    ]
+}
