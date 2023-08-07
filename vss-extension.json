@@ -1,9 +1,9 @@
 {
     "manifestVersion": 1,
     "id": "cosopbidocumenter",
-    "name": "CoSo Power BI Documenter",
+    "name": "CoSo PowerBI Documenter",
     "version": "1.0.0",
-    "publisher": "CorporateSoftwareOnline",
+    "publisher": "CorporateSoftwareAG",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
