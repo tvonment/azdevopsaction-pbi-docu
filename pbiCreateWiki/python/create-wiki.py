@@ -23,10 +23,34 @@ def prepare_markdown(workspace, scan_date, work_dir):
     mdIndex.new_header(level=1, title='Power BI Workspaces Scan')
     mdIndex.new_paragraph("Last Scan: " + scan_date)
     mdIndex.new_paragraph("Last Wiki updated: " + datetime.now().strftime('%B %d, %Y %H:%M:%S'))
-    mdIndex.new_header(level=3, title='Reports')
+    mdIndex.new_header(level=2, title='Reports')
+
+    list_of_datasets = []
+    list_of_datasets.extend(['Workspace', 'Dataset Name', 'Last Modified'])
+
+    for dataset in datasets:
+        dataset_wiki_name = dataset['name'].replace(' ', '-')
+        list_of_datasets.extend([f"{workspace['name']}", f"[{dataset['name']}](./{dataset_wiki_name}.md)", datetime.strptime(dataset['createdDate'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])  
+        dataset_path = os.path.join(wiki_path, "Datasets")
+        if not os.path.exists(dataset_path):
+            os.makedirs(dataset_path)
+
+        mdOverview = mdutils.MdUtils(file_name=os.path.join(dataset_path, dataset_wiki_name))
+        mdOverview.new_header(level=1, title=dataset['name'])
+        list_of_rows = []
+        list_of_rows.extend(['Dataset ID', dataset['id']])
+        list_of_rows.extend(['Configured By', dataset['configuredBy']])
+        list_of_rows.extend(['Target Storage Mode', dataset['targetStorageMode']])
+        list_of_rows.extend(['Content Provider Type', dataset['contentProviderType']])
+        list_of_rows.extend(['Created Date', datetime.strptime(dataset['createdDate'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
+        mdOverview.new_table(columns=2, rows=5, text=list_of_rows, text_align='left')
+        
+        
+        mdOverview.create_md_file()
+
     list_of_reports = []
     list_of_reports.extend(['Workspace', 'Report Name', 'Last Modified'])
-
+    
     for report in reports:
         report_wiki_name = report['name'].replace(' ', '-')
         list_of_reports.extend([f"{workspace['name']}", f"[{report['name']}](./{report_wiki_name}.md)", datetime.strptime(report['modifiedDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
@@ -37,18 +61,17 @@ def prepare_markdown(workspace, scan_date, work_dir):
         mdOverview = mdutils.MdUtils(file_name=os.path.join(wiki_path, report_wiki_name))
         mdOverview.new_header(level=1, title=report['name'])
         dataset = datasets_dict[report['datasetId']]
-        
+        dataset_wiki_path = 'Datasets/' + dataset['name'].replace(' ', '-') + '.md'
+
         list_of_rows = []
-        list_of_rows.extend(['Workspace', workspace['name']])
         list_of_rows.extend(['Report ID', report['id']])
-        list_of_rows.extend(['Dataset Name', dataset['name']])
-        list_of_rows.extend(['Dataset ID', dataset['id']])
+        list_of_rows.extend(['Dataset Name', f"[{dataset['name']}](./{dataset_wiki_path})"])
         list_of_rows.extend(['Created By', report['createdBy']])
         list_of_rows.extend(['Created Date', datetime.strptime(report['createdDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
         list_of_rows.extend(['Modified By', report['modifiedBy']])
         list_of_rows.extend(['Modified Date', datetime.strptime(report['modifiedDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
 
-        mdOverview.new_table(columns=2, rows=8, text=list_of_rows, text_align='left')    
+        mdOverview.new_table(columns=2, rows=6, text=list_of_rows, text_align='left')    
         mdOverview.create_md_file()
 
         mdMCode = mdutils.MdUtils(file_name=os.path.join(report_path, 'mcode'))
@@ -91,7 +114,7 @@ def prepare_markdown(workspace, scan_date, work_dir):
         mdMCode.create_md_file()
         mdDAX.create_md_file()
 
-    columns = 2
+    columns = 3
     mdIndex.new_table(columns=columns, rows=len(list_of_reports)//columns, text=list_of_reports, text_align='left')  
     return mdIndex
 
@@ -111,12 +134,13 @@ def git_operations(pat):
         print(f"An error occurred during Git operations: {str(e)}")
 
 def main():
-    work_dir = sys.argv[1]
-    pat = sys.argv[2]
+    #work_dir = sys.argv[1]
+    #pat = sys.argv[2]
+    work_dir = ""
 
     data = load_data()
     scan_date = data['lastScanDate']
-    workspace = data['workspaces'][0]
+    workspace = data['workspaces'][1]
     mdIndex = prepare_markdown(workspace, scan_date, work_dir)
     mdIndex.create_md_file()
     #git_operations(pat)
