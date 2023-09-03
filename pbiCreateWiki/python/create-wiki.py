@@ -1,4 +1,5 @@
 import os
+import openai
 import json
 import mdutils
 import sys
@@ -9,8 +10,25 @@ from datetime import datetime
 def load_data():
     with open('export/scanResult.json', 'r') as file:
         return json.load(file)
+    
+def get_openai_explanation(systemmessage, text, openai_url, openai_modelname, openai_api_key):
+    openai.api_key = openai_api_key
+    openai.api_type = "azure"
+    openai.api_base = openai_url
+    openai.api_version = "2023-03-15-preview"
+    messages = [{"content": systemmessage, "role": "assistant"}, {"content": text, "role": "user"}]
+    response = openai.ChatCompletion.create(
+      engine=openai_modelname,
+      messages = messages,
+      temperature=0.7,
+      max_tokens=800,
+      top_p=0.95,
+      frequency_penalty=0,
+      presence_penalty=0,
+      stop=None)
+    return response.choices[0].message.content
 
-def prepare_markdown(workspace, scan_date, mdIndex, wiki_path):
+def prepare_markdown(workspace, scan_date, mdIndex, wiki_path, openai_url,  openai_modelname, openai_api_key):
     reports = sorted(workspace['reports'], key=lambda x: x['modifiedDateTime'], reverse=True)
     datasets = workspace['datasets']
     datasets_dict = {obj["id"]: obj for obj in datasets}
@@ -92,6 +110,8 @@ def prepare_markdown(workspace, scan_date, mdIndex, wiki_path):
             measures = [measure for measure in table['measures'] if measure.get('expression') is not None]
             if len(calculated_table_columns) == 0:
                 mdMCode.new_header(level=2, title='Table: ' + table['name'])
+                gpt_response = get_openai_explanation("Explain the following M Code:", table['source'][0]['expression'], openai_url,  openai_modelname, openai_api_key)
+                mdMCode.new_paragraph(gpt_response)
                 mdMCode.insert_code(table['source'][0]['expression'], 'm')
 
             if len(calculated_columns) > 0 or len(measures) > 0 or len(calculated_table_columns) > 0:
@@ -113,6 +133,8 @@ def prepare_markdown(workspace, scan_date, mdIndex, wiki_path):
                 mdMCode.new_header(level=2, title='Parameter: ' + parameter['name'])
                 if parameter.get('description') is not None:
                     mdMCode.new_paragraph(parameter['description'])
+                gpt_response = get_openai_explanation("Explain the following M Code of a Parameter:", parameter['expression'], openai_url,  openai_modelname, openai_api_key)
+                mdMCode.new_paragraph(gpt_response)
                 mdMCode.insert_code(parameter['expression'], 'm')
 
         mdMCode.create_md_file()
@@ -143,6 +165,9 @@ def git_operations(pat):
 def main():
     work_dir = sys.argv[1]
     pat = sys.argv[2]
+    openai_url = sys.argv[3]
+    openai_modelname = sys.argv[4]
+    openai_api_key = sys.argv[5]
 
     data = load_data()
     scan_date = data['lastScanDate']
@@ -154,7 +179,7 @@ def main():
 
     mdIndex = mdutils.MdUtils(file_name=os.path.join(wiki_path, 'Workspaces-Scan'))
     for workspace in workspaces:
-        mdIndex = prepare_markdown(workspace, scan_date, mdIndex, wiki_path)
+        mdIndex = prepare_markdown(workspace, scan_date, mdIndex, wiki_path, openai_url, openai_modelname, openai_api_key)
     mdIndex.create_md_file()
     #git_operations(pat)
 

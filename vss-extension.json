@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "cosopbidocumenter",
     "name": "CoSo PowerBI Documenter",
-    "version": "1.0.8",
+    "version": "1.0.1",
     "publisher": "CorporateSoftwareAG",
     "targets": [
         {
