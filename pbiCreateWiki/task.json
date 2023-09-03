@@ -14,7 +14,7 @@
     "version": {
         "Major": "1",
         "Minor": "0",
-        "Patch": "7"
+        "Patch": "8"
     },
     "minimumAgentVersion": "1.83.0",
     "instanceNameFormat": "PBI Create Wiki $(message)",
@@ -33,7 +33,31 @@
             "label": "PAT",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "TODO"
+            "helpMarkDown": "Personal Access Token"
+        },
+        {
+            "name": "openai_url",
+            "type": "string",
+            "label": "OpenAI URL",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "URL for OpenAI API Service"
+        },
+        {
+            "name": "openai_modelname",
+            "type": "string",
+            "label": "OpenAI Model Name",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Deployed OpenAI Model Name for use"
+        },
+        {
+            "name": "openai_key",
+            "type": "string",
+            "label": "OpenAI Key",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Access Key for Azure OpenAI Service"
         }
     ],
     "execution": {
