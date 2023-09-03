@@ -181,7 +181,7 @@ def main():
     for workspace in workspaces:
         mdIndex = prepare_markdown(workspace, scan_date, mdIndex, wiki_path, openai_url, openai_modelname, openai_api_key)
     mdIndex.create_md_file()
-    #git_operations(pat)
+    git_operations(pat)
 
 if __name__ == '__main__':
     main()
