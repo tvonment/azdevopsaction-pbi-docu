@@ -50,7 +50,7 @@ def prepare_markdown(workspace, scan_date, work_dir):
 
     list_of_reports = []
     list_of_reports.extend(['Workspace', 'Report Name', 'Last Modified'])
-    
+
     for report in reports:
         report_wiki_name = report['name'].replace(' ', '-')
         list_of_reports.extend([f"{workspace['name']}", f"[{report['name']}](./{report_wiki_name}.md)", datetime.strptime(report['modifiedDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
@@ -134,16 +134,15 @@ def git_operations(pat):
         print(f"An error occurred during Git operations: {str(e)}")
 
 def main():
-    #work_dir = sys.argv[1]
-    #pat = sys.argv[2]
-    work_dir = ""
+    work_dir = sys.argv[1]
+    pat = sys.argv[2]
 
     data = load_data()
     scan_date = data['lastScanDate']
     workspace = data['workspaces'][1]
     mdIndex = prepare_markdown(workspace, scan_date, work_dir)
     mdIndex.create_md_file()
-    #git_operations(pat)
+    git_operations(pat)
 
 if __name__ == '__main__':
     main()

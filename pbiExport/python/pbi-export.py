@@ -53,7 +53,7 @@ else:
     workspaces_ids = [group_id]
 
 # Start the scan
-start_scan_url = f"https://api.powerbi.com/v1.0/myorg/admin/workspaces/getInfo?lineage=True&datasourceDetails=True&datasetSchema=True&datasetExpressions=True"
+start_scan_url = f"https://api.powerbi.com/v1.0/myorg/admin/workspaces/getInfo?lineage=True&datasourceDetails=True&datasetSchema=True&datasetExpressions=True&getArtifactUsers=True"
 workspaces = {
   "workspaces": workspaces_ids
 }
