@@ -48,9 +48,9 @@ async function run() {
     try {
         const workingDirectory = tl.getVariable('System.DefaultWorkingDirectory') || "";
         const pat = tl.getVariable('pat') || "";
-        const openai_url = tl.getVariable('openai_url') || "";
-        const openai_modelname = tl.getVariable('openai_modelname') || "";
-        const openai_key = tl.getVariable('openai_key') || "";
+        const openaiUrl = tl.getVariable('openaiUrl') || "";
+        const openaiModelname = tl.getVariable('openaiModelname') || "";
+        const openaiKey = tl.getVariable('openaiKey') || "";
 
         const path = require('path');
         const scriptPath = path.join(__dirname, 'python/create-wiki.py');
@@ -59,7 +59,7 @@ async function run() {
         console.log("Script path: " + scriptPath);
         const dep = await installPythonPackages(path.join(__dirname, 'python/requirements.txt'));
         // Run the python script with input as argument
-        const data = await runScript(scriptPath, [workingDirectory, pat, openai_url, openai_modelname, openai_key]);
+        const data = await runScript(scriptPath, [workingDirectory, pat, openaiUrl, openaiModelname, openaiKey]);
         console.log(data);
     }
     catch (err) {
