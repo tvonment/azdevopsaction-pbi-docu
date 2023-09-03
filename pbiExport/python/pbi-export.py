@@ -37,11 +37,25 @@ headers = {
     "Authorization": f"Bearer {access_token}",
 }
 
+if group_id is None or group_id == "": # If no group id is provided, get all workspaces
+    # Get all workspaces
+    workspaces_url = f"https://api.powerbi.com/v1.0/myorg/admin/groups?$top=1000&$filter=type eq 'Workspace'"
+    get_workspaces_response = requests.get(workspaces_url, headers=headers)
+
+    if get_workspaces_response.status_code == 200 or get_workspaces_response.status_code == 202:
+        print(json.dumps(get_workspaces_response.json(), indent=3))
+    else:
+        print(f"Error in API request: {get_workspaces_response.status_code}: {get_workspaces_response.text}")
+        exit(1)
+
+    workspaces_ids = [item['id'] for item in get_workspaces_response.json()['value']]
+else:
+    workspaces_ids = [group_id]
+
+# Start the scan
 start_scan_url = f"https://api.powerbi.com/v1.0/myorg/admin/workspaces/getInfo?lineage=True&datasourceDetails=True&datasetSchema=True&datasetExpressions=True"
 workspaces = {
-  "workspaces": [
-    f"{group_id}"
-  ]
+  "workspaces": workspaces_ids
 }
 
 scan_start_response = requests.post(start_scan_url, headers=headers, data=workspaces)
