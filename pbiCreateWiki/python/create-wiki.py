@@ -19,17 +19,17 @@ def prepare_markdown(workspace, scan_date, work_dir):
     if not os.path.exists(wiki_path):
         os.makedirs(wiki_path)
 
-    mdIndex = mdutils.MdUtils(file_name=os.path.join(wiki_path, 'Workspace-Scan'))
-    mdIndex.new_header(level=1, title='Power BI Workspace Scan')
+    mdIndex = mdutils.MdUtils(file_name=os.path.join(wiki_path, 'Workspaces-Scan'))
+    mdIndex.new_header(level=1, title='Power BI Workspaces Scan')
     mdIndex.new_paragraph("Last Scan: " + scan_date)
     mdIndex.new_paragraph("Last Wiki updated: " + datetime.now().strftime('%B %d, %Y %H:%M:%S'))
-    mdIndex.new_header(level=2, title='Reports')
+    mdIndex.new_header(level=3, title='Reports')
     list_of_reports = []
-    list_of_reports.extend(['Report Name', 'Last Modified'])
+    list_of_reports.extend(['Workspace', 'Report Name', 'Last Modified'])
 
     for report in reports:
         report_wiki_name = report['name'].replace(' ', '-')
-        list_of_reports.extend([f"[{report['name']}](./{report_wiki_name}.md)", datetime.strptime(report['modifiedDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
+        list_of_reports.extend([f"{workspace['name']}", f"[{report['name']}](./{report_wiki_name}.md)", datetime.strptime(report['modifiedDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
         report_path = os.path.join(wiki_path, report_wiki_name)
         if not os.path.exists(report_path):
             os.makedirs(report_path)
@@ -39,6 +39,7 @@ def prepare_markdown(workspace, scan_date, work_dir):
         dataset = datasets_dict[report['datasetId']]
         
         list_of_rows = []
+        list_of_rows.extend(['Workspace', workspace['name']])
         list_of_rows.extend(['Report ID', report['id']])
         list_of_rows.extend(['Dataset Name', dataset['name']])
         list_of_rows.extend(['Dataset ID', dataset['id']])
@@ -47,7 +48,7 @@ def prepare_markdown(workspace, scan_date, work_dir):
         list_of_rows.extend(['Modified By', report['modifiedBy']])
         list_of_rows.extend(['Modified Date', datetime.strptime(report['modifiedDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
 
-        mdOverview.new_table(columns=2, rows=7, text=list_of_rows, text_align='left')    
+        mdOverview.new_table(columns=2, rows=8, text=list_of_rows, text_align='left')    
         mdOverview.create_md_file()
 
         mdMCode = mdutils.MdUtils(file_name=os.path.join(report_path, 'mcode'))
@@ -114,13 +115,11 @@ def main():
     pat = sys.argv[2]
 
     data = load_data()
-    #workspace = data['workspaces'][0]
     scan_date = data['lastScanDate']
-    for workspace in data['workspaces']:
-        mdIndex = prepare_markdown(workspace, scan_date, work_dir)
-        mdIndex.create_md_file()
-    # Maybe do something with mdIndex if needed, otherwise you can omit this line and the return in prepare_markdown.
-    git_operations(pat)
+    workspace = data['workspaces'][0]
+    mdIndex = prepare_markdown(workspace, scan_date, work_dir)
+    mdIndex.create_md_file()
+    #git_operations(pat)
 
 if __name__ == '__main__':
     main()
