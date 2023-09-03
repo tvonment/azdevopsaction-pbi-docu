@@ -10,27 +10,22 @@ def load_data():
     with open('export/scanResult.json', 'r') as file:
         return json.load(file)
 
-def prepare_markdown(workspace, scan_date, work_dir):
+def prepare_markdown(workspace, scan_date, mdIndex, wiki_path):
     reports = sorted(workspace['reports'], key=lambda x: x['modifiedDateTime'], reverse=True)
     datasets = workspace['datasets']
     datasets_dict = {obj["id"]: obj for obj in datasets}
 
-    wiki_path = os.path.join(work_dir, 'wiki')
-    if not os.path.exists(wiki_path):
-        os.makedirs(wiki_path)
-
-    mdIndex = mdutils.MdUtils(file_name=os.path.join(wiki_path, 'Workspaces-Scan'))
-    mdIndex.new_header(level=1, title='Power BI Workspaces Scan')
+    mdIndex.new_header(level=1, title=workspace['name'])
     mdIndex.new_paragraph("Last Scan: " + scan_date)
     mdIndex.new_paragraph("Last Wiki updated: " + datetime.now().strftime('%B %d, %Y %H:%M:%S'))
     mdIndex.new_header(level=2, title='Reports')
 
     list_of_datasets = []
-    list_of_datasets.extend(['Workspace', 'Dataset Name', 'Last Modified'])
+    list_of_datasets.extend(['Dataset Name', 'Last Modified'])
 
     for dataset in datasets:
         dataset_wiki_name = dataset['name'].replace(' ', '-')
-        list_of_datasets.extend([f"{workspace['name']}", f"[{dataset['name']}](./{dataset_wiki_name}.md)", datetime.strptime(dataset['createdDate'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])  
+        list_of_datasets.extend([f"[{dataset['name']}](./{dataset_wiki_name}.md)", datetime.strptime(dataset['createdDate'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])  
         dataset_path = os.path.join(wiki_path, "Datasets")
         if not os.path.exists(dataset_path):
             os.makedirs(dataset_path)
@@ -58,11 +53,11 @@ def prepare_markdown(workspace, scan_date, work_dir):
         mdOverview.create_md_file()
 
     list_of_reports = []
-    list_of_reports.extend(['Workspace', 'Report Name', 'Last Modified'])
+    list_of_reports.extend(['Report Name', 'Last Modified'])
 
     for report in reports:
         report_wiki_name = report['name'].replace(' ', '-')
-        list_of_reports.extend([f"{workspace['name']}", f"[{report['name']}](./{report_wiki_name}.md)", datetime.strptime(report['modifiedDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
+        list_of_reports.extend([f"[{report['name']}](./{report_wiki_name}.md)", datetime.strptime(report['modifiedDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
         report_path = os.path.join(wiki_path, report_wiki_name)
         if not os.path.exists(report_path):
             os.makedirs(report_path)
@@ -123,8 +118,11 @@ def prepare_markdown(workspace, scan_date, work_dir):
         mdMCode.create_md_file()
         mdDAX.create_md_file()
 
-    columns = 3
-    mdIndex.new_table(columns=columns, rows=len(list_of_reports)//columns, text=list_of_reports, text_align='left')  
+    columns = 2
+    mdIndex.new_table(columns=columns, rows=len(list_of_reports)//columns, text=list_of_reports, text_align='left')
+
+    mdIndex.new_line()
+    mdIndex.new_line()
     return mdIndex
 
 def git_operations(pat):
@@ -143,13 +141,20 @@ def git_operations(pat):
         print(f"An error occurred during Git operations: {str(e)}")
 
 def main():
-    #work_dir = sys.argv[1]
-    #pat = sys.argv[2]
-    work_dir = ""
+    work_dir = sys.argv[1]
+    pat = sys.argv[2]
+
     data = load_data()
     scan_date = data['lastScanDate']
-    workspace = data['workspaces'][1]
-    mdIndex = prepare_markdown(workspace, scan_date, work_dir)
+    workspaces = data['workspaces']
+
+    wiki_path = os.path.join(work_dir, 'wiki')
+    if not os.path.exists(wiki_path):
+        os.makedirs(wiki_path)
+
+    mdIndex = mdutils.MdUtils(file_name=os.path.join(wiki_path, 'Workspaces-Scan'))
+    for workspace in workspaces:
+        mdIndex = prepare_markdown(workspace, scan_date, mdIndex, wiki_path)
     mdIndex.create_md_file()
     #git_operations(pat)
 
