@@ -10,7 +10,18 @@
             "dashboards": [],
             "datasets": [],
             "dataflows": [],
-            "datamarts": []
+            "datamarts": [],
+            "users": [
+                {
+                    "groupUserAccessRight": "Admin",
+                    "emailAddress": "admin@CRM038254.onmicrosoft.com",
+                    "displayName": "System Administrator",
+                    "identifier": "admin@CRM038254.onmicrosoft.com",
+                    "graphId": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                    "principalType": "User",
+                    "userType": "Member"
+                }
+            ]
         },
         {
             "id": "4d651e02-affb-40b2-81db-0c3361233f1c",
@@ -31,7 +42,45 @@
                     "modifiedBy": "admin@CRM038254.onmicrosoft.com",
                     "createdBy": "admin@CRM038254.onmicrosoft.com",
                     "modifiedById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
-                    "createdById": "3f908c4d-f6af-4696-9afa-ed5b63033657"
+                    "createdById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                    "users": [
+                        {
+                            "reportUserAccessRight": "Owner",
+                            "emailAddress": "admin@CRM038254.onmicrosoft.com",
+                            "displayName": "System Administrator",
+                            "identifier": "admin@CRM038254.onmicrosoft.com",
+                            "graphId": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                            "principalType": "User",
+                            "userType": "Member"
+                        },
+                        {
+                            "reportUserAccessRight": "Owner",
+                            "emailAddress": null,
+                            "displayName": "Power BI Admins",
+                            "identifier": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "graphId": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "reportUserAccessRight": "ReadWrite",
+                            "emailAddress": null,
+                            "displayName": "Power BI Entwickler",
+                            "identifier": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "graphId": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "reportUserAccessRight": "Owner",
+                            "emailAddress": null,
+                            "displayName": "Power BI Report Documentation Test",
+                            "identifier": "f2610d2d-73a0-45be-91c2-dbbd6f4cdc0d",
+                            "graphId": "7b2b976f-50d1-4c1d-976e-30be4407c727",
+                            "principalType": "App",
+                            "userType": null
+                        }
+                    ]
                 },
                 {
                     "reportType": "PowerBIReport",
@@ -45,7 +94,45 @@
                     "modifiedBy": "admin@CRM038254.onmicrosoft.com",
                     "createdBy": "admin@CRM038254.onmicrosoft.com",
                     "modifiedById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
-                    "createdById": "3f908c4d-f6af-4696-9afa-ed5b63033657"
+                    "createdById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                    "users": [
+                        {
+                            "reportUserAccessRight": "ReadCopy",
+                            "emailAddress": "admin@CRM038254.onmicrosoft.com",
+                            "displayName": "System Administrator",
+                            "identifier": "admin@CRM038254.onmicrosoft.com",
+                            "graphId": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                            "principalType": "User",
+                            "userType": "Member"
+                        },
+                        {
+                            "reportUserAccessRight": "ReadCopy",
+                            "emailAddress": null,
+                            "displayName": "Power BI Admins",
+                            "identifier": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "graphId": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "reportUserAccessRight": "ReadCopy",
+                            "emailAddress": null,
+                            "displayName": "Power BI Entwickler",
+                            "identifier": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "graphId": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "reportUserAccessRight": "ReadCopy",
+                            "emailAddress": null,
+                            "displayName": "Power BI Report Documentation Test",
+                            "identifier": "f2610d2d-73a0-45be-91c2-dbbd6f4cdc0d",
+                            "graphId": "7b2b976f-50d1-4c1d-976e-30be4407c727",
+                            "principalType": "App",
+                            "userType": null
+                        }
+                    ]
                 },
                 {
                     "reportType": "PowerBIReport",
@@ -57,7 +144,45 @@
                     "modifiedBy": "admin@CRM038254.onmicrosoft.com",
                     "createdBy": "admin@CRM038254.onmicrosoft.com",
                     "modifiedById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
-                    "createdById": "3f908c4d-f6af-4696-9afa-ed5b63033657"
+                    "createdById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                    "users": [
+                        {
+                            "reportUserAccessRight": "Owner",
+                            "emailAddress": "admin@CRM038254.onmicrosoft.com",
+                            "displayName": "System Administrator",
+                            "identifier": "admin@CRM038254.onmicrosoft.com",
+                            "graphId": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                            "principalType": "User",
+                            "userType": "Member"
+                        },
+                        {
+                            "reportUserAccessRight": "Owner",
+                            "emailAddress": null,
+                            "displayName": "Power BI Admins",
+                            "identifier": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "graphId": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "reportUserAccessRight": "ReadWrite",
+                            "emailAddress": null,
+                            "displayName": "Power BI Entwickler",
+                            "identifier": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "graphId": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "reportUserAccessRight": "Owner",
+                            "emailAddress": null,
+                            "displayName": "Power BI Report Documentation Test",
+                            "identifier": "f2610d2d-73a0-45be-91c2-dbbd6f4cdc0d",
+                            "graphId": "7b2b976f-50d1-4c1d-976e-30be4407c727",
+                            "principalType": "App",
+                            "userType": null
+                        }
+                    ]
                 },
                 {
                     "reportType": "PowerBIReport",
@@ -69,7 +194,45 @@
                     "modifiedBy": "admin@CRM038254.onmicrosoft.com",
                     "createdBy": "admin@CRM038254.onmicrosoft.com",
                     "modifiedById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
-                    "createdById": "3f908c4d-f6af-4696-9afa-ed5b63033657"
+                    "createdById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                    "users": [
+                        {
+                            "reportUserAccessRight": "Owner",
+                            "emailAddress": "admin@CRM038254.onmicrosoft.com",
+                            "displayName": "System Administrator",
+                            "identifier": "admin@CRM038254.onmicrosoft.com",
+                            "graphId": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                            "principalType": "User",
+                            "userType": "Member"
+                        },
+                        {
+                            "reportUserAccessRight": "Owner",
+                            "emailAddress": null,
+                            "displayName": "Power BI Report Documentation Test",
+                            "identifier": "f2610d2d-73a0-45be-91c2-dbbd6f4cdc0d",
+                            "graphId": "7b2b976f-50d1-4c1d-976e-30be4407c727",
+                            "principalType": "App",
+                            "userType": null
+                        },
+                        {
+                            "reportUserAccessRight": "Owner",
+                            "emailAddress": null,
+                            "displayName": "Power BI Admins",
+                            "identifier": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "graphId": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "reportUserAccessRight": "ReadWrite",
+                            "emailAddress": null,
+                            "displayName": "Power BI Entwickler",
+                            "identifier": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "graphId": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "principalType": "Group",
+                            "userType": null
+                        }
+                    ]
                 }
             ],
             "dashboards": [
@@ -85,7 +248,45 @@
                             "datasetId": "ebb901fc-c217-4150-80b3-0deb7bd30cb6"
                         }
                     ],
-                    "appId": "bea90ce0-2cd8-4c1d-8e77-196ea380223a"
+                    "appId": "bea90ce0-2cd8-4c1d-8e77-196ea380223a",
+                    "users": [
+                        {
+                            "dashboardUserAccessRight": "ReadCopy",
+                            "emailAddress": "admin@CRM038254.onmicrosoft.com",
+                            "displayName": "System Administrator",
+                            "identifier": "admin@CRM038254.onmicrosoft.com",
+                            "graphId": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                            "principalType": "User",
+                            "userType": "Member"
+                        },
+                        {
+                            "dashboardUserAccessRight": "ReadCopy",
+                            "emailAddress": null,
+                            "displayName": "Power BI Admins",
+                            "identifier": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "graphId": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "dashboardUserAccessRight": "ReadCopy",
+                            "emailAddress": null,
+                            "displayName": "Power BI Entwickler",
+                            "identifier": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "graphId": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "dashboardUserAccessRight": "ReadCopy",
+                            "emailAddress": null,
+                            "displayName": "Power BI Report Documentation Test",
+                            "identifier": "f2610d2d-73a0-45be-91c2-dbbd6f4cdc0d",
+                            "graphId": "7b2b976f-50d1-4c1d-976e-30be4407c727",
+                            "principalType": "App",
+                            "userType": null
+                        }
+                    ]
                 },
                 {
                     "id": "3b05c61f-2eca-4969-bb18-4b6b721a75ff",
@@ -124,6 +325,44 @@
                             "reportId": "577f39e0-e585-474b-ba12-dbc7038d7bc9",
                             "datasetId": "ebb901fc-c217-4150-80b3-0deb7bd30cb6"
                         }
+                    ],
+                    "users": [
+                        {
+                            "dashboardUserAccessRight": "Owner",
+                            "emailAddress": "admin@CRM038254.onmicrosoft.com",
+                            "displayName": "System Administrator",
+                            "identifier": "admin@CRM038254.onmicrosoft.com",
+                            "graphId": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                            "principalType": "User",
+                            "userType": "Member"
+                        },
+                        {
+                            "dashboardUserAccessRight": "Owner",
+                            "emailAddress": null,
+                            "displayName": "Power BI Admins",
+                            "identifier": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "graphId": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "dashboardUserAccessRight": "ReadWrite",
+                            "emailAddress": null,
+                            "displayName": "Power BI Entwickler",
+                            "identifier": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "graphId": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "dashboardUserAccessRight": "Owner",
+                            "emailAddress": null,
+                            "displayName": "Power BI Report Documentation Test",
+                            "identifier": "f2610d2d-73a0-45be-91c2-dbbd6f4cdc0d",
+                            "graphId": "7b2b976f-50d1-4c1d-976e-30be4407c727",
+                            "principalType": "App",
+                            "userType": null
+                        }
                     ]
                 },
                 {
@@ -136,6 +375,44 @@
                             "title": "DevOps-Power BI Demo Report x.pbix",
                             "reportId": "7ecfbdd4-a5ce-427b-b73d-cfff984586f6",
                             "datasetId": "152a07fa-8848-4b00-9cc9-d9155c693376"
+                        }
+                    ],
+                    "users": [
+                        {
+                            "dashboardUserAccessRight": "Owner",
+                            "emailAddress": "admin@CRM038254.onmicrosoft.com",
+                            "displayName": "System Administrator",
+                            "identifier": "admin@CRM038254.onmicrosoft.com",
+                            "graphId": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                            "principalType": "User",
+                            "userType": "Member"
+                        },
+                        {
+                            "dashboardUserAccessRight": "Owner",
+                            "emailAddress": null,
+                            "displayName": "Power BI Report Documentation Test",
+                            "identifier": "f2610d2d-73a0-45be-91c2-dbbd6f4cdc0d",
+                            "graphId": "7b2b976f-50d1-4c1d-976e-30be4407c727",
+                            "principalType": "App",
+                            "userType": null
+                        },
+                        {
+                            "dashboardUserAccessRight": "Owner",
+                            "emailAddress": null,
+                            "displayName": "Power BI Admins",
+                            "identifier": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "graphId": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "dashboardUserAccessRight": "ReadWrite",
+                            "emailAddress": null,
+                            "displayName": "Power BI Entwickler",
+                            "identifier": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "graphId": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "principalType": "Group",
+                            "userType": null
                         }
                     ]
                 }
@@ -448,6 +725,44 @@
                         },
                         {
                             "datasourceInstanceId": "4555fdaf-c61d-4f8e-a052-a9bc59140584"
+                        }
+                    ],
+                    "users": [
+                        {
+                            "datasetUserAccessRight": "ReadWriteReshareExplore",
+                            "emailAddress": "admin@CRM038254.onmicrosoft.com",
+                            "displayName": "System Administrator",
+                            "identifier": "admin@CRM038254.onmicrosoft.com",
+                            "graphId": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                            "principalType": "User",
+                            "userType": "Member"
+                        },
+                        {
+                            "datasetUserAccessRight": "ReadWriteReshareExplore",
+                            "emailAddress": null,
+                            "displayName": "Power BI Admins",
+                            "identifier": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "graphId": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "datasetUserAccessRight": "ReadWriteExplore",
+                            "emailAddress": null,
+                            "displayName": "Power BI Entwickler",
+                            "identifier": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "graphId": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "datasetUserAccessRight": "ReadWriteReshareExplore",
+                            "emailAddress": null,
+                            "displayName": "Power BI Report Documentation Test",
+                            "identifier": "f2610d2d-73a0-45be-91c2-dbbd6f4cdc0d",
+                            "graphId": "7b2b976f-50d1-4c1d-976e-30be4407c727",
+                            "principalType": "App",
+                            "userType": null
                         }
                     ]
                 },
@@ -848,6 +1163,44 @@
                         {
                             "datasourceInstanceId": "3b7753e1-eb84-4e48-9260-0d3b631323c7"
                         }
+                    ],
+                    "users": [
+                        {
+                            "datasetUserAccessRight": "ReadWriteReshareExplore",
+                            "emailAddress": "admin@CRM038254.onmicrosoft.com",
+                            "displayName": "System Administrator",
+                            "identifier": "admin@CRM038254.onmicrosoft.com",
+                            "graphId": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                            "principalType": "User",
+                            "userType": "Member"
+                        },
+                        {
+                            "datasetUserAccessRight": "ReadWriteReshareExplore",
+                            "emailAddress": null,
+                            "displayName": "Power BI Admins",
+                            "identifier": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "graphId": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "datasetUserAccessRight": "ReadWriteExplore",
+                            "emailAddress": null,
+                            "displayName": "Power BI Entwickler",
+                            "identifier": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "graphId": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "datasetUserAccessRight": "ReadWriteReshareExplore",
+                            "emailAddress": null,
+                            "displayName": "Power BI Report Documentation Test",
+                            "identifier": "f2610d2d-73a0-45be-91c2-dbbd6f4cdc0d",
+                            "graphId": "7b2b976f-50d1-4c1d-976e-30be4407c727",
+                            "principalType": "App",
+                            "userType": null
+                        }
                     ]
                 },
                 {
@@ -1068,11 +1421,87 @@
                         {
                             "datasourceInstanceId": "f155e09e-e893-4b7b-8b5d-443f301ec1ba"
                         }
+                    ],
+                    "users": [
+                        {
+                            "datasetUserAccessRight": "ReadWriteReshareExplore",
+                            "emailAddress": "admin@CRM038254.onmicrosoft.com",
+                            "displayName": "System Administrator",
+                            "identifier": "admin@CRM038254.onmicrosoft.com",
+                            "graphId": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                            "principalType": "User",
+                            "userType": "Member"
+                        },
+                        {
+                            "datasetUserAccessRight": "ReadWriteReshareExplore",
+                            "emailAddress": null,
+                            "displayName": "Power BI Report Documentation Test",
+                            "identifier": "f2610d2d-73a0-45be-91c2-dbbd6f4cdc0d",
+                            "graphId": "7b2b976f-50d1-4c1d-976e-30be4407c727",
+                            "principalType": "App",
+                            "userType": null
+                        },
+                        {
+                            "datasetUserAccessRight": "ReadWriteReshareExplore",
+                            "emailAddress": null,
+                            "displayName": "Power BI Admins",
+                            "identifier": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "graphId": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                            "principalType": "Group",
+                            "userType": null
+                        },
+                        {
+                            "datasetUserAccessRight": "ReadWriteExplore",
+                            "emailAddress": null,
+                            "displayName": "Power BI Entwickler",
+                            "identifier": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "graphId": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                            "principalType": "Group",
+                            "userType": null
+                        }
                     ]
                 }
             ],
             "dataflows": [],
-            "datamarts": []
+            "datamarts": [],
+            "users": [
+                {
+                    "groupUserAccessRight": "Admin",
+                    "emailAddress": "admin@CRM038254.onmicrosoft.com",
+                    "displayName": "System Administrator",
+                    "identifier": "admin@CRM038254.onmicrosoft.com",
+                    "graphId": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                    "principalType": "User",
+                    "userType": "Member"
+                },
+                {
+                    "groupUserAccessRight": "Admin",
+                    "emailAddress": null,
+                    "displayName": "Power BI Admins",
+                    "identifier": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                    "graphId": "5b530630-ef98-4d36-bb2e-240a6be0e37f",
+                    "principalType": "Group",
+                    "userType": null
+                },
+                {
+                    "groupUserAccessRight": "Contributor",
+                    "emailAddress": null,
+                    "displayName": "Power BI Entwickler",
+                    "identifier": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                    "graphId": "972fc38f-999b-4a95-8aa1-0acd24f8eab2",
+                    "principalType": "Group",
+                    "userType": null
+                },
+                {
+                    "groupUserAccessRight": "Admin",
+                    "emailAddress": null,
+                    "displayName": "Power BI Report Documentation Test",
+                    "identifier": "f2610d2d-73a0-45be-91c2-dbbd6f4cdc0d",
+                    "graphId": "7b2b976f-50d1-4c1d-976e-30be4407c727",
+                    "principalType": "App",
+                    "userType": null
+                }
+            ]
         }
     ],
     "datasourceInstances": [
@@ -1125,5 +1554,5 @@
             "gatewayId": "65377c97-1b07-4cb1-ac4b-d1733e839b75"
         }
     ],
-    "lastScanDate": "September 03, 2023 16:17:35"
+    "lastScanDate": "September 03, 2023 17:33:18"
 }
