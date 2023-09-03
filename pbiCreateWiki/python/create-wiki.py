@@ -69,6 +69,7 @@ def prepare_markdown(workspace, scan_date, mdIndex, wiki_path, openai_url,  open
                         mdOverview.new_paragraph(table_row['name'])
                         mdOverview.insert_code(table_row['filterExpression'], 'm')
         mdOverview.create_md_file()
+        print(dataset_wiki_name + '.md created')
 
     list_of_reports = []
     list_of_reports.extend(['Report Name', 'Last Modified'])
@@ -95,6 +96,7 @@ def prepare_markdown(workspace, scan_date, mdIndex, wiki_path, openai_url,  open
 
         mdOverview.new_table(columns=2, rows=6, text=list_of_rows, text_align='left')    
         mdOverview.create_md_file()
+        print(report_wiki_name + '.md created')
 
         mdMCode = mdutils.MdUtils(file_name=os.path.join(report_path, 'mcode'))
         mdMCode.new_header(level=1, title='M Code')
@@ -138,7 +140,10 @@ def prepare_markdown(workspace, scan_date, mdIndex, wiki_path, openai_url,  open
                 mdMCode.insert_code(parameter['expression'], 'm')
 
         mdMCode.create_md_file()
+        print(report_wiki_name + ' MCode created')
         mdDAX.create_md_file()
+        print(report_wiki_name + ' DAX created')
+
 
     columns = 2
     mdIndex.new_table(columns=columns, rows=len(list_of_reports)//columns, text=list_of_reports, text_align='left')
@@ -161,6 +166,8 @@ def git_operations(pat):
         subprocess.run(["git", "-c", f"http.extraHeader=Authorization: Basic {b64_pat}", "push", "--set-upstream", "origin", branch_name ], check=True)
     except subprocess.CalledProcessError as e:
         print(f"An error occurred during Git operations: {str(e)}")
+    print('Git commands completed')
+
 
 def main():
     work_dir = sys.argv[1]
@@ -181,6 +188,7 @@ def main():
     for workspace in workspaces:
         mdIndex = prepare_markdown(workspace, scan_date, mdIndex, wiki_path, openai_url, openai_modelname, openai_api_key)
     mdIndex.create_md_file()
+    print('Index File created')
     git_operations(pat)
 
 if __name__ == '__main__':
