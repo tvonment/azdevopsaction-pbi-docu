@@ -45,7 +45,16 @@ def prepare_markdown(workspace, scan_date, work_dir):
         list_of_rows.extend(['Created Date', datetime.strptime(dataset['createdDate'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
         mdOverview.new_table(columns=2, rows=5, text=list_of_rows, text_align='left')
         
-        
+        if 'roles' in dataset and len(dataset['roles']) > 0:
+            roles = dataset['roles']
+            mdOverview.new_header(level=2, title='Roles')
+            for role in roles:
+                mdOverview.new_header(level=3, title=role['name'])
+                mdOverview.new_paragraph('Model Permission: ' + role['modelPermission'])
+                if 'tablePermissions' in role and len(role['tablePermissions']) > 0:
+                    for table_row in role['tablePermissions']:
+                        mdOverview.new_paragraph(table_row['name'])
+                        mdOverview.insert_code(table_row['filterExpression'], 'm')
         mdOverview.create_md_file()
 
     list_of_reports = []
@@ -134,15 +143,15 @@ def git_operations(pat):
         print(f"An error occurred during Git operations: {str(e)}")
 
 def main():
-    work_dir = sys.argv[1]
-    pat = sys.argv[2]
-
+    #work_dir = sys.argv[1]
+    #pat = sys.argv[2]
+    work_dir = ""
     data = load_data()
     scan_date = data['lastScanDate']
     workspace = data['workspaces'][1]
     mdIndex = prepare_markdown(workspace, scan_date, work_dir)
     mdIndex.create_md_file()
-    git_operations(pat)
+    #git_operations(pat)
 
 if __name__ == '__main__':
     main()
