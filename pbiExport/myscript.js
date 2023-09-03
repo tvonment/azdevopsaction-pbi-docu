@@ -54,7 +54,7 @@ function run() {
             const tenantId = tl.getInput('tenantId', true) || "";
             const appId = tl.getInput('appId', true) || "";
             const appSecret = tl.getInput('appSecret', true) || "";
-            const groupId = tl.getInput('groupId', true) || "";
+            const groupId = tl.getInput('groupId', false) || "";
             const workingDirectory = tl.getVariable('System.DefaultWorkingDirectory') || "";
             const pat = tl.getVariable('pat') || "";
             const path = require('path');

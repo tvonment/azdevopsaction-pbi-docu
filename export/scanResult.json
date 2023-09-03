@@ -1,0 +1,1129 @@
+{
+    "workspaces": [
+        {
+            "id": "a0df85c2-65d3-4151-971c-a6853149499e",
+            "name": "Power BI Report Documentation Test Workspace Pro",
+            "type": "Workspace",
+            "state": "Active",
+            "isOnDedicatedCapacity": false,
+            "reports": [],
+            "dashboards": [],
+            "datasets": [],
+            "dataflows": [],
+            "datamarts": []
+        },
+        {
+            "id": "4d651e02-affb-40b2-81db-0c3361233f1c",
+            "name": "Power BI Report Documentation Test Workspace PremiumPB",
+            "type": "Workspace",
+            "state": "Active",
+            "isOnDedicatedCapacity": true,
+            "capacityId": "4392FC2C-F03E-4295-BB9E-BA13FA7AFBB9",
+            "defaultDatasetStorageFormat": "Small",
+            "reports": [
+                {
+                    "reportType": "PowerBIReport",
+                    "id": "577f39e0-e585-474b-ba12-dbc7038d7bc9",
+                    "name": "test - Kopie",
+                    "datasetId": "ebb901fc-c217-4150-80b3-0deb7bd30cb6",
+                    "createdDateTime": "2023-06-22T11:34:03.023",
+                    "modifiedDateTime": "2023-07-03T13:21:12.01",
+                    "modifiedBy": "admin@CRM038254.onmicrosoft.com",
+                    "createdBy": "admin@CRM038254.onmicrosoft.com",
+                    "modifiedById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                    "createdById": "3f908c4d-f6af-4696-9afa-ed5b63033657"
+                },
+                {
+                    "reportType": "PowerBIReport",
+                    "id": "e455cac8-8090-45b3-860a-cbd76a48e061",
+                    "name": "[App] test - Kopie",
+                    "datasetId": "ebb901fc-c217-4150-80b3-0deb7bd30cb6",
+                    "appId": "bea90ce0-2cd8-4c1d-8e77-196ea380223a",
+                    "createdDateTime": "2023-06-22T11:40:32.18",
+                    "modifiedDateTime": "2023-06-22T11:47:39.283",
+                    "originalReportObjectId": "577f39e0-e585-474b-ba12-dbc7038d7bc9",
+                    "modifiedBy": "admin@CRM038254.onmicrosoft.com",
+                    "createdBy": "admin@CRM038254.onmicrosoft.com",
+                    "modifiedById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                    "createdById": "3f908c4d-f6af-4696-9afa-ed5b63033657"
+                },
+                {
+                    "reportType": "PowerBIReport",
+                    "id": "276397a8-55e9-4f24-b6c3-b553f5f8b38a",
+                    "name": "Modul 3 Start Demo neu - Kopie",
+                    "datasetId": "b151e950-bc59-4920-95ae-a5b8656ee1a1",
+                    "createdDateTime": "2023-06-22T13:44:45.55",
+                    "modifiedDateTime": "2023-06-22T13:44:45.55",
+                    "modifiedBy": "admin@CRM038254.onmicrosoft.com",
+                    "createdBy": "admin@CRM038254.onmicrosoft.com",
+                    "modifiedById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                    "createdById": "3f908c4d-f6af-4696-9afa-ed5b63033657"
+                },
+                {
+                    "reportType": "PowerBIReport",
+                    "id": "7ecfbdd4-a5ce-427b-b73d-cfff984586f6",
+                    "name": "DevOps-Power BI Demo Report x",
+                    "datasetId": "152a07fa-8848-4b00-9cc9-d9155c693376",
+                    "createdDateTime": "2023-07-25T13:23:34.513",
+                    "modifiedDateTime": "2023-07-25T13:23:34.513",
+                    "modifiedBy": "admin@CRM038254.onmicrosoft.com",
+                    "createdBy": "admin@CRM038254.onmicrosoft.com",
+                    "modifiedById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                    "createdById": "3f908c4d-f6af-4696-9afa-ed5b63033657"
+                }
+            ],
+            "dashboards": [
+                {
+                    "id": "10bda27e-4360-4115-9eb2-e4f9f552ff7f",
+                    "displayName": "[App] test - Kopie.pbix",
+                    "isReadOnly": false,
+                    "tiles": [
+                        {
+                            "id": "f9b89cca-4cc5-4889-8036-fe73a091e9ce",
+                            "title": "test - Kopie.pbix",
+                            "reportId": "e455cac8-8090-45b3-860a-cbd76a48e061",
+                            "datasetId": "ebb901fc-c217-4150-80b3-0deb7bd30cb6"
+                        }
+                    ],
+                    "appId": "bea90ce0-2cd8-4c1d-8e77-196ea380223a"
+                },
+                {
+                    "id": "3b05c61f-2eca-4969-bb18-4b6b721a75ff",
+                    "displayName": "Test Dahsboard",
+                    "isReadOnly": false,
+                    "tiles": [
+                        {
+                            "id": "e4f48feb-3965-4090-9a44-a25bea5a1d8a",
+                            "title": "Info"
+                        },
+                        {
+                            "id": "f6ebc0bc-7e55-4b74-8655-4ac15e1f5ae6",
+                            "title": "Total Units",
+                            "subTitle": "nach \"Manufacturer Name\"",
+                            "reportId": "577f39e0-e585-474b-ba12-dbc7038d7bc9",
+                            "datasetId": "ebb901fc-c217-4150-80b3-0deb7bd30cb6"
+                        },
+                        {
+                            "id": "ff5fdd21-712d-4060-8d68-93829e0b3fa1",
+                            "title": "Total Units",
+                            "subTitle": "nach \"Category\"",
+                            "reportId": "577f39e0-e585-474b-ba12-dbc7038d7bc9",
+                            "datasetId": "ebb901fc-c217-4150-80b3-0deb7bd30cb6"
+                        },
+                        {
+                            "id": "04d06555-779d-4ff5-92a8-26a9899e0574",
+                            "title": "Total Units",
+                            "subTitle": "nach \"Manufacturer Name\"",
+                            "reportId": "577f39e0-e585-474b-ba12-dbc7038d7bc9",
+                            "datasetId": "ebb901fc-c217-4150-80b3-0deb7bd30cb6"
+                        },
+                        {
+                            "id": "fa6af03e-b4e0-48cd-9ff7-6567d4983d4a",
+                            "title": "test - Kopie",
+                            "subTitle": "Page 1",
+                            "reportId": "577f39e0-e585-474b-ba12-dbc7038d7bc9",
+                            "datasetId": "ebb901fc-c217-4150-80b3-0deb7bd30cb6"
+                        }
+                    ]
+                },
+                {
+                    "id": "58e19b9f-4d0f-405e-af7f-e04019f93a87",
+                    "displayName": "DevOps-Power BI Demo Report x.pbix",
+                    "isReadOnly": false,
+                    "tiles": [
+                        {
+                            "id": "237824db-1a06-42c6-8b85-0a360ce68806",
+                            "title": "DevOps-Power BI Demo Report x.pbix",
+                            "reportId": "7ecfbdd4-a5ce-427b-b73d-cfff984586f6",
+                            "datasetId": "152a07fa-8848-4b00-9cc9-d9155c693376"
+                        }
+                    ]
+                }
+            ],
+            "datasets": [
+                {
+                    "id": "ebb901fc-c217-4150-80b3-0deb7bd30cb6",
+                    "name": "test - Kopie",
+                    "tables": [
+                        {
+                            "name": "Population",
+                            "columns": [
+                                {
+                                    "name": "Country",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Year",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Population",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Source = Excel.Workbook(File.Contents(\"C:\\Users\\boesc\\Corporate Software AG\\Coso-Kursunterlagen - Documents\\General\\CorporateSoftware-Kursunterlagen\\PowerBI\\MPBI01\\MPBI01 - English\\MPBI01 Übungen EN 2023\\TN\\Data\\Population.xlsx\"), null, false),\n    Population_sheet = Source{[Item=\"Sheet Population\",Kind=\"Sheet\"]}[Data],\n    FilterNullAndWhitespace = each List.Select(_, each _ <> null and (not (_ is text) or Text.Trim(_) <> \"\")),\n    #\"Removed Top Rows\" = Table.Skip(Population_sheet, each try List.IsEmpty(List.Skip(FilterNullAndWhitespace(Record.FieldValues(_)), 1)) otherwise false),\n    #\"Removed Blank Rows\" = Table.SelectRows(#\"Removed Top Rows\", each not List.IsEmpty(FilterNullAndWhitespace(Record.FieldValues(_)))),\n    #\"Removed Top Rows1\" = Table.Skip(#\"Removed Blank Rows\",2),\n    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Removed Top Rows1\", [PromoteAllScalars=true]),\n    #\"Unpivoted Other Columns\" = Table.UnpivotOtherColumns(#\"Promoted Headers\", {\"Country\"}, \"Attribute\", \"Value\"),\n    #\"Renamed Columns\" = Table.RenameColumns(#\"Unpivoted Other Columns\",{{\"Attribute\", \"Year\"}, {\"Value\", \"Population\"}}),\n    #\"Changed Type\" = Table.TransformColumnTypes(#\"Renamed Columns\",{{\"Population\", Int64.Type}})\nin\n    #\"Changed Type\""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Calendar",
+                            "columns": [
+                                {
+                                    "name": "Date",
+                                    "dataType": "DateTime",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Day",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Month",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Month Nr.",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Quarter",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Year",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Source = Excel.Workbook(File.Contents(\"C:\\Users\\boesc\\Corporate Software AG\\Coso-Kursunterlagen - Documents\\General\\CorporateSoftware-Kursunterlagen\\PowerBI\\MPBI01\\MPBI01 - English\\MPBI01 Übungen EN 2023\\TN\\Data\\AccessDB.xlsx\"), null, true),\n    Calendar_Table = Source{[Item=\"Calendar\",Kind=\"Table\"]}[Data],\n    #\"Changed Type\" = Table.TransformColumnTypes(Calendar_Table,{{\"Date\", type date}, {\"Day\", Int64.Type}, {\"Month\", type text}, {\"Month Nr.\", Int64.Type}, {\"Quarter\", type text}, {\"Year\", Int64.Type}})\nin\n    #\"Changed Type\""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Geo",
+                            "columns": [
+                                {
+                                    "name": "Postalcode",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "City",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "State",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Region",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "District",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Country",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Key",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "expression": "Geo[Country]&\",\"&Geo[Postalcode]",
+                                    "columnType": "Calculated"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Source = Excel.Workbook(File.Contents(\"C:\\Users\\boesc\\Corporate Software AG\\Coso-Kursunterlagen - Documents\\General\\CorporateSoftware-Kursunterlagen\\PowerBI\\MPBI01\\MPBI01 - English\\MPBI01 Übungen EN 2023\\TN\\Data\\AccessDB.xlsx\"), null, true),\n    Geo_Table = Source{[Item=\"Geo\",Kind=\"Table\"]}[Data],\n    #\"Changed Type\" = Table.TransformColumnTypes(Geo_Table,{{\"Postalcode\", type text}, {\"City\", type text}, {\"State\", type text}, {\"Region\", type text}, {\"District\", type text}, {\"Country\", type text}})\nin\n    #\"Changed Type\""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Manufacturers",
+                            "columns": [
+                                {
+                                    "name": "Manufacturer ID",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Manufacturer Name",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Source = Excel.Workbook(File.Contents(\"C:\\Users\\boesc\\Corporate Software AG\\Coso-Kursunterlagen - Documents\\General\\CorporateSoftware-Kursunterlagen\\PowerBI\\MPBI01\\MPBI01 - English\\MPBI01 Übungen EN 2023\\TN\\Data\\AccessDB.xlsx\"), null, true),\n    Manufacturers_Table = Source{[Item=\"Manufacturers\",Kind=\"Table\"]}[Data],\n    #\"Changed Type\" = Table.TransformColumnTypes(Manufacturers_Table,{{\"Manufacturer ID\", Int64.Type}, {\"Manufacturer Name\", type text}})\nin\n    #\"Changed Type\""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Products",
+                            "columns": [
+                                {
+                                    "name": "Product ID",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Name",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Category",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Segment",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Manufacturer ID",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Source = Excel.Workbook(File.Contents(\"C:\\Users\\boesc\\Corporate Software AG\\Coso-Kursunterlagen - Documents\\General\\CorporateSoftware-Kursunterlagen\\PowerBI\\MPBI01\\MPBI01 - English\\MPBI01 Übungen EN 2023\\TN\\Data\\AccessDB.xlsx\"), null, true),\n    Products_Table = Source{[Item=\"Products\",Kind=\"Table\"]}[Data],\n    #\"Changed Type\" = Table.TransformColumnTypes(Products_Table,{{\"Product ID\", Int64.Type}, {\"Name\", type text}, {\"Category\", type text}, {\"Segment\", type text}, {\"Manufacturer ID\", Int64.Type}})\nin\n    #\"Changed Type\""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Sales",
+                            "columns": [
+                                {
+                                    "name": "Product ID",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Date",
+                                    "dataType": "DateTime",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Postalcode",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Amount",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Revenue",
+                                    "dataType": "Double",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Country name",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Key",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "expression": "Sales[Country name]&\",\"&Sales[Postalcode]",
+                                    "columnType": "Calculated"
+                                }
+                            ],
+                            "measures": [
+                                {
+                                    "name": "Total Units",
+                                    "expression": "SUM(Sales[Amount])\n\n\n",
+                                    "isHidden": false
+                                }
+                            ],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Source = Table.Combine({#\"US Sales\", #\"International Sales\"}),\n    #\"Added Custom\" = Table.AddColumn(Source, \"Country name\", each if [Country] = null then \"USA\" else [Country]),\n    #\"Removed Columns\" = Table.RemoveColumns(#\"Added Custom\",{\"Country\"}),\n    #\"Changed Type\" = Table.TransformColumnTypes(#\"Removed Columns\",{{\"Country name\", type text}, {\"Amount\", Int64.Type}, {\"Product ID\", Int64.Type}, {\"Postalcode\", type text}, {\"Revenue\", type number}})\nin\n    #\"Changed Type\""
+                                }
+                            ]
+                        }
+                    ],
+                    "expressions": [
+                        {
+                            "name": "US Sales",
+                            "expression": "let\n    Source = Excel.Workbook(File.Contents(\"C:\\Users\\boesc\\Corporate Software AG\\Coso-Kursunterlagen - Documents\\General\\CorporateSoftware-Kursunterlagen\\PowerBI\\MPBI01\\MPBI01 - English\\MPBI01 Übungen EN 2023\\TN\\Data\\AccessDB.xlsx\"), null, true),\n    Sales_Table = Source{[Item=\"Sales\",Kind=\"Table\"]}[Data],\n    #\"Changed Type\" = Table.TransformColumnTypes(Sales_Table,{{\"Date\", type date}})\nin\n    #\"Changed Type\""
+                        },
+                        {
+                            "name": "International Sales",
+                            "expression": "let\n    Source = Folder.Files(\"C:\\Users\\boesc\\Corporate Software AG\\Coso-Kursunterlagen - Documents\\General\\CorporateSoftware-Kursunterlagen\\PowerBI\\MPBI01\\MPBI01 - English\\MPBI01 Übungen EN 2023\\TN\\Data\\International Sales\"),\n    #\"Filtered Hidden Files1\" = Table.SelectRows(Source, each [Attributes]?[Hidden]? <> true),\n    #\"Invoke Custom Function1\" = Table.AddColumn(#\"Filtered Hidden Files1\", \"Transform File\", each #\"Transform File\"([Content])),\n    #\"Renamed Columns1\" = Table.RenameColumns(#\"Invoke Custom Function1\", {\"Name\", \"Source.Name\"}),\n    #\"Removed Other Columns1\" = Table.SelectColumns(#\"Renamed Columns1\", {\"Source.Name\", \"Transform File\"}),\n    #\"Expanded Table Column1\" = Table.ExpandTableColumn(#\"Removed Other Columns1\", \"Transform File\", Table.ColumnNames(#\"Transform File\"(#\"Sample File\"))),\n    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Expanded Table Column1\", [PromoteAllScalars=true]),\n    #\"Removed Columns\" = Table.RemoveColumns(#\"Promoted Headers\",{\"France Sales.csv\"}),\n    #\"Changed Type\" = Table.TransformColumnTypes(#\"Removed Columns\",{{\"Date\", type date}, {\"Postalcode\", type text}})\nin\n    #\"Changed Type\""
+                        },
+                        {
+                            "name": "Sample File",
+                            "expression": "let\n    Source = Folder.Files(\"C:\\Users\\boesc\\Corporate Software AG\\Coso-Kursunterlagen - Documents\\General\\CorporateSoftware-Kursunterlagen\\PowerBI\\MPBI01\\MPBI01 - English\\MPBI01 Übungen EN 2023\\TN\\Data\\International Sales\"),\n    Navigation1 = Source{0}[Content]\nin\n    Navigation1"
+                        },
+                        {
+                            "name": "Parameter1",
+                            "expression": "#\"Sample File\" meta [IsParameterQuery=true, BinaryIdentifier=#\"Sample File\", Type=\"Binary\", IsParameterQueryRequired=true]"
+                        },
+                        {
+                            "name": "Transform Sample File",
+                            "expression": "let\n    Source = Csv.Document(Parameter1,[Delimiter=\";\", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None])\nin\n    Source"
+                        },
+                        {
+                            "name": "Transform File",
+                            "expression": "let\n    Source = (Parameter1) => let\n        Source = Csv.Document(Parameter1,[Delimiter=\";\", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None])\n    in\n        Source\nin\n    Source"
+                        }
+                    ],
+                    "configuredBy": "admin@CRM038254.onmicrosoft.com",
+                    "configuredById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                    "isEffectiveIdentityRequired": false,
+                    "isEffectiveIdentityRolesRequired": false,
+                    "targetStorageMode": "Abf",
+                    "createdDate": "2023-06-22T11:33:59.327",
+                    "contentProviderType": "PbixInImportMode",
+                    "datasourceUsages": [
+                        {
+                            "datasourceInstanceId": "b0535c2f-8553-4fe9-83fd-e47169ac65c9"
+                        },
+                        {
+                            "datasourceInstanceId": "e8f4e8f3-d92d-4c8f-855b-8f112504f0fa"
+                        },
+                        {
+                            "datasourceInstanceId": "4555fdaf-c61d-4f8e-a052-a9bc59140584"
+                        }
+                    ]
+                },
+                {
+                    "id": "b151e950-bc59-4920-95ae-a5b8656ee1a1",
+                    "name": "Modul 3 Start Demo neu - Kopie",
+                    "tables": [
+                        {
+                            "name": "Hersteller",
+                            "columns": [
+                                {
+                                    "name": "Hersteller ID",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Hersteller Name",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Quelle = Excel.Workbook(File.Contents(Pfad & \"AccessDB.xlsx\"), null, true),\n    _Hersteller = Quelle{[Item=\"Hersteller\", Kind=\"Table\"]}[Data],\n    #\"Geänderter Typ\" = Table.TransformColumnTypes(_Hersteller,{{\"Hersteller ID\", Int64.Type}, {\"Hersteller Name\", type text}})\nin\n    #\"Geänderter Typ\""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Kalender",
+                            "columns": [
+                                {
+                                    "name": "Datum",
+                                    "dataType": "DateTime",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Tag",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Monat Nr",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Quartal",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Jahr",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Monat ",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Quelle = Excel.Workbook(File.Contents(Pfad & \"AccessDB.xlsx\"), null, true),\n    _Kalender = Quelle{[Item=\"Kalender\",Kind=\"Table\"]}[Data],\n    #\"Geänderter Typ\" = Table.TransformColumnTypes(_Kalender,{{\"Jahr\", Int64.Type}, {\"Datum\", type date}, {\"Tag\", Int64.Type}, {\"Monat \", type text}, {\"Monat Nr\", Int64.Type}, {\"Quartal\", type text}})\nin\n    #\"Geänderter Typ\""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Produkte",
+                            "columns": [
+                                {
+                                    "name": "Produkt ID",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Produktname",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Kategorie",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Segment",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Hersteller ID",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Hersteller Name",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Quelle = Excel.Workbook(File.Contents(Pfad & \"AccessDB.xlsx\"), null, true),\n    _Produkte = Quelle{[Item=\"Produkte\", Kind=\"Table\"]}[Data],\n    #\"Geänderter Typ\" = Table.TransformColumnTypes(_Produkte,{{\"Produkt ID\", Int64.Type}, {\"Produktname\", type text}, {\"Kategorie\", type text}, {\"Segment\", type text}, {\"Hersteller ID\", Int64.Type}, {\"Hersteller Name\", type text}})\nin\n    #\"Geänderter Typ\""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Geo",
+                            "columns": [
+                                {
+                                    "name": "PLZ",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Stadt",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Staat",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Region",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Distrikt",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Land",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Key",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "expression": "Geo[Land] & \",\" & Geo[PLZ]",
+                                    "columnType": "Calculated"
+                                },
+                                {
+                                    "name": "Land (Gruppen)",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "expression": "SWITCH(\n  TRUE,\n  ISBLANK('Geo'[Land]),\n  \"(Leer)\",\n  'Geo'[Land] IN {\"Germany\",\n    \"France\"},\n  \"EU\",\n  'Geo'[Land] IN {\"Mexico\"},\n  \"Mittelamerika\",\n  'Geo'[Land] IN {\"Canada\",\n    \"USA\"},\n  \"Nordamerika\",\n  \"Sonstige\"\n)",
+                                    "columnType": "Calculated"
+                                },
+                                {
+                                    "name": "Location",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "expression": "IF(Geo[Land] = \"Mexico\", \"Inland\", \"Ausland\")",
+                                    "columnType": "Calculated"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Quelle = Excel.Workbook(File.Contents(Pfad & \"AccessDB.xlsx\"), null, true),\n    _Geo = Quelle{[Item=\"Geo\", Kind=\"Table\"]}[Data],\n    #\"Geänderter Typ\" = Table.TransformColumnTypes(_Geo,{{\"Stadt\", type text}, {\"Staat\", type text}, {\"Region\", type text}, {\"Distrikt\", type text}, {\"Land\", type text}}),\n    #\"Gefilterte Zeilen\" = Table.SelectRows(#\"Geänderter Typ\", each true)\nin\n    #\"Gefilterte Zeilen\""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Sales",
+                            "columns": [
+                                {
+                                    "name": "Produkt ID",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Datum",
+                                    "dataType": "DateTime",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "PLZ",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Menge",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Umsatz",
+                                    "dataType": "Double",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Ländername",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Key",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "expression": "Sales[Ländername] &\",\"& Sales[PLZ]",
+                                    "columnType": "Calculated"
+                                },
+                                {
+                                    "name": "Stückpreis DAX",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "expression": "Sales[Umsatz]/Sales[Menge]",
+                                    "columnType": "Calculated"
+                                },
+                                {
+                                    "name": "xy",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Calculated"
+                                }
+                            ],
+                            "measures": [
+                                {
+                                    "name": "Total Sales",
+                                    "expression": "SUM(Sales[Umsatz])",
+                                    "isHidden": false
+                                }
+                            ],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Quelle = Table.Combine({#\"US Sales\", #\"International Sales\"}),\n    #\"Hinzugefügte benutzerdefinierte Spalte\" = Table.AddColumn(Quelle, \"Ländername\", each if [Land] = null then \"USA\" else [Land]),\n    #\"Entfernte Spalten\" = Table.RemoveColumns(#\"Hinzugefügte benutzerdefinierte Spalte\",{\"Land\"})\nin\n    #\"Entfernte Spalten\""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "StatDatum",
+                            "columns": [
+                                {
+                                    "name": "StatDatum",
+                                    "dataType": "DateTime",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "#date(2019, 1, 1) meta [IsParameterQuery=true, Type=\"Date\", IsParameterQueryRequired=true]"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Einwohnerzahlen",
+                            "columns": [
+                                {
+                                    "name": "Land",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Jahr",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Einwohnerzahl",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Quelle = Excel.Workbook(File.Contents(\"C:\\Users\\boesc\\OneDrive\\Desktop\\Power BI Demo Content\\Demo Data\\Einwohnerzahlen.xlsx\"), null, false),\n    Einwohnerzahlen_sheet = Quelle{[Item=\"Einwohnerzahlen\",Kind=\"Sheet\"]}[Data],\n    #\"Entfernte oberste Zeilen\" = Table.Skip(Einwohnerzahlen_sheet,4),\n    #\"Höher gestufte Header\" = Table.PromoteHeaders(#\"Entfernte oberste Zeilen\", [PromoteAllScalars=true]),\n    #\"Entpivotierte andere Spalten\" = Table.UnpivotOtherColumns(#\"Höher gestufte Header\", {\"Land\"}, \"Attribut\", \"Wert\"),\n    #\"Umbenannte Spalten\" = Table.RenameColumns(#\"Entpivotierte andere Spalten\",{{\"Attribut\", \"Jahr\"}, {\"Wert\", \"Einwohnerzahl\"}}),\n    #\"Geänderter Typ\" = Table.TransformColumnTypes(#\"Umbenannte Spalten\",{{\"Jahr\", Int64.Type}, {\"Einwohnerzahl\", Int64.Type}})\nin\n    #\"Geänderter Typ\""
+                                }
+                            ]
+                        }
+                    ],
+                    "expressions": [
+                        {
+                            "name": "US Sales",
+                            "expression": "let\n    Quelle = Excel.Workbook(File.Contents(Pfad & \"AccessDB.xlsx\"), null, true),\n    _Sales = Quelle{[Item=\"Sales\", Kind=\"Table\"]}[Data],\n    #\"Geänderter Typ\" = Table.TransformColumnTypes(_Sales,{{\"Datum\", type date}, {\"Produkt ID\", Int64.Type}, {\"Menge\", Int64.Type}, {\"Umsatz\", type number}})\nin\n    #\"Geänderter Typ\""
+                        },
+                        {
+                            "name": "International Sales",
+                            "expression": "let\n    Quelle = Folder.Files(Pfad & \"\\International Sales\"),\n    #\"Gefilterte ausgeblendete Dateien1\" = Table.SelectRows(Quelle, each [Attributes]?[Hidden]? <> true),\n    #\"Benutzerdefinierte Funktion aufrufen1\" = Table.AddColumn(#\"Gefilterte ausgeblendete Dateien1\", \"Datei transformieren\", each #\"Datei transformieren\"([Content])),\n    #\"Umbenannte Spalten1\" = Table.RenameColumns(#\"Benutzerdefinierte Funktion aufrufen1\", {\"Name\", \"Source.Name\"}),\n    #\"Andere entfernte Spalten1\" = Table.SelectColumns(#\"Umbenannte Spalten1\", {\"Source.Name\", \"Datei transformieren\"}),\n    #\"Erweiterte Tabellenspalte1\" = Table.ExpandTableColumn(#\"Andere entfernte Spalten1\", \"Datei transformieren\", Table.ColumnNames(#\"Datei transformieren\"(Beispieldatei))),\n    #\"Geänderter Typ\" = Table.TransformColumnTypes(#\"Erweiterte Tabellenspalte1\",{{\"Source.Name\", type text}, {\"Produkt ID\", Int64.Type}, {\"Datum\", type date}, {\"PLZ\", Int64.Type}, {\"Menge\", Int64.Type}, {\"Umsatz\", type number}, {\"Land\", type text}}),\n    #\"Entfernte Spalten\" = Table.RemoveColumns(#\"Geänderter Typ\",{\"Source.Name\"}),\n    #\"Geänderter Typ1\" = Table.TransformColumnTypes(#\"Entfernte Spalten\",{{\"Datum\", type date}, {\"PLZ\", type text}}),\n    #\"Gefilterte Zeilen\" = Table.SelectRows(#\"Geänderter Typ1\", each [Datum] > #date(2016, 12, 31))\nin\n    #\"Gefilterte Zeilen\""
+                        },
+                        {
+                            "name": "Beispieldatei",
+                            "expression": "let\n    Quelle = Folder.Files(Pfad & \"\\International Sales\"),\n    Navigation1 = Quelle{0}[Content]\nin\n    Navigation1"
+                        },
+                        {
+                            "name": "Parameter1",
+                            "expression": "Beispieldatei meta [IsParameterQuery=true, BinaryIdentifier=Beispieldatei, Type=\"Binary\", IsParameterQueryRequired=true]"
+                        },
+                        {
+                            "name": "Beispieldatei transformieren",
+                            "expression": "let\n    Quelle = Csv.Document(Parameter1,[Delimiter=\";\", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),\n    #\"Höher gestufte Header\" = Table.PromoteHeaders(Quelle, [PromoteAllScalars=true])\nin\n    #\"Höher gestufte Header\""
+                        },
+                        {
+                            "name": "Datei transformieren",
+                            "expression": "let\n    Quelle = (Parameter1 as binary) => let\n    Quelle = Csv.Document(Parameter1,[Delimiter=\";\", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),\n    #\"Höher gestufte Header\" = Table.PromoteHeaders(Quelle, [PromoteAllScalars=true])\nin\n    #\"Höher gestufte Header\"\nin\n    Quelle"
+                        },
+                        {
+                            "name": "Pfad",
+                            "expression": "\"C:\\Users\\boesc\\OneDrive\\Desktop\\Power BI Demo Content\\Demo Data\\\" meta [IsParameterQuery=true, List={\"C:\\Users\\boesc\\OneDrive\\Desktop\\Power BI Demo Content\\Demo Data\\\"}, DefaultValue=\"C:\\Users\\boesc\\OneDrive\\Desktop\\Power BI Demo Content\\Demo Data\\\", Type=\"Text\", IsParameterQueryRequired=true]"
+                        }
+                    ],
+                    "roles": [
+                        {
+                            "name": "Verantworlicher EU",
+                            "modelPermission": "Read"
+                        },
+                        {
+                            "name": "Neue Rolle",
+                            "modelPermission": "Read"
+                        },
+                        {
+                            "name": "Verantworlicher Deutschland",
+                            "modelPermission": "Read",
+                            "tablePermissions": [
+                                {
+                                    "name": "Geo",
+                                    "filterExpression": "[Land] = \"Deutschland\""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "DE Pirum",
+                            "modelPermission": "Read",
+                            "tablePermissions": [
+                                {
+                                    "name": "Geo",
+                                    "filterExpression": "[Land] = \"Deutschland\""
+                                },
+                                {
+                                    "name": "Hersteller",
+                                    "filterExpression": "[Hersteller Name] = \"Pirum\""
+                                }
+                            ]
+                        }
+                    ],
+                    "configuredBy": "admin@CRM038254.onmicrosoft.com",
+                    "configuredById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                    "isEffectiveIdentityRequired": true,
+                    "isEffectiveIdentityRolesRequired": true,
+                    "targetStorageMode": "Abf",
+                    "createdDate": "2023-06-22T13:44:43.103",
+                    "contentProviderType": "PbixInImportMode",
+                    "datasourceUsages": [
+                        {
+                            "datasourceInstanceId": "f155e09e-e893-4b7b-8b5d-443f301ec1ba"
+                        },
+                        {
+                            "datasourceInstanceId": "e2028391-7c09-48f0-abaa-09ac9190aa63"
+                        },
+                        {
+                            "datasourceInstanceId": "3b7753e1-eb84-4e48-9260-0d3b631323c7"
+                        }
+                    ]
+                },
+                {
+                    "id": "152a07fa-8848-4b00-9cc9-d9155c693376",
+                    "name": "DevOps-Power BI Demo Report x",
+                    "tables": [
+                        {
+                            "name": "Einwohnerzahlen",
+                            "columns": [
+                                {
+                                    "name": "Land",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Jahr",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Einwohnerzahl",
+                                    "dataType": "Int64",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Berechnete Spalte in M",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Quelle = Excel.Workbook(File.Contents(\"C:\\Users\\boesc\\OneDrive\\Desktop\\Power BI Demo Content\\Demo Data\\Einwohnerzahlen.xlsx\"), null, false),\n    Einwohnerzahlen_sheet = Quelle{[Item=\"Einwohnerzahlen\",Kind=\"Sheet\"]}[Data],\n    #\"Entfernte oberste Zeilen\" = Table.Skip(Einwohnerzahlen_sheet,4),\n    #\"Höher gestufte Header\" = Table.PromoteHeaders(#\"Entfernte oberste Zeilen\", [PromoteAllScalars=true]),\n    #\"Entpivotierte andere Spalten\" = Table.UnpivotOtherColumns(#\"Höher gestufte Header\", {\"Land\"}, \"Attribut\", \"Wert\"),\n    #\"Umbenannte Spalten\" = Table.RenameColumns(#\"Entpivotierte andere Spalten\",{{\"Attribut\", \"Jahr\"}, {\"Wert\", \"Einwohnerzahl\"}}),\n    #\"Hinzugefügte benutzerdefinierte Spalte\" = Table.AddColumn(#\"Umbenannte Spalten\", \"Berechnete Spalte in M\", each if [Land] = \"Deutschland\" then \"DACH\" else \"-\"),\n    #\"Geänderter Typ\" = Table.TransformColumnTypes(#\"Hinzugefügte benutzerdefinierte Spalte\",{{\"Einwohnerzahl\", Int64.Type}, {\"Jahr\", Int64.Type}, {\"Berechnete Spalte in M\", type text}})\nin\n    #\"Geänderter Typ\""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Geo",
+                            "columns": [
+                                {
+                                    "name": "PLZ",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Stadt",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Staat",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Region",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Distrikt",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Land",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "Data"
+                                },
+                                {
+                                    "name": "Berechnete Spalte in DAX",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "expression": "1",
+                                    "columnType": "Calculated"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "let\n    Quelle = Excel.Workbook(File.Contents(\"C:\\Users\\boesc\\OneDrive\\Desktop\\Power BI Demo Content\\Demo Data\\AccessDB.xlsx\"), null, true),\n    Geo_Table = Quelle{[Item=\"Geo\",Kind=\"Table\"]}[Data],\n    #\"Geänderter Typ\" = Table.TransformColumnTypes(Geo_Table,{{\"PLZ\", type text}, {\"Stadt\", type text}, {\"Staat\", type text}, {\"Region\", type text}, {\"Distrikt\", type text}, {\"Land\", type text}})\nin\n    #\"Geänderter Typ\""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Kalender als DAX Tabelle",
+                            "columns": [
+                                {
+                                    "name": "Date",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                },
+                                {
+                                    "name": "DateAsInteger",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                },
+                                {
+                                    "name": "Year",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                },
+                                {
+                                    "name": "Monthnumber",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                },
+                                {
+                                    "name": "YearMonthnumber",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                },
+                                {
+                                    "name": "YearMonthShort",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                },
+                                {
+                                    "name": "MonthNameShort",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                },
+                                {
+                                    "name": "MonthNameLong",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                },
+                                {
+                                    "name": "DayOfWeek",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                },
+                                {
+                                    "name": "DayOfWeekShort",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                },
+                                {
+                                    "name": "Quarter",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                },
+                                {
+                                    "name": "YearQuarter",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                },
+                                {
+                                    "name": "YearWeekNum",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                },
+                                {
+                                    "name": "WeekNum",
+                                    "dataType": "String",
+                                    "isHidden": false,
+                                    "columnType": "CalculatedTableColumn"
+                                }
+                            ],
+                            "measures": [],
+                            "isHidden": false,
+                            "source": [
+                                {
+                                    "expression": "\nADDCOLUMNS (\nCALENDAR (DATE(2018,1,1), DATE(2022,12,31)),\n\"DateAsInteger\", FORMAT ( [Date], \"YYYYMMDD\" ),\n\"Year\", YEAR ( [Date] ),\n\"Monthnumber\", FORMAT ( [Date], \"MM\" ),\n\"YearMonthnumber\", FORMAT ( [Date], \"YYYY/MM\" ),\n\"YearMonthShort\", FORMAT ( [Date], \"YYYY/mmm\" ),\n\"MonthNameShort\", FORMAT ( [Date], \"mmm\" ),\n\"MonthNameLong\", FORMAT ( [Date], \"mmmm\" ),\n\"DayOfWeek\", FORMAT ( [Date], \"dddd\" ),\n\"DayOfWeekShort\", FORMAT ( [Date], \"ddd\" ),\n\"Quarter\", \"Q\" & FORMAT ( [Date], \"Q\" ),\n\"YearQuarter\", FORMAT ( [Date], \"YYYY\" ) & \"/Q\" & FORMAT ( [Date], \"Q\" ),\n\"YearWeekNum\", FORMAT ( [Date], \"YYYY\" ) & \"/\" & FORMAT (WEEKNUM( [Date] ), \"00\" ),\n\"WeekNum\", WEEKNUM( [Date] ) )\n"
+                                }
+                            ]
+                        }
+                    ],
+                    "expressions": [
+                        {
+                            "name": "Parameter_SingleValue",
+                            "description": "Parameter mit einem Wert",
+                            "expression": "\"Parameterwert als Text\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]"
+                        },
+                        {
+                            "name": "Parameter_List",
+                            "description": "Parameter mit Liste von Werten die ausgewählt werden können",
+                            "expression": "#date(2023, 1, 1) meta [IsParameterQuery=true, List={#date(2023, 1, 1), #date(2022, 1, 1), #date(2021, 1, 1)}, DefaultValue=#date(2023, 1, 1), Type=\"Date\", IsParameterQueryRequired=true]"
+                        }
+                    ],
+                    "configuredBy": "admin@CRM038254.onmicrosoft.com",
+                    "configuredById": "3f908c4d-f6af-4696-9afa-ed5b63033657",
+                    "isEffectiveIdentityRequired": false,
+                    "isEffectiveIdentityRolesRequired": false,
+                    "targetStorageMode": "Abf",
+                    "createdDate": "2023-07-25T13:23:30.24",
+                    "contentProviderType": "PbixInImportMode",
+                    "datasourceUsages": [
+                        {
+                            "datasourceInstanceId": "3b7753e1-eb84-4e48-9260-0d3b631323c7"
+                        },
+                        {
+                            "datasourceInstanceId": "f155e09e-e893-4b7b-8b5d-443f301ec1ba"
+                        }
+                    ]
+                }
+            ],
+            "dataflows": [],
+            "datamarts": []
+        }
+    ],
+    "datasourceInstances": [
+        {
+            "datasourceType": "File",
+            "connectionDetails": {
+                "path": "C:\\Users\\boesc\\OneDrive\\Desktop\\Power BI Demo Content\\Demo Data\\Einwohnerzahlen.xlsx"
+            },
+            "datasourceId": "3b7753e1-eb84-4e48-9260-0d3b631323c7",
+            "gatewayId": "65377c97-1b07-4cb1-ac4b-d1733e839b75"
+        },
+        {
+            "datasourceType": "File",
+            "connectionDetails": {
+                "path": "C:\\Users\\boesc\\OneDrive\\Desktop\\Power BI Demo Content\\Demo Data\\AccessDB.xlsx"
+            },
+            "datasourceId": "f155e09e-e893-4b7b-8b5d-443f301ec1ba",
+            "gatewayId": "65377c97-1b07-4cb1-ac4b-d1733e839b75"
+        },
+        {
+            "datasourceType": "Folder",
+            "connectionDetails": {
+                "path": "C:\\Users\\boesc\\OneDrive\\Desktop\\Power BI Demo Content\\Demo Data\\\\International Sales"
+            },
+            "datasourceId": "e2028391-7c09-48f0-abaa-09ac9190aa63",
+            "gatewayId": "65377c97-1b07-4cb1-ac4b-d1733e839b75"
+        },
+        {
+            "datasourceType": "Folder",
+            "connectionDetails": {
+                "path": "C:\\Users\\boesc\\Corporate Software AG\\Coso-Kursunterlagen - Documents\\General\\CorporateSoftware-Kursunterlagen\\PowerBI\\MPBI01\\MPBI01 - English\\MPBI01 Übungen EN 2023\\TN\\Data\\International Sales"
+            },
+            "datasourceId": "b0535c2f-8553-4fe9-83fd-e47169ac65c9",
+            "gatewayId": "65377c97-1b07-4cb1-ac4b-d1733e839b75"
+        },
+        {
+            "datasourceType": "File",
+            "connectionDetails": {
+                "path": "C:\\Users\\boesc\\Corporate Software AG\\Coso-Kursunterlagen - Documents\\General\\CorporateSoftware-Kursunterlagen\\PowerBI\\MPBI01\\MPBI01 - English\\MPBI01 Übungen EN 2023\\TN\\Data\\Population.xlsx"
+            },
+            "datasourceId": "e8f4e8f3-d92d-4c8f-855b-8f112504f0fa",
+            "gatewayId": "65377c97-1b07-4cb1-ac4b-d1733e839b75"
+        },
+        {
+            "datasourceType": "File",
+            "connectionDetails": {
+                "path": "C:\\Users\\boesc\\Corporate Software AG\\Coso-Kursunterlagen - Documents\\General\\CorporateSoftware-Kursunterlagen\\PowerBI\\MPBI01\\MPBI01 - English\\MPBI01 Übungen EN 2023\\TN\\Data\\AccessDB.xlsx"
+            },
+            "datasourceId": "4555fdaf-c61d-4f8e-a052-a9bc59140584",
+            "gatewayId": "65377c97-1b07-4cb1-ac4b-d1733e839b75"
+        }
+    ],
+    "lastScanDate": "September 03, 2023 16:17:35"
+}
