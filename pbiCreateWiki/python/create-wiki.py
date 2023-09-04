@@ -176,6 +176,12 @@ def main():
     openai_modelname = sys.argv[4]
     openai_api_key = sys.argv[5]
 
+    print('Work Directory: ' + work_dir)
+    print('PAT: ' + pat)
+    print('OpenAI URL: ' + openai_url)
+    print('OpenAI Model Name: ' + openai_modelname)
+    print('OpenAI API Key: ' + openai_api_key)
+
     data = load_data()
     scan_date = data['lastScanDate']
     workspaces = data['workspaces']
