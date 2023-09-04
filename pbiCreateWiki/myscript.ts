@@ -47,16 +47,19 @@ const runScript = (scriptPath: string, args: string[]): Promise<string> => {
 async function run() {
     try {
         const workingDirectory = tl.getVariable('System.DefaultWorkingDirectory') || "";
-        const pat = tl.getVariable('pat') || "";
-        const openaiUrl = tl.getVariable('openaiUrl') || "";
-        const openaiModelname = tl.getVariable('openaiModelname') || "";
-        const openaiKey = tl.getVariable('openaiKey') || "";
+        const pat = tl.getVariable('pat') || tl.getInput('pat', false) || "";
+        const openaiUrl = tl.getInput('openaiUrl') || "";
+        const openaiModelname = tl.getInput('openaiModelname') || "";
+        const openaiKey = tl.getVariable('openaiKey') || tl.getInput('openaiKey') || "";
 
         const path = require('path');
         const scriptPath = path.join(__dirname, 'python/create-wiki.py');
 
         console.log("Working directory: " + workingDirectory);
         console.log("Script path: " + scriptPath);
+        console.log("OpenAI URL: " + openaiUrl);
+        console.log("OpenAI Model name: " + openaiModelname);
+
         const dep = await installPythonPackages(path.join(__dirname, 'python/requirements.txt'));
         // Run the python script with input as argument
         const data = await runScript(scriptPath, [workingDirectory, pat, openaiUrl, openaiModelname, openaiKey]);

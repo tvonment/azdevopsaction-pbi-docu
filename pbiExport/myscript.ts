@@ -51,7 +51,7 @@ async function run() {
         const appSecret = tl.getInput('appSecret', true) || "";
         const groupId = tl.getInput('groupId', false) || "";
         const workingDirectory = tl.getVariable('System.DefaultWorkingDirectory') || "";
-        const pat = tl.getVariable('pat') || "";
+        const pat = tl.getVariable('pat') || tl.getInput('pat', false) || "";
 
         const path = require('path');
         const scriptPath = path.join(__dirname, 'python/pbi-export.py');
