@@ -14,7 +14,7 @@
     "version": {
         "Major": "1",
         "Minor": "0",
-        "Patch": "11"
+        "Patch": "12"
     },
     "minimumAgentVersion": "1.83.0",
     "instanceNameFormat": "PBI Create Wiki $(message)",
@@ -36,7 +36,7 @@
             "helpMarkDown": "Personal Access Token"
         },
         {
-            "name": "openai_url",
+            "name": "openaiUrl",
             "type": "string",
             "label": "OpenAI URL",
             "defaultValue": "",
@@ -44,7 +44,7 @@
             "helpMarkDown": "URL for OpenAI API Service"
         },
         {
-            "name": "openai_modelname",
+            "name": "openaiModelname",
             "type": "string",
             "label": "OpenAI Model Name",
             "defaultValue": "",
@@ -52,7 +52,7 @@
             "helpMarkDown": "Deployed OpenAI Model Name for use"
         },
         {
-            "name": "openai_key",
+            "name": "openaiKey",
             "type": "string",
             "label": "OpenAI Key",
             "defaultValue": "",
