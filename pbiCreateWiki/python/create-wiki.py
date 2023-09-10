@@ -169,7 +169,7 @@ def create_mdWorkspace(workspace, wiki_path, wiki_name, list_of_total_reports, o
     list_of_reports.extend(['Report Name', 'Last Modified'])
 
     for report in reports:
-        list_of_reports.extend([f"[{report['name']}](./{report['name'].replace(' ', '-')}.md)", datetime.strptime(report['modifiedDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
+        list_of_reports.extend([f"[{report['name']}](../Reports/{report['name'].replace(' ', '-')}.md)", datetime.strptime(report['modifiedDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
         create_mdReport(workspace['name'], report, wiki_path, report['name'].replace(' ', '-'), dataset['name'])
 
     columns = 2
