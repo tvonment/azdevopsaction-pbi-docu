@@ -52,60 +52,64 @@ if group_id is None or group_id == "": # If no group id is provided, get all wor
 else:
     workspaces_ids = [group_id]
 
-# Start the scan
-start_scan_url = f"https://api.powerbi.com/v1.0/myorg/admin/workspaces/getInfo?lineage=True&datasourceDetails=True&datasetSchema=True&datasetExpressions=True&getArtifactUsers=True"
-workspaces = {
-  "workspaces": workspaces_ids
-}
+workspace_chunks = [workspaces_ids[i:i+100] for i in range(0, len(workspaces_ids), 100)]
 
-scan_start_response = requests.post(start_scan_url, headers=headers, data=workspaces)
+chunk_index = 1
+for chunk in workspace_chunks:
+    # Start the scan
+    start_scan_url = f"https://api.powerbi.com/v1.0/myorg/admin/workspaces/getInfo?lineage=True&datasourceDetails=True&datasetSchema=True&datasetExpressions=True&getArtifactUsers=True"
+    workspaces = {
+        "workspaces": chunk
+    }
 
-if scan_start_response.status_code == 200 or scan_start_response.status_code == 202:
-    print(json.dumps(scan_start_response.json(), indent=3))
-else:
-    print(f"Error in API request: {scan_start_response.status_code}: {scan_start_response.text}")
+    scan_start_response = requests.post(start_scan_url, headers=headers, data=workspaces)
 
-scan_start_data = scan_start_response.json()
-scan_id = scan_start_data["id"]
-scan_status = scan_start_data["status"]
-
-scan_status_url = f"https://api.powerbi.com/v1.0/myorg/admin/workspaces/scanStatus/{scan_id}"
-
-while scan_status != "Succeeded":
-    print(f"Scan status is {scan_status}. Waiting for scan to complete...")
-    scan_status_response = requests.get(scan_status_url, headers=headers)
-    if scan_status_response.status_code == 200:
-        scan_status_data = scan_status_response.json()
-        scan_status = scan_status_data["status"]
-        print(json.dumps(scan_status_response.json(), indent=3))
+    if scan_start_response.status_code == 200 or scan_start_response.status_code == 202:
+        print(json.dumps(scan_start_response.json(), indent=3))
     else:
-        print(f"Error in API request: {scan_status_response.status_code}: {scan_status_response.text}")
-        exit(1)
-    time.sleep(2)
+        print(f"Error in API request: {scan_start_response.status_code}: {scan_start_response.text}")
 
-scan_result_url = f"https://api.powerbi.com/v1.0/myorg/admin/workspaces/scanResult/{scan_id}"
-scan_result_response = requests.get(scan_result_url, headers=headers)
+    scan_start_data = scan_start_response.json()
+    scan_id = scan_start_data["id"]
+    scan_status = scan_start_data["status"]
 
-if scan_result_response.status_code == 200:
-    print(json.dumps(scan_result_response.json(), indent=3))
-else:
-    print(f"Error in API request: {scan_result_response.status_code}: {scan_result_response.text}")
+    scan_status_url = f"https://api.powerbi.com/v1.0/myorg/admin/workspaces/scanStatus/{scan_id}"
 
-data = scan_result_response.json()
-data["lastScanDate"] = datetime.datetime.now().strftime('%B %d, %Y %H:%M:%S')
+    while scan_status != "Succeeded":
+        print(f"Scan status is {scan_status}. Waiting for scan to complete...")
+        scan_status_response = requests.get(scan_status_url, headers=headers)
+        if scan_status_response.status_code == 200:
+            scan_status_data = scan_status_response.json()
+            scan_status = scan_status_data["status"]
+            print(json.dumps(scan_status_response.json(), indent=3))
+        else:
+            print(f"Error in API request: {scan_status_response.status_code}: {scan_status_response.text}")
+            exit(1)
+        time.sleep(2)
 
-directory = 'export'
+    scan_result_url = f"https://api.powerbi.com/v1.0/myorg/admin/workspaces/scanResult/{scan_id}"
+    scan_result_response = requests.get(scan_result_url, headers=headers)
 
-if not os.path.exists(directory):
-    os.makedirs(directory)
+    if scan_result_response.status_code == 200:
+        print(json.dumps(scan_result_response.json(), indent=3))
+    else:
+        print(f"Error in API request: {scan_result_response.status_code}: {scan_result_response.text}")
 
-file_path = os.path.join(work_dir, directory,'scanResult.json')
-with open(file_path, 'w', encoding='utf-8') as f:
-    json.dump(data, f, ensure_ascii=False, indent=4)
+    data = scan_result_response.json()
+    data["lastScanDate"] = datetime.datetime.now().strftime('%B %d, %Y %H:%M:%S')
 
-while not os.path.exists(file_path):
-    print(f"Waiting for file {file_path} to be created...")
-    time.sleep(1)
+    directory = 'export'
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    file_path = os.path.join(work_dir, directory,f'scanResult-{ chunk_index }.json')
+    chunk_index += 1
+    with open(file_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
+    while not os.path.exists(file_path):
+        print(f"Waiting for file {file_path} to be created...")
+        time.sleep(1)
 
 # Get the current date and time in the specified format
 current_date = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M')

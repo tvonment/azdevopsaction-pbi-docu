@@ -20,7 +20,7 @@ in
     #"Geänderter Typ"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Table: Kalender
 
 
@@ -33,7 +33,7 @@ in
     #"Geänderter Typ"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Table: Produkte
 
 
@@ -46,7 +46,7 @@ in
     #"Geänderter Typ"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Table: Geo
 
 
@@ -60,7 +60,7 @@ in
     #"Gefilterte Zeilen"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Table: Sales
 
 
@@ -73,7 +73,7 @@ in
     #"Entfernte Spalten"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Table: StatDatum
 
 
@@ -81,7 +81,7 @@ OpenAI is not configured
 #date(2019, 1, 1) meta [IsParameterQuery=true, Type="Date", IsParameterQueryRequired=true]
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Table: Einwohnerzahlen
 
 
@@ -98,7 +98,7 @@ in
     #"Geänderter Typ"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Parameter: Parameter1
 
 
@@ -106,7 +106,7 @@ OpenAI is not configured
 Beispieldatei meta [IsParameterQuery=true, BinaryIdentifier=Beispieldatei, Type="Binary", IsParameterQueryRequired=true]
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Parameter: Pfad
 
 
@@ -114,7 +114,7 @@ OpenAI is not configured
 "C:\Users\boesc\OneDrive\Desktop\Power BI Demo Content\Demo Data\" meta [IsParameterQuery=true, List={"C:\Users\boesc\OneDrive\Desktop\Power BI Demo Content\Demo Data\"}, DefaultValue="C:\Users\boesc\OneDrive\Desktop\Power BI Demo Content\Demo Data\", Type="Text", IsParameterQueryRequired=true]
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Roles
 
 ### Verantworlicher EU
@@ -136,7 +136,7 @@ Geo
 [Land] = "Deutschland"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ### DE Pirum
 
 
@@ -148,7 +148,7 @@ Geo
 [Land] = "Deutschland"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 
 Hersteller
 
@@ -156,4 +156,4 @@ Hersteller
 [Hersteller Name] = "Pirum"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured

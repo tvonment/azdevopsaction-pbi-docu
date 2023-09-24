@@ -25,7 +25,7 @@ in
     #"Geänderter Typ"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Table: Geo
 
 
@@ -38,7 +38,7 @@ in
     #"Geänderter Typ"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Parameter: Parameter_SingleValue
 
 
@@ -48,7 +48,7 @@ Parameter mit einem Wert
 "Parameterwert als Text" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Parameter: Parameter_List
 
 
@@ -58,4 +58,4 @@ Parameter mit Liste von Werten die ausgewählt werden können
 #date(2023, 1, 1) meta [IsParameterQuery=true, List={#date(2023, 1, 1), #date(2022, 1, 1), #date(2021, 1, 1)}, DefaultValue=#date(2023, 1, 1), Type="Date", IsParameterQueryRequired=true]
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured

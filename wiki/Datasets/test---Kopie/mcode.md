@@ -27,7 +27,7 @@ in
     #"Changed Type"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Table: Calendar
 
 
@@ -40,7 +40,7 @@ in
     #"Changed Type"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Table: Geo
 
 
@@ -53,7 +53,7 @@ in
     #"Changed Type"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Table: Manufacturers
 
 
@@ -66,7 +66,7 @@ in
     #"Changed Type"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Table: Products
 
 
@@ -79,7 +79,7 @@ in
     #"Changed Type"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Table: Sales
 
 
@@ -93,7 +93,7 @@ in
     #"Changed Type"
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured
 ## Parameter: Parameter1
 
 
@@ -101,4 +101,4 @@ OpenAI is not configured
 #"Sample File" meta [IsParameterQuery=true, BinaryIdentifier=#"Sample File", Type="Binary", IsParameterQueryRequired=true]
 ```
 
-OpenAI is not configured
+OpenAI API Key is not configured

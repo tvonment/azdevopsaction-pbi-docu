@@ -14,7 +14,7 @@
     "version": {
         "Major": "1",
         "Minor": "0",
-        "Patch": "16"
+        "Patch": "17"
     },
     "minimumAgentVersion": "1.83.0",
     "instanceNameFormat": "PBI Create Wiki $(message)",
@@ -40,7 +40,7 @@
             "type": "string",
             "label": "OpenAI URL",
             "defaultValue": "",
-            "required": true,
+            "required": false,
             "helpMarkDown": "URL for OpenAI API Service"
         },
         {
@@ -48,7 +48,7 @@
             "type": "string",
             "label": "OpenAI Model Name",
             "defaultValue": "",
-            "required": true,
+            "required": false,
             "helpMarkDown": "Deployed OpenAI Model Name for use"
         },
         {
@@ -56,7 +56,7 @@
             "type": "string",
             "label": "OpenAI Key",
             "defaultValue": "",
-            "required": true,
+            "required": false,
             "helpMarkDown": "Access Key for Azure OpenAI Service"
         }
     ],

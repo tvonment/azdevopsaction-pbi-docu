@@ -50,7 +50,7 @@ async function run() {
         const pat = tl.getVariable('pat') || tl.getInput('pat', false) || "";
         const openaiUrl = tl.getInput('openaiUrl') || "";
         const openaiModelname = tl.getInput('openaiModelname') || "";
-        const openaiKey = tl.getVariable('openaiKey') || tl.getInput('openaiKey') || "";
+        const openaiKey = tl.getInput('openaiKey') || "";
 
         const path = require('path');
         const scriptPath = path.join(__dirname, 'python/create-wiki.py');
