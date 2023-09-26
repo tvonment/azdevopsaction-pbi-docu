@@ -28,5 +28,3 @@
 |[[App] Sales Funnel & Order Book - Platform Head (FU)](../Reports/[App]-Sales-Funnel-&-Order-Book---Platform-Head-(FU).md)|[IFRS_Reporting [QA]](../Workspaces/IFRS_Reporting-[QA].md)|
 |[[App] Sales Funnel & Order Book - Platform Head DACH (IN)](../Reports/[App]-Sales-Funnel-&-Order-Book---Platform-Head-DACH-(IN).md)|[IFRS_Reporting [QA]](../Workspaces/IFRS_Reporting-[QA].md)|
 |[[App] Sales Funnel & Order Book - Platform Head DACH (FU)](../Reports/[App]-Sales-Funnel-&-Order-Book---Platform-Head-DACH-(FU).md)|[IFRS_Reporting [QA]](../Workspaces/IFRS_Reporting-[QA].md)|
-|[Sales Funnel & Order Book - MD, Region Head, Country Head](../Reports/Sales-Funnel-&-Order-Book---MD,-Region-Head,-Country-Head.md)|[IFRS_Reporting [QA]](../Workspaces/IFRS_Reporting-[QA].md)|
-|[[App] Sales Funnel & Order Book - MD, Region Head, Country Head](../Reports/[App]-Sales-Funnel-&-Order-Book---MD,-Region-Head,-Country-Head.md)|[IFRS_Reporting [QA]](../Workspaces/IFRS_Reporting-[QA].md)|

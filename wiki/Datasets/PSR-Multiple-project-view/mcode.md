@@ -22,7 +22,7 @@ in
     #"Added Index"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: dim_project
 
 
@@ -36,7 +36,7 @@ in
     #"Replaced Value"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: dim_project_hierarchy
 
 
@@ -49,7 +49,7 @@ in
     #"Changed Type"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: fact_project_invoices_ppo
 
 
@@ -61,7 +61,7 @@ in
     rep_v_fc_psr_project_invoices_ppo
 ```
 
-OpenAI API Key is not configured
+
 ## Table: fact_project_oview_budget_costs
 
 
@@ -73,7 +73,7 @@ in
     rep_v_fc_psr_project_oview_budget_costs
 ```
 
-OpenAI API Key is not configured
+
 ## Table: fact_project_time_recording
 
 
@@ -85,7 +85,7 @@ in
     rep_v_fc_psr_project_recording
 ```
 
-OpenAI API Key is not configured
+
 ## Table: fact_project_time_planned
 
 
@@ -99,7 +99,7 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: fact_sales_order_items
 
 
@@ -111,7 +111,7 @@ in
     rep_v_fc_psr_sales_order_items
 ```
 
-OpenAI API Key is not configured
+
 ## Table: _Project Measures (budget/cost)
 
 
@@ -124,7 +124,7 @@ in
     #"Removed Columns"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: DisplayProjectTableData
 
 
@@ -136,7 +136,7 @@ in
     #"Changed Type"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_fc_psr_permisson
 
 
@@ -149,7 +149,7 @@ in
     rep_v_fc_psr_permisson
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_fc_psr_permisson_admin
 
 
@@ -162,7 +162,7 @@ in
     rep_v_fc_psr_permisson_admin
 ```
 
-OpenAI API Key is not configured
+
 ## Table: _progressMeasures by status date
 
 
@@ -175,7 +175,7 @@ in
     #"Removed Columns"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_fc_psr_invoice
 
 
@@ -189,7 +189,7 @@ in
     #"Replaced Value1"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: ProjectStatus
 
 
@@ -201,7 +201,7 @@ in
     #"Changed Type"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: pub ll_fc_data_explanation
 
 
@@ -215,7 +215,7 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: dim_service
 
 
@@ -231,7 +231,7 @@ in
     #"Sorted Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: v_fc_psr_byd_project_internal_incurred_costs
 
 
@@ -245,7 +245,7 @@ in
     #"Replaced Value"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: v_fc_psr_byd_sales_order_acquisition_performance
 
 
@@ -258,7 +258,7 @@ in
     rep_v_fc_psr_byd_sales_order_acquisition_performance
 ```
 
-OpenAI API Key is not configured
+
 ## Table: ll_fc_ie_cost_category
 
 
@@ -270,7 +270,7 @@ in
     rep_v_ll_report_type_byd_service
 ```
 
-OpenAI API Key is not configured
+
 ## Roles
 
 ### PM
@@ -284,7 +284,7 @@ rep v_fc_psr_permisson
 or([email] = userprincipalname(), CONTAINS('rep v_fc_psr_permisson_admin','rep v_fc_psr_permisson_admin'[email], USERPRINCIPALNAME(), 'rep v_fc_psr_permisson_admin'[report_id],100))
 ```
 
-OpenAI API Key is not configured
+
 ### ADMIN
 
 
@@ -300,4 +300,3 @@ rep v_fc_psr_permisson
 [email] = "eric.kirstetter@rolandberger.com"
 ```
 
-OpenAI API Key is not configured

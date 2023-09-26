@@ -17,19 +17,19 @@
 Utilization_target_hours = SUM('msr v_employee_utilization'[target_hours])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_on_client_project = SUM('msr v_employee_utilization'[productive_hours_utilization])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_absolute = [Utilization_hours_on_client_project] / 'msr v_employee_utilization'[Utilization_target_hours]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization % = 
@@ -39,43 +39,43 @@ DIVIDE(
 )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Target = 0.8
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Performance = 'msr v_employee_utilization'[Utilization %] - 'msr v_employee_utilization'[Utilization Target]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Performance String = "(" & 'msr v_employee_utilization'[Utilization Performance Short] & "ppt.)"
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Performance Short = FIXED('msr v_employee_utilization'[Utilization Performance] * 100, 0)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Target String = "Target: " & 'msr v_employee_utilization'[Utilization Target] * 100 & "%"
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Target & Performance = [Utilization Target String] & " " & [Utilization Performance String]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization % CY = 
@@ -85,19 +85,19 @@ var productive_hours_utilization = CALCULATE(SUM('msr v_employee_utilization'[pr
     productive_hours_utilization
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_target_hours_utilization = SUM('msr v_employee_utilization'[target_hours_utilization])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_absolute_2 = [Utilization_hours_on_client_project] / 'msr v_employee_utilization'[Utilization_target_hours_utilization]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization %_2 = 
@@ -109,103 +109,103 @@ RETURN
     IF(utilization <= 0, BLANK(), utilization)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Completion rate (all vs th) = DIVIDE(SUM('msr v_employee_utilization'[booked_hours]), SUM('msr v_employee_utilization'[target_hours]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Completion rate (prod+ill vs adj.) = DIVIDE(SUM('msr v_employee_utilization'[productive_hours_utilization])+SUM('msr v_employee_utilization'[illness_hours]), SUM('msr v_employee_utilization'[TA: Target hours adj.]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 TA: Target hours adj. Total = SUM('msr v_employee_utilization'[TA: Target hours adj.])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Completion rate (reported) = DIVIDE([Hours_reported], [TA: Target hours adj. Total])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_illness = SUM('msr v_employee_utilization'[illness_hours])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_illness_bridge = [Utilization_hours_illness] * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_internal = SUM('msr v_employee_utilization'[inp_project_hours_adj]) + SUM('msr v_employee_utilization'[hr_project_hours])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_internal_bridge = [Utilization_hours_internal] * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_acq = SUM('msr v_employee_utilization'[acq_project_hours])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_acq_bridge = [Utilization_hours_acq] * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_training = SUM('msr v_employee_utilization'[training_hours])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_training_bridge = [Utilization_hours_training] * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_vacation_leave = SUM('msr v_employee_utilization'[vacation_hours]) + SUM('msr v_employee_utilization'[leave_hours])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_vacation_leave_bridge = [Utilization_hours_vacation_leave] * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Completion = DIVIDE([Utilization_hours_recorded], SUM('msr v_employee_utilization'[target_hours]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization % PY = CALCULATE([Utilization %_2], SAMEPERIODLASTYEAR('pub dim_date'[Date]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_target_hours_formatted = 
@@ -215,55 +215,55 @@ RETURN
     number_whole & "k h"
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_target_hours_formatted_2 = [Utilization_target_hours]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_vacation_leave_bridge_formatted = [Utilization_hours_vacation_leave_bridge]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_target_hours_utilization_formatted = [Utilization_target_hours_utilization]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_training_bridge_formatted = [Utilization_hours_training_bridge]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_illness_bridge_formatted = [Utilization_hours_illness_bridge]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_internal_bridge_formatted = [Utilization_hours_internal_bridge]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_acq_bridge_formatted = [Utilization_hours_acq_bridge]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_on_client_project_formatted = [Utilization_hours_on_client_project]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization % AVG_3M = 
@@ -280,13 +280,13 @@ RETURN
     IF(utilization <= 0, 0, utilization)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 start_3_month = EOMONTH(TODAY(),-4)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization % AVG_3M_test = 
@@ -300,7 +300,7 @@ RETURN
     utilization
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization % AVG_12M = 
@@ -317,79 +317,79 @@ RETURN
     IF(utilization <= 0, 0, utilization)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization % AVG_txt = "L12M AVG: " & FORMAT('msr v_employee_utilization'[Utilization % AVG_12M], "0%") & "  |  L3M AVG: " & FORMAT('msr v_employee_utilization'[Utilization % AVG_3M], "0%")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Timesheet_Customer = [Utilization_hours_on_client_project]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Timesheet_Internal_Acq_Sick = ([Utilization_hours_illness_bridge_formatted] + [Utilization_hours_internal_bridge_formatted] + [Utilization_hours_acq_bridge_formatted]) * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Timesheet_Vacation_Leave_Training = ([Utilization_hours_vacation_leave_bridge_formatted] + [Utilization_hours_training_bridge_formatted]) * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Target AVG = AVERAGE('msr v_employee_utilization'[utilization_target])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Δ Target = IF([Utilization Target AVG] = 0, 0, ([Utilization Target AVG] - [Utilization %_2]) * -1)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Timesheet_Target_Hours = SUM('msr v_employee_utilization'[target_hours])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Timesheet_Missing_Hours = [Timesheet_Target_Hours] - [Timesheet_Customer] - [Timesheet_Vacation_Leave_Training] - [Timesheet_Internal_Acq_Sick]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Δ Target for Table = IF([Utilization Target AVG] = 0, 0, ([Utilization Target AVG] - [Utilization %_2]) * -1)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_missing = [Utilization_target_hours] - [Utilization_hours_recorded]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_missing_bridge = [Utilization_hours_missing] * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Δ Target pp = IF(ISBLANK('msr v_employee_utilization'[Utilization %_2]), BLANK(), ROUND('msr v_employee_utilization'[Utilization Δ Target]*100, 0) & " pp")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization % LM = 
@@ -402,7 +402,7 @@ RETURN
     IF(utilization <= 0, 0, utilization)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization % YTD = 
@@ -415,39 +415,39 @@ RETURN
     IF(utilization <= 0, 0, utilization)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Δ Target YTD = IF([Utilization Target AVG] = 0, 0, 
                                 CALCULATE(([Utilization Target AVG] - [Utilization %_2]) * -1, FILTER(ALL('pub dim_date'),'pub dim_date'[UpToCurrentMonth] = 1)))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Δ Target LM = IF([Utilization Target AVG] = 0, 0, 
                                 CALCULATE(([Utilization Target AVG] - [Utilization %_2]) * -1, FILTER(ALL('pub dim_date'), 'pub dim_date'[Month] = MONTH(TODAY())-1 && 'pub dim_date'[Year] = YEAR(TODAY()))))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Δ Target pp YTD = ROUND('msr v_employee_utilization'[Utilization Δ Target YTD]*100, 0)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Δ Target pp LM = ROUND('msr v_employee_utilization'[Utilization Δ Target LM]*100, 0)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_reported = Not available
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Completion Missing Hours = 
@@ -458,104 +458,104 @@ RETURN
     missing_hours
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Completion Reported Hours = [Utilization_hours_acq] + [Utilization_hours_internal] + [Utilization_hours_illness] + [Utilization_hours_on_client_project]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Completion Target Hours adj. = [Utilization_target_hours_utilization]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Δ Target pp YTD formatted = "AVG Δ: " & [Utilization Δ Target pp YTD] & "pp" 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Δ Target YTD old = IF([Utilization Target AVG] = 0, 0, 
                                 CALCULATE(([Utilization Target AVG] - [Utilization %_2]) * -1, 'pub dim_date'[UpToCurrentMonth] = 1))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Δ Target pp LM formatted = "AVG Δ: " & [Utilization Δ Target pp LM] & "pp" 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Δ Target pp YTD formatted_table = "AVG Δ year to date: " & [Utilization Δ Target pp YTD] & "pp" 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Δ Target pp LM formatted_table = "AVG Δ last month: " & [Utilization Δ Target pp LM] & "pp" 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_target_days = SUM('msr v_employee_utilization'[target_hours])/8
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_target_days_utilization = SUM('msr v_employee_utilization'[target_hours_utilization])/8
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_days_on_client_project = SUM('msr v_employee_utilization'[productive_hours_utilization])/8
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_days_vacation_leave_bridge = [Utilization_hours_vacation_leave]/8 * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_days_training_bridge = [Utilization_hours_training]/8 * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_days_illness_bridge = [Utilization_hours_illness]/8 * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_days_internal_bridge = [Utilization_hours_internal]/8 * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_days_acq_bridge = [Utilization_hours_acq]/8 * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_days_missing_bridge = [Utilization_hours_missing]/8 * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Flag Single Employee Selected = 
@@ -564,25 +564,25 @@ return
 if(emp = "multiple",0,1)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Text Special Time Model = if([Flag Single Employee Selected] && [Flag Special Time Model],"Values > 100% may be due to special time models","")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Flag Special Time Model = if(max('msr v_employee_utilization'[Utilization % Day]) > 1, 1,0)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Δ Target pp PY = ROUND(CALCULATE('msr v_employee_utilization'[Utilization Δ Target pp], SAMEPERIODLASTYEAR('pub dim_date'[Date]))*100, 0)& " pp"
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Δ pp PY = 
@@ -595,67 +595,67 @@ IF(CY > 0 ,IF(PY > 0,
     "N/A"), BLANK())
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_eur_vacation_leave_bridge = SUMX('msr v_employee_utilization',[Utilization_days_vacation_leave_bridge]*[daily_rate_eur])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_target_eur = SUMX('msr v_employee_utilization',[Utilization_target_days]*[daily_rate_eur])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_eur_training_bridge = SUMX('msr v_employee_utilization',[Utilization_days_training_bridge]*[daily_rate_eur])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_target_eur_utilization = SUMX('msr v_employee_utilization',[Utilization_target_days_utilization]*[daily_rate_eur])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_eur_illness_bridge = SUMX('msr v_employee_utilization',[Utilization_days_illness_bridge]*[daily_rate_eur])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_eur_internal_bridge = SUMX('msr v_employee_utilization',[Utilization_days_internal_bridge]*[daily_rate_eur])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_eur_acq_bridge = SUMX('msr v_employee_utilization',[Utilization_days_acq_bridge]*[daily_rate_eur])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_eur_missing_bridge = SUMX('msr v_employee_utilization',[Utilization_days_missing_bridge]*[daily_rate_eur])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_eur_on_client_project = SUMX('msr v_employee_utilization',[Utilization_days_on_client_project]*[daily_rate_eur])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_days_missing = [Utilization_hours_missing]/8
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_missing % = 
@@ -667,13 +667,13 @@ RETURN
     IF(missing <= 0, 0, missing)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 utilization_hours_acq_internal_illness = [Utilization_hours_acq] + [Utilization_hours_internal] + [Utilization_hours_illness]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 utilization_hours_acq_internal_illness % = 
@@ -685,13 +685,13 @@ RETURN
     IF(utilization <= 0, 0, utilization)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Spacer = REPT("l", 15)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Completion_OLD = 
@@ -706,37 +706,37 @@ RETURN
     IF(completion_total < 0, 0, completion_total)))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_hours_recorded = [Utilization_hours_vacation_leave] + [Utilization_hours_training] + [Utilization_hours_illness] + [Utilization_hours_internal] + [Utilization_hours_acq] + [Utilization_hours_on_client_project]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Target AVG_OLD = AVERAGE('rep v_hr_employee'[utilization_target])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization Target AVG_NEW = AVERAGE('msr v_employee_utilization'[utilization_target])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Tooltip_Timetheet_analysis = "based on target hours adjusted"
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Tooltip_completion = "based on target hours"
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -744,19 +744,19 @@ OpenAI API Key is not configured
 TA: Vacation & other leave = 'msr v_employee_utilization'[vacation_hours] + 'msr v_employee_utilization'[leave_hours]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 TA: Target hours adj. = 'msr v_employee_utilization'[target_hours] - 'msr v_employee_utilization'[TA: Vacation & other leave] - 'msr v_employee_utilization'[training_hours]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 booked_hours = 'msr v_employee_utilization'[absence_hours] + 'msr v_employee_utilization'[training_hours] + 'msr v_employee_utilization'[productive_hours_utilization]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization % Day = 
@@ -764,19 +764,197 @@ if('msr v_employee_utilization'[target_hours] = 0 && 'msr v_employee_utilization
 DIVIDE('msr v_employee_utilization'[productive_hours_utilization], 'msr v_employee_utilization'[target_hours],0))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 full_name_job_reporting_level4 = 'msr v_employee_utilization'[full_name] & " - " & 'msr v_employee_utilization'[job_reporting_level4]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 employee_date_key = 'msr v_employee_utilization'[emp_id] & "-" & 'msr v_employee_utilization'[calendar_day]
 ```
 
-OpenAI API Key is not configured
+
+
+```dax
+toe_description = RELATED('msr v_hr_employee_job_matrix'[toe_description])
+```
+
+
+
+```dax
+cost_center_id = RELATED('msr v_hr_employee_job_matrix'[cost_center_id])
+```
+
+
+
+```dax
+company_id_byd = RELATED('msr v_hr_employee_job_matrix'[company_id_byd])
+```
+
+
+
+```dax
+office = RELATED('msr v_hr_employee_job_matrix'[office])
+```
+
+
+
+```dax
+platform_1_id = RELATED('msr v_hr_employee_job_matrix'[platform_1_id])
+```
+
+
+
+```dax
+country_code_iso3 = RELATED('msr v_hr_employee_job_matrix'[country_code_iso3])
+```
+
+
+
+```dax
+job.Im Scope = RELATED('msr v_hr_employee_job_matrix'[job.Im Scope])
+```
+
+
+
+```dax
+job.Bezeichnung = RELATED('msr v_hr_employee_job_matrix'[job.Bezeichnung])
+```
+
+
+
+```dax
+job.Kurz-Bezeichnung = RELATED('msr v_hr_employee_job_matrix'[job.Kurz-Bezeichnung])
+```
+
+
+
+```dax
+job.JobGroup = RELATED('msr v_hr_employee_job_matrix'[job.JobGroup])
+```
+
+
+
+```dax
+daily_rate_eur = RELATED('msr v_hr_employee_job_matrix'[daily_rate_eur])
+```
+
+
+
+```dax
+utilization_target = RELATED('msr v_hr_employee_job_matrix'[utilization_target])
+```
+
+
+
+```dax
+platform_1_name = RELATED('msr v_hr_employee_job_matrix'[platform_1_name])
+```
+
+
+
+```dax
+platform_1_name_short = RELATED('msr v_hr_employee_job_matrix'[platform_1_name_short])
+```
+
+
+
+```dax
+platform_1_sort = RELATED('msr v_hr_employee_job_matrix'[platform_1_sort])
+```
+
+
+
+```dax
+region_reporting_level1 = RELATED('msr v_hr_employee_job_matrix'[region_reporting_level1])
+```
+
+
+
+```dax
+region_reporting_level2 = RELATED('msr v_hr_employee_job_matrix'[region_reporting_level2])
+```
+
+
+
+```dax
+region_reporting_level3 = RELATED('msr v_hr_employee_job_matrix'[region_reporting_level3])
+```
+
+
+
+```dax
+region_reporting_level1_sort = RELATED('msr v_hr_employee_job_matrix'[region_reporting_level1_sort])
+```
+
+
+
+```dax
+full_name = RELATED('msr v_hr_employee_job_matrix'[full_name])
+```
+
+
+
+```dax
+job_reporting_level1 = RELATED('msr v_hr_employee_job_matrix'[job_reporting_level1])
+```
+
+
+
+```dax
+job_reporting_level2 = RELATED('msr v_hr_employee_job_matrix'[job_reporting_level2])
+```
+
+
+
+```dax
+job_reporting_level3 = RELATED('msr v_hr_employee_job_matrix'[job_reporting_level3])
+```
+
+
+
+```dax
+job_reporting_level4 = RELATED('msr v_hr_employee_job_matrix'[job_reporting_level4])
+```
+
+
+
+```dax
+job_reporting_level1_sort = RELATED('msr v_hr_employee_job_matrix'[job_reporting_level1_sort])
+```
+
+
+
+```dax
+job_reporting_level2_sort = RELATED('msr v_hr_employee_job_matrix'[job_reporting_level2_sort])
+```
+
+
+
+```dax
+job_reporting_level3_sort = RELATED('msr v_hr_employee_job_matrix'[job_reporting_level3_sort])
+```
+
+
+
+```dax
+job_reporting_level4_sort = RELATED('msr v_hr_employee_job_matrix'[job_reporting_level4_sort])
+```
+
+
+## Table: msr v_hr_employee_job_matrix
+
+### Calculated Columns:
+
+
+```dax
+employee_date_key = 'msr v_hr_employee_job_matrix'[emp_id] & "-" & 'msr v_hr_employee_job_matrix'[key_date]
+```
+
+
 ## Table: rep v_hr_employee
 
 ### Calculated Columns:
@@ -786,25 +964,25 @@ OpenAI API Key is not configured
 Country-Jobcode = 'rep v_hr_employee'[country_code_iso3] & "-" & 'rep v_hr_employee'[jobcode_id]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 utilization_target = RELATED(utilization_budgets[utilization_target])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 fullname_joblevel4 = 'rep v_hr_employee'[full_name] & " - " & 'rep v_hr_employee'[job_reporting_level4]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 employee_joblevel4_mentor = 'rep v_hr_employee'[full_name] & " - " & 'rep v_hr_employee'[job_reporting_level4] & " - " & 'rep v_hr_employee'[mentor_full_name]
 ```
 
-OpenAI API Key is not configured
+
 ## Table: pub dim_date
 
 ### Measures:
@@ -814,25 +992,25 @@ OpenAI API Key is not configured
 temp_CurrentWeek = WEEKNUM(TODAY())
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 temp_FirstWeek = WEEKNUM(TODAY())-3
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 temp_Lastweek = WEEKNUM(TODAY())+4
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Column_width = REPT("0", 7)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 ActiveMonthList = 
@@ -843,19 +1021,19 @@ ActiveMonthList =
     )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 CurrentDay = TODAY()
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 CurrentDayWeek = [CurrentDay] & " (" & [CurrentWeek] & ")"
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 CurrentWeek = CALCULATE(
@@ -863,7 +1041,7 @@ CurrentWeek = CALCULATE(
                 FILTER(ALL('pub dim_date'), 'pub dim_date'[Date] = TODAY()))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 ActiveWeekList = 
@@ -874,7 +1052,7 @@ ActiveWeekList =
     )
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -882,7 +1060,7 @@ OpenAI API Key is not configured
 Calendarweek = "CW-" & 'pub dim_date'[WeekOfYear]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 UpToCurrentMonth = 
@@ -896,7 +1074,7 @@ RETURN
     result
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Last4Next4Weeks = 
@@ -912,19 +1090,19 @@ RETURN
     result
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Color_current_month = IF(MONTH(TODAY()) = 'pub dim_date'[Date].[MonthNo], "#008080", "#66B3B3")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Color_current_week = IF(WEEKNUM(TODAY()+1) = 'pub dim_date'[WeekOfYear], "#008080", "#66B3B3")
 ```
 
-OpenAI API Key is not configured
+
 ## Table: Refresh_Timestamp
 
 ### Calculated Columns:
@@ -934,7 +1112,7 @@ OpenAI API Key is not configured
 Calendarweek = "CW-" & WEEKNUM(Refresh_Timestamp[Last_refresh_local])
 ```
 
-OpenAI API Key is not configured
+
 ## Table: msr v_employee_project_hours
 
 ### Measures:
@@ -944,85 +1122,85 @@ OpenAI API Key is not configured
 Hours_in_approval = CALCULATE(SUM('msr v_employee_project_hours'[recorded_time])+0, 'msr v_employee_project_hours'[approval_status] IN {"In Approval"})
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Hours_approved = CALCULATE(SUM('msr v_employee_project_hours'[recorded_time]), 'msr v_employee_project_hours'[approval_status] IN {"Approved", "Approval not Necessary"})
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Hours_reported = CALCULATE(SUM('msr v_employee_project_hours'[recorded_time]), 'msr v_employee_project_hours'[approval_status] IN {"Approved", "Approval not Necessary", "In Approval"})
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Hours_in_approval_% = DIVIDE([Hours_in_approval], [Hours_reported])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Hours_in_approval_CP = CALCULATE([Hours_in_approval]+0, 'msr v_employee_project_hours'[project_type] IN {"CP"})
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Sum_recorded_time_hours = SUM('msr v_employee_project_hours'[recorded_time])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Sum_recorded_time_days = SUM('msr v_employee_project_hours'[recorded_time])/8
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Days_in_approval = CALCULATE(SUM('msr v_employee_project_hours'[recorded_time])/8+0, 'msr v_employee_project_hours'[approval_status] IN {"In Approval"})
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Days_in_approval_CP = CALCULATE([Days_in_approval]+0, 'msr v_employee_project_hours'[project_type] IN {"CP"})
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Text Hours in Approval = "Hours currently in approval: " & FORMAT([Hours_in_approval],"0") & " (CP: " & FORMAT([Hours_in_approval_CP],"0") & ")"
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Text Days in Approval = "Days currently in approval: " & FORMAT([Days_in_approval],"0") & " (CP: " & FORMAT([Days_in_approval_CP],"0") & ")"
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Euros_in_approval = CALCULATE(SUMX('msr v_employee_project_hours',[recorded_time]/8*[daily_rate_eur])+0, 'msr v_employee_project_hours'[approval_status] IN {"In Approval"})
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Euros_in_approval_CP = CALCULATE([Euros_in_approval]+0, 'msr v_employee_project_hours'[project_type] IN {"CP"})
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Text Euros in Approval = "Euros currently in approval: " & SUBSTITUTE(FORMAT([Euros_in_approval], "#,##,,.0M"),".",",") & " (CP: " & SUBSTITUTE(FORMAT([Euros_in_approval_CP],"#,##,,.0M"),".",",") & ")"
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Dynamic_in_approval = SWITCH(
@@ -1033,7 +1211,7 @@ Dynamic_in_approval = SWITCH(
 )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Dynamic_in_approval_CP = SWITCH(
@@ -1044,7 +1222,7 @@ Dynamic_in_approval_CP = SWITCH(
 )
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -1052,25 +1230,25 @@ OpenAI API Key is not configured
 mentor_full_name_old = RELATED('rep v_hr_employee'[mentor_full_name])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 project_title = IF('msr v_employee_project_hours'[time_type_category] IN {"Productive Time", "Training"}, 'msr v_employee_project_hours'[project_number] & " - " & 'msr v_employee_project_hours'[project_name], 'msr v_employee_project_hours'[time_type_category])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 approver = IF('msr v_employee_project_hours'[time_type_category] IN {"Productive Time", "Training"}, 'msr v_employee_project_hours'[project_manager], 'msr v_employee_project_hours'[mentor_full_name])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 employee_date_key = 'msr v_employee_project_hours'[emp_id] & "-" & 'msr v_employee_project_hours'[calendar_day]
 ```
 
-OpenAI API Key is not configured
+
 ## Table: Comparison_Table
 
 
@@ -1081,7 +1259,7 @@ SELECTCOLUMNS('rep v_hr_employee',
                         "Target", 'rep v_hr_employee'[utilization_target])
 ```
 
-OpenAI API Key is not configured
+
 ### Measures:
 
 
@@ -1089,7 +1267,7 @@ OpenAI API Key is not configured
 Info Button = UNICHAR(128712)
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -1097,61 +1275,61 @@ OpenAI API Key is not configured
 Utilization_YTD = CALCULATE([Utilization % YTD], ALLEXCEPT(Comparison_Table, Comparison_Table[emp_id]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Utilization_LM = CALCULATE([Utilization % LM], ALLEXCEPT(Comparison_Table, Comparison_Table[emp_id]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Delta_YTD = (Comparison_Table[Target] - Comparison_Table[Utilization_YTD]) * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Delta_LM = (Comparison_Table[Target] - Comparison_Table[Utilization_LM]) * -1
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Delta_rounded_0.05_YTD = CEILING(Comparison_Table[Delta_YTD], 0.05)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Delta_rounded_0.05_LM = CEILING(Comparison_Table[Delta_LM], 0.05)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Delta_pp_YTD = Comparison_Table[Delta_rounded_0.05_YTD]*100
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Delta_pp_LM = Comparison_Table[Delta_rounded_0.05_LM]*100
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Delta_pp_YTD_table = ROUND(Comparison_Table[Delta_YTD] * 100, 0)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Delta_pp_LM_table = ROUND(Comparison_Table[Delta_LM] * 100, 0)
 ```
 
-OpenAI API Key is not configured
+
 ## Table: utilization_budgets
 
 ### Calculated Columns:
@@ -1161,7 +1339,7 @@ OpenAI API Key is not configured
 Country-Jobcode = utilization_budgets[country_code_iso3] & "-" & utilization_budgets[jobcode_id]
 ```
 
-OpenAI API Key is not configured
+
 ## Table: D/H Utilization Deepdive
 
 
@@ -1176,7 +1354,7 @@ OpenAI API Key is not configured
 }
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -1187,7 +1365,7 @@ D/H = SWITCH(
 )
 ```
 
-OpenAI API Key is not configured
+
 ## Table: D/H Utilization Drillthrough
 
 
@@ -1198,7 +1376,7 @@ OpenAI API Key is not configured
 }
 ```
 
-OpenAI API Key is not configured
+
 ## Table: D/H Slicer
 
 
@@ -1206,7 +1384,7 @@ OpenAI API Key is not configured
 {("Days"),("Hours")}
 ```
 
-OpenAI API Key is not configured
+
 ## Table: D/H Timesheet Analysis
 
 
@@ -1234,7 +1412,7 @@ OpenAI API Key is not configured
 }
 ```
 
-OpenAI API Key is not configured
+
 ### Measures:
 
 
@@ -1242,7 +1420,7 @@ OpenAI API Key is not configured
 Text Button Details Hours/Days = "Details " & LOWER(SELECTEDVALUE('D/H Slicer'[D/H]))
 ```
 
-OpenAI API Key is not configured
+
 ## Table: D/H Approval Textbox
 
 
@@ -1253,7 +1431,7 @@ OpenAI API Key is not configured
 }
 ```
 
-OpenAI API Key is not configured
+
 ## Table: D/H Completion Deepdive
 
 
@@ -1264,4 +1442,11 @@ OpenAI API Key is not configured
 }
 ```
 
-OpenAI API Key is not configured
+
+## Table: Platform Slicer
+
+
+```dax
+DISTINCT('msr v_employee_utilization'[platform_1_name])
+```
+

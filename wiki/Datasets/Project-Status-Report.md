@@ -2,20 +2,21 @@
 
 
 
-# Project Status Report
+# project status report
 
-|Dataset ID|2b06ef8b-2943-4a9a-9e7d-0d7ae3c7568c|
+|Dataset ID|d99e7210-a0a4-4ab2-9c30-889df5818ae4|
 | :--- | :--- |
-|Workspace|[IFRS_Reporting [QA]](../Workspaces/IFRS_Reporting-[QA].md)|
+|Workspace|[FC_PSR](../Workspaces/FC_PSR.md)|
 |Configured By|Yi.Faber@rolandberger.com|
 |Target Storage Mode|Abf|
 |Content Provider Type|PbixInImportMode|
-|Created Date|September 05, 2023 20:23:13|
-|MCode|[M Code](./Project-Status-Report/mcode.md)|
-|DAX|[DAX](./Project-Status-Report/dax.md)|
+|Created Date|July 19, 2023 11:25:11|
+|MCode|[M Code](./project-status-report/mcode.md)|
+|DAX|[DAX](./project-status-report/dax.md)|
 
 ## Reports
 
 |Report|Workspace|
 | :--- | :--- |
-|[Project Status Report](../Reports/Project-Status-Report.md)|[IFRS_Reporting [QA]](../Workspaces/IFRS_Reporting-[QA].md)|
+|[project status report](../Reports/project-status-report.md)|[FC_PSR](../Workspaces/FC_PSR.md)|
+|[[App] project status report](../Reports/[App]-project-status-report.md)|[FC_PSR](../Workspaces/FC_PSR.md)|

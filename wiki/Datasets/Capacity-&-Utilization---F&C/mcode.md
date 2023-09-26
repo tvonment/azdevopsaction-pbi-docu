@@ -6,7 +6,7 @@
 
 |Dataset|[Capacity & Utilization - F&C](./../Capacity-&-Utilization---F&C.md)|
 | :--- | :--- |
-|Workspace|[IFRS_Reporting [QA]](../../Workspaces/IFRS_Reporting-[QA].md)|
+|Workspace|[IFRS_Reporting [Prod]](../../Workspaces/IFRS_Reporting-[Prod].md)|
 
 ## Table: msr v_employee_utilization
 
@@ -19,7 +19,7 @@ in
     Publish
 ```
 
-OpenAI API Key is not configured
+
 ## Table: msr v_hr_employee_job_matrix
 
 
@@ -31,7 +31,7 @@ in
     Publish
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_hr_employee
 
 
@@ -43,7 +43,7 @@ in
     Publish
 ```
 
-OpenAI API Key is not configured
+
 ## Table: pub dim_date
 
 
@@ -59,7 +59,7 @@ in
     #"Inserted Text After Delimiter"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: Refresh_Timestamp
 
 
@@ -134,7 +134,7 @@ in
     #"Removed Columns"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: msr v_employee_project_hours
 
 
@@ -146,7 +146,7 @@ in
     Publish
 ```
 
-OpenAI API Key is not configured
+
 ## Table: utilization_budgets
 
 
@@ -159,7 +159,7 @@ in
     #"Changed Type"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_ll_head_platform
 
 
@@ -171,7 +171,7 @@ in
     rep_v_ll_head_platform
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_ll_head_platform_DACH
 
 
@@ -183,7 +183,7 @@ in
     rep_v_ll_head_platform_DACH
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_II_head_region_country
 
 
@@ -194,7 +194,7 @@ in
     Source
 ```
 
-OpenAI API Key is not configured
+
 ## Table: pub v_ll_company_to_region
 
 
@@ -209,7 +209,7 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Roles
 
 ### Admin
@@ -227,7 +227,7 @@ rep v_II_head_region_country
 [email] = username()
 ```
 
-OpenAI API Key is not configured
+
 
 rep v_ll_head_platform
 
@@ -235,7 +235,7 @@ rep v_ll_head_platform
 [email] = username()
 ```
 
-OpenAI API Key is not configured
+
 
 rep v_ll_head_platform_DACH
 
@@ -243,16 +243,8 @@ rep v_ll_head_platform_DACH
 [email] = username()
 ```
 
-OpenAI API Key is not configured
+
 ### General Head
 
 
 Model Permission: Read
-
-msr v_employee_utilization
-
-```m
-[platform_1_name] = "General"
-```
-
-OpenAI API Key is not configured

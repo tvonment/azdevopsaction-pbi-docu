@@ -2,13 +2,13 @@
 
 
 
-# Project Status Report
+# project status report
 
-|Report ID|af716bd1-226c-47b4-8125-554b0128f0d7|
+|Report ID|4f5501b7-dedb-4dd2-ae30-8a86dbb15af9|
 | :--- | :--- |
-|Workspace|[IFRS_Reporting [QA]](../Workspaces/IFRS_Reporting-[QA].md)|
-|Dataset|[Capacity & Utilization - F&C](../Datasets/Capacity-&-Utilization---F&C.md)|
-|Created By|Yi.Faber@rolandberger.com|
-|Created Date|September 05, 2023 20:23:14|
-|Modified By|Yi.Faber@rolandberger.com|
-|Modified Date|September 06, 2023 13:23:37|
+|Workspace|[FC_PSR](../Workspaces/FC_PSR.md)|
+|Dataset|[project status report](../Datasets/project-status-report.md)|
+|Created By|Bernd.Reiser@rolandberger.com|
+|Created Date|July 19, 2023 11:25:13|
+|Modified By|Bernd.Reiser@rolandberger.com|
+|Modified Date|July 19, 2023 11:25:13|

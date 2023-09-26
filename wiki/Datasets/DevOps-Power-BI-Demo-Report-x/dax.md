@@ -17,7 +17,7 @@
 Berechnete Spalte in DAX = 1
 ```
 
-OpenAI API Key is not configured
+
 ## Table: Kalender als DAX Tabelle
 
 
@@ -41,4 +41,3 @@ CALENDAR (DATE(2018,1,1), DATE(2022,12,31)),
 
 ```
 
-OpenAI API Key is not configured

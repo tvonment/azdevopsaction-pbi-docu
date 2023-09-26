@@ -5,7 +5,12 @@ import mdutils
 import sys
 import base64
 import subprocess
+import uuid
+import re
 from datetime import datetime
+from azure.cosmos import CosmosClient, PartitionKey, exceptions
+
+invalid_chars_regex = re.compile(r'[<>:"/\\|?*\x00-\x1F]')
 
 def load_data(filename):
     with open(filename, 'r') as file:
@@ -28,7 +33,8 @@ def git_operations(pat):
     print('Git commands completed')
 
 def get_openai_explanation(systemmessage, text, openai_config):
-
+    local = True
+    
     if (openai_config['url'] is None or openai_config['url'] == '') and (openai_config['modelname'] is None or openai_config['modelname'] == '') and (openai_config['api_key'] is None or openai_config['api_key'] == ''): 
         return ''
     if openai_config['url'] is None or openai_config['url'] == '':
@@ -38,16 +44,39 @@ def get_openai_explanation(systemmessage, text, openai_config):
     if openai_config['api_key'] is None or openai_config['api_key'] == '':
         return 'OpenAI API Key is not configured'
     
-    if os.path.exists('export/openai.json'):
-        with open('export/openai.json', 'r') as json_file:
-            openai_content = json.load(json_file)
-    else:
-        openai_content = []
+    if (local):
+        if os.path.exists('export/openai.json'):
+            with open('export/openai.json', 'r') as json_file:
+                openai_content = json.load(json_file)
+        else:
+            openai_content = []
 
-    matching = next((item for item in openai_content if item["text"] == text), None)
-    if matching is not None:
-        return matching["content"]
-    
+        matching = next((item for item in openai_content if item["text"] == text), None)
+        if matching is not None:
+            print('OpenAI explanation found in local file')
+            return matching["content"]
+        
+    else:
+        CosmosClientConnection = os.environ.get('CosmosClientConnection')
+        client = CosmosClient.from_connection_string(conn_str=CosmosClientConnection)
+        client.create_database_if_not_exists(id='openai')
+        database = client.get_database_client('openai')
+        database.create_container_if_not_exists(id='customer02', partition_key=PartitionKey(path="/id"))
+        container = database.get_container_client('customer02')
+        query = f"SELECT * FROM c WHERE c.text = '{text}'"
+        try:
+            items = list(container.query_items(
+                query=query,
+                enable_cross_partition_query=True
+            ))
+        except:
+            print('Error in SearchQuery')
+            print(query)
+        if len(items) > 0:
+            print('OpenAI explanation found in CosmosDB')
+            return items[0]['content']
+
+
     openai.api_key = openai_config['api_key']
     openai.api_type = "azure"
     openai.api_base = openai_config['url']
@@ -64,9 +93,12 @@ def get_openai_explanation(systemmessage, text, openai_config):
       stop=None)
     
     content = response.choices[0].message.content
-    openai_content.append({"text": text, "content": content, "date": datetime.now().strftime('%B %d, %Y %H:%M:%S')})
-    with open('export/openai.json', 'w') as outfile:
-        json.dump(openai_content, outfile, indent=10)
+    if (local):
+        openai_content.append({"text": text, "content": content, "date": datetime.now().strftime('%B %d, %Y %H:%M:%S')})
+        with open('export/openai.json', 'w') as outfile:
+            json.dump(openai_content, outfile, indent=10)
+    else:
+        container.upsert_item({"id": str(uuid.uuid4()), "text": text, "content": content, "date": datetime.now().strftime('%B %d, %Y %H:%M:%S')})
     return content
 
 def create_mdMCode(workspace_name, dataset, dataset_path, openai_config):
@@ -85,11 +117,12 @@ def create_mdMCode(workspace_name, dataset, dataset_path, openai_config):
         calculated_table_columns = [column for column in table['columns'] if column.get('columnType') == 'CalculatedTableColumn']
         if len(calculated_table_columns) == 0:
             mdMCode.new_header(level=2, title='Table: ' + table['name'])
-            mdMCode.insert_code(table['source'][0]['expression'], 'm')
-            gpt_response = get_openai_explanation("Explain the following M Code:", table['source'][0]['expression'], openai_config)
-            mdMCode.new_paragraph(gpt_response)
+            if table.get('source') is not None:
+                mdMCode.insert_code(table['source'][0]['expression'], 'm')
+                gpt_response = get_openai_explanation("Explain the following M Code:", table['source'][0]['expression'], openai_config)
+                mdMCode.new_paragraph(gpt_response)
     
-    parameters = [parameter for parameter in dataset['expressions'] if 'IsParameter' in parameter.get('expression', '')]        
+    parameters = [parameter for parameter in dataset.get('expressions', []) if 'IsParameter' in parameter.get('expression', '')]        
     if len(parameters) > 0:
         for parameter in parameters:
             mdMCode.new_header(level=2, title='Parameter: ' + parameter['name'])
@@ -158,7 +191,7 @@ def create_mdWorkspace(workspace, wiki_path, wiki_name, list_of_total_reports, o
     if not os.path.exists(workspace_path):
         os.makedirs(workspace_path)
     
-    mdWorkspace = mdutils.MdUtils(file_name=os.path.join(workspace_path, wiki_name))
+    mdWorkspace = mdutils.MdUtils(file_name=os.path.join(workspace_path, invalid_chars_regex.sub('', wiki_name)))
     mdWorkspace.new_header(level=1, title=workspace['name'])
     list_of_rows = []
     list_of_rows.extend(['Workspace ID', workspace['id']])
@@ -183,17 +216,18 @@ def create_mdWorkspace(workspace, wiki_path, wiki_name, list_of_total_reports, o
 
     mdWorkspace.new_table(columns=2, rows=len(list_of_datasets)//2, text=list_of_datasets, text_align='left')
     mdWorkspace.new_header(level=3, title='Reports')
-    reports = sorted(workspace['reports'], key=lambda x: x['modifiedDateTime'], reverse=True)
+    reports = sorted(workspace['reports'], key=lambda x: x.get('modifiedDateTime', 'not set'), reverse=True)
 
     list_of_reports = []
     list_of_reports.extend(['Report Name', 'Last Modified'])
 
     for report in reports:
+        dataset = next((dataset for dataset in datasets if dataset['id'] == report.get('datasetId', '')), None)
         try:
             list_of_reports.extend([f"[{report['name']}](../Reports/{report['name'].replace(' ', '-')}.md)", datetime.strptime(report['modifiedDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
         except:
-            list_of_reports.extend([f"[{report['name']}](../Reports/{report['name'].replace(' ', '-')}.md)", report['modifiedDateTime']])
-        create_mdReport(workspace['name'], report, wiki_path, report['name'].replace(' ', '-'), dataset['name'])
+            list_of_reports.extend([f"[{report['name']}](../Reports/{report['name'].replace(' ', '-')}.md)", report.get('modifiedDateTime', 'not set')])
+        create_mdReport(workspace['name'], report, wiki_path, report['name'].replace(' ', '-'), dataset['name'] if dataset and 'name' in dataset else 'not set')
 
     columns = 2
     mdWorkspace.new_table(columns=columns, rows=len(list_of_reports)//columns, text=list_of_reports, text_align='left')
@@ -206,14 +240,14 @@ def create_mdDataset(workspace_name, dataset, wiki_path, wiki_name, list_of_tota
     if not os.path.exists(datasets_path):
         os.makedirs(datasets_path)
 
-    mdDataset = mdutils.MdUtils(file_name=os.path.join(datasets_path, wiki_name))
+    mdDataset = mdutils.MdUtils(file_name=os.path.join(datasets_path, invalid_chars_regex.sub('', wiki_name)))
     mdDataset.new_header(level=1, title=dataset['name'])
     list_of_rows = []
     list_of_rows.extend(['Dataset ID', dataset['id']])
     list_of_rows.extend(['Workspace', f"[{workspace_name}](../Workspaces/{workspace_name.replace(' ', '-')}.md)"]) 
-    list_of_rows.extend(['Configured By', dataset['configuredBy']])
-    list_of_rows.extend(['Target Storage Mode', dataset['targetStorageMode']])
-    list_of_rows.extend(['Content Provider Type', dataset['contentProviderType']])
+    list_of_rows.extend(['Configured By', dataset.get('configuredBy', 'not set')])
+    list_of_rows.extend(['Target Storage Mode', dataset.get('targetStorageMode', 'not set')])
+    list_of_rows.extend(['Content Provider Type', dataset.get('contentProviderType', 'not set')])
     try:
         list_of_rows.extend(['Created Date', datetime.strptime(dataset['createdDate'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
     except:
@@ -245,22 +279,22 @@ def create_mdReport(workspace_name, report, wiki_path, wiki_name, dataset_name):
     if not os.path.exists(report_path):
         os.makedirs(report_path)
 
-    mdReport = mdutils.MdUtils(file_name=os.path.join(report_path, wiki_name))
+    mdReport = mdutils.MdUtils(file_name=os.path.join(report_path, invalid_chars_regex.sub('', wiki_name)))
     mdReport.new_header(level=1, title=report['name'])
     list_of_rows = []
     list_of_rows.extend(['Report ID', report['id']])
     list_of_rows.extend(['Workspace', f"[{workspace_name}](../Workspaces/{workspace_name.replace(' ', '-')}.md)"])  
     list_of_rows.extend(['Dataset', f"[{dataset_name}](../Datasets/{dataset_name.replace(' ', '-')}.md)"])
-    list_of_rows.extend(['Created By', report['createdBy']])
+    list_of_rows.extend(['Created By', report.get('createdBy', 'not set')])
     try:
         list_of_rows.extend(['Created Date', datetime.strptime(report['createdDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
     except:
-        list_of_rows.extend(['Created Date', report['createdDateTime']])
-    list_of_rows.extend(['Modified By', report['modifiedBy']])
+        list_of_rows.extend(['Created Date', report.get('createdDateTime', 'not set')])
+    list_of_rows.extend(['Modified By', report.get('modifiedBy', 'not set')])
     try:
         list_of_rows.extend(['Modified Date', datetime.strptime(report['modifiedDateTime'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
     except:
-        list_of_rows.extend(['Modified Date', report['modifiedDateTime']])
+        list_of_rows.extend(['Modified Date', report.get('modifiedDateTime', 'not set')])
 
     columns = 2
     mdReport.new_table(columns=columns, rows=len(list_of_rows)//columns, text=list_of_rows, text_align='left')
@@ -279,7 +313,7 @@ def create_mdWorkspaces(workspaces, wiki_path, scan_date, openai_config):
 
     for workspace in workspaces:
         for report in workspace['reports']:
-            list_of_total_reports.append({'workspace': workspace['name'], 'id': report['id'], 'name': report['name'], 'datasetId': report['datasetId']})
+            list_of_total_reports.append({'workspace': workspace['name'], 'id': report['id'], 'name': report['name'], 'datasetId': report.get('datasetId', 'not set')})
     
     for workspace in workspaces:
         workspace_wiki_name = workspace['name'].replace(' ', '-')
@@ -314,13 +348,13 @@ def main():
     print('OpenAI Model Name: ' + openai_config['modelname'])
     print('OpenAI API Key: ' + openai_config['api_key'])
 
+    workspaces = []
     for file in os.listdir('export'):
-        print(file)
         if file.startswith('scanResult'):
             data = load_data(os.path.join('export', file))
+            workspaces.extend(data['workspaces'])
             scan_date = data['lastScanDate']
-            workspaces = data['workspaces']
-            create_wiki(workspaces, work_dir, scan_date, openai_config)
+    create_wiki(workspaces, work_dir, scan_date, openai_config)
 
     git_operations(pat)
 

@@ -17,7 +17,7 @@
 Partner_count = COUNTROWS(FILTER('rep v_hr_employee', FIND("Partner", 'rep v_hr_employee'[jobcode],,0)>0))
 ```
 
-OpenAI API Key is not configured
+
 ## Table: pub dim_date
 
 ### Measures:
@@ -32,13 +32,13 @@ ActiveMonthList =
     )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 CurrentDay = TODAY()
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 CurrentWeek = CALCULATE(
@@ -46,19 +46,19 @@ CurrentWeek = CALCULATE(
                 FILTER(ALL('pub dim_date'), 'pub dim_date'[Date] = TODAY()))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 CurrentDayWeek = [CurrentDay] & " (" & [CurrentWeek] & ")"
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 CurrentYear = YEAR(TODAY())
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -66,7 +66,7 @@ OpenAI API Key is not configured
 Calendarweek = "CW-" & 'pub dim_date'[WeekOfYear]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 UpToCurrentMonth = 
@@ -76,7 +76,7 @@ RETURN
     result
 ```
 
-OpenAI API Key is not configured
+
 ## Table: msr v_fc_order_income_accumulated
 
 ### Measures:
@@ -86,19 +86,19 @@ OpenAI API Key is not configured
 OI_Monthly = CALCULATE(SUM('msr v_fc_order_income_accumulated'[order_income_current_dax]), MONTH('msr v_fc_order_income_accumulated'[report_month]) <= MONTH(TODAY())-1)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Cumulated = SUM('msr v_fc_order_income_accumulated'[order_income_total])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD = TOTALYTD('msr v_fc_order_income_accumulated'[OI_Monthly_for_YTD], 'pub dim_date'[Date])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_BUD_C = SUM(OI_Budget_Countries[OI_Budget])
@@ -108,25 +108,25 @@ OI_Monthly_BUD_C = SUM(OI_Budget_Countries[OI_Budget])
 //    if(check_industry || check_function, BLANK(), SUM(OI_Budget_Countries[OI_Budget]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_BUD_C = TOTALYTD([OI_Monthly_BUD_C], 'pub dim_date'[Date])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_PY = CALCULATE([OI_Monthly], SAMEPERIODLASTYEAR('pub dim_date'[Date]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_PY = CALCULATE([OI_YTD], SAMEPERIODLASTYEAR('pub dim_date'[Date]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_ΔBUD_C = 
@@ -135,79 +135,79 @@ RETURN
     IF(delta_BUD < -0.9, "", delta_BUD)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_full_number = [OI_YTD] * 1000
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_formatted = DIVIDE([OI_YTD], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_PY_formatted = DIVIDE([OI_YTD_PY], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_BUD_C_formatted = DIVIDE([OI_YTD_BUD_C], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Spacer (act vs bud vs py) = REPT("l", 33)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_formatted_0.00 = DIVIDE([OI_YTD], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_PY = CALCULATE([OI_Monthly], ALL('pub dim_date'[Date]), 'pub dim_date'[Year] = YEAR(TODAY())-1)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_CY = CALCULATE([OI_Monthly], 'pub dim_date'[Year] = YEAR(TODAY()))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_BUD_C_no_future = CALCULATE([OI_Monthly_BUD_C], MONTH(OI_Budget_Countries[FirstDayOfMonth]) <= MONTH(TODAY())-1)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_PY_formatted = DIVIDE([OI_PY], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Delta_%_PY = ([OI_Monthly] - [OI_Monthly_PY]) / [OI_Monthly_PY]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Delta_%_BUD_C = ([OI_Monthly] - [OI_Monthly_BUD_C]) / [OI_Monthly_BUD_C]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_no_future = CALCULATE([OI_YTD], ALL('pub dim_date'[Date]), 'pub dim_date'[Month] <= MONTH(TODAY())-1)
@@ -215,181 +215,181 @@ OI_YTD_no_future = CALCULATE([OI_YTD], ALL('pub dim_date'[Date]), 'pub dim_date'
 //IF(MAX('pub dim_date'[Date]) <= TODAY(), [OI_YTD], BLANK())
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_no_future_formatted = DIVIDE([OI_YTD_no_future], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_function_operations = CALCULATE([OI_Monthly_formatted], 'msr v_fc_order_income_accumulated'[function] = "Operations")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_function_digital = CALCULATE([OI_Monthly_formatted], 'msr v_fc_order_income_accumulated'[function] = "Digital")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_function_investor_support = CALCULATE([OI_Monthly_formatted], 'msr v_fc_order_income_accumulated'[function] = "Investor Support")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_function_rpt = CALCULATE([OI_Monthly_formatted], 'msr v_fc_order_income_accumulated'[function] = "RPT")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_function_strategy_others = CALCULATE([OI_Monthly_formatted], 'msr v_fc_order_income_accumulated'[function] = "Strategy & Others")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_historical = CALCULATE(SUM('msr v_fc_order_income_accumulated'[order_income_current]), ALL('pub dim_date'[Date]), 'pub dim_date'[Month] <= MONTH(TODAY())-1)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_historical_formatted = DIVIDE([OI_YTD_historical], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_historical_2 = CALCULATE([OI_YTD], ALL('pub dim_date'[Date]), 'pub dim_date'[Month] <= MONTH(TODAY()))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_historical_2_formatted = DIVIDE([OI_YTD_historical_2], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_historical_3 = CALCULATE(SUM('msr v_fc_order_income_accumulated'[order_income_current]), ALL('pub dim_date'[Date]), 'pub dim_date'[Month] <= MONTH(TODAY()))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_industry_industrials = CALCULATE([OI_Monthly_formatted], 'msr v_fc_order_income_accumulated'[industry] = "Industrials")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_industry_regulated_infrastructure = CALCULATE([OI_Monthly_formatted], 'msr v_fc_order_income_accumulated'[industry] = "Regulated & Infrastructure")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_industry_health_consumer = CALCULATE([OI_Monthly_formatted], 'msr v_fc_order_income_accumulated'[industry] = "Health & Consumer")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_industry_services = CALCULATE([OI_Monthly_formatted], 'msr v_fc_order_income_accumulated'[industry] = "Services")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_formatted = DIVIDE([OI_Monthly], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_BUD_C_no_future = CALCULATE([OI_YTD_BUD_C], ALL('pub dim_date'[Date]), 'pub dim_date'[Month] < MONTH(TODAY()))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_BUD_C_no_future_formatted = DIVIDE([OI_YTD_BUD_C_no_future], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_BUD_C_no_future_formatted = DIVIDE([OI_Monthly_BUD_C_no_future], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_BUD_C_formatted = DIVIDE([OI_Monthly_BUD_C], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_PY_YTD = CALCULATE([OI_Monthly], ALL('pub dim_date'[Date]), 'pub dim_date'[Year] = YEAR(TODAY())-1, 'pub dim_date'[Month] <= MONTH(TODAY())-1)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_PY_YTD_formatted = DIVIDE([OI_PY_YTD], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_per_P = DIVIDE([OI_Monthly], [Partner_count])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_per_P_PY_YTD = DIVIDE([OI_PY_YTD], CALCULATE([Partner_count], ALL('pub dim_date'[Date]), 'pub dim_date'[Month] <= MONTH(TODAY()), 'pub dim_date'[Year] = YEAR(TODAY())-1))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_per_P_test = CALCULATE(DISTINCTCOUNT('msr v_fc_order_income_accumulated'[project_number]), ALL('pub dim_date'[Date]), 'pub dim_date'[Month] <= MONTH(TODAY()), 'pub dim_date'[Year] = YEAR(TODAY())-1)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_BUD_C_2 = CALCULATE(SUM(OI_Budget_Countries[OI_Budget]), ALL('pub dim_date'[Date]), 'pub dim_date'[Month] < MONTH(TODAY()))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_per_P_BUD_combined_YTD = IF([OI_Monthly_BUD_combined_no_future] = "", BLANK(), DIVIDE([OI_Monthly_BUD_combined_no_future], CALCULATE([Partner_count], ALL('pub dim_date'[Date]), 'pub dim_date'[Month] <= MONTH(TODAY()), 'pub dim_date'[Year] = YEAR(TODAY())-1)))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 order_income_GROSS_PY_formatted = IF(SUM('msr v_fc_order_income_accumulated'[order_income_GROSS_formatted]) > 0, CALCULATE(SUM('msr v_fc_order_income_accumulated'[order_income_GROSS_formatted]), SAMEPERIODLASTYEAR('pub dim_date'[Date])), 0)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_absolute = SUM('msr v_fc_order_income_accumulated'[order_income_current]) * 1000
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Measure 1 = 
@@ -400,19 +400,19 @@ return
  if(check_industry || check_function, BLANK(), 111)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_BUD_C_old = SUM(OI_Budget_Countries[OI_Budget])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_DAX = TOTALYTD(SUM('msr v_fc_order_income_accumulated'[order_income_current_dax]), 'pub dim_date'[Date])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_BUD_FP = 
@@ -427,7 +427,7 @@ return
     if(check_region1 || check_region2 || check_region3 || check_industry || check_subplatform_industry || check_subject_industry || check_subject_function, BLANK(), SUM(OI_Budget_Platforms_Function[OI_Budget]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_BUD_IP = 
@@ -442,19 +442,19 @@ return
     if(check_region1 || check_region2 || check_region3 || check_function || check_subplatform_industry || check_subject_industry || check_subject_function, BLANK(), SUM(OI_Budget_Platforms_Industry[OI_Budget]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_BUD_IP = TOTALYTD([OI_Monthly_BUD_IP], 'pub dim_date'[Date])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_BUD_FP = TOTALYTD([OI_Monthly_BUD_FP], 'pub dim_date'[Date])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_BUD_combined = 
@@ -471,7 +471,7 @@ return
             IF(check_combination = "F", [OI_Monthly_BUD_FP], "")))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_BUD_IP_no_future = CALCULATE([OI_Monthly_BUD_IP], MONTH(OI_Budget_Platforms_Industry[FirstDayOfMonth]) <= MONTH(TODAY())-1)
@@ -479,7 +479,7 @@ OI_Monthly_BUD_IP_no_future = CALCULATE([OI_Monthly_BUD_IP], MONTH(OI_Budget_Pla
 //IF(MAX('pub dim_date'[Date]) <= TODAY(), [OI_Monthly_BUD_IP], BLANK())
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_BUD_FP_no_future = CALCULATE([OI_Monthly_BUD_FP], MONTH(OI_Budget_Platforms_Function[FirstDayOfMonth]) <= MONTH(TODAY())-1)
@@ -487,7 +487,7 @@ OI_Monthly_BUD_FP_no_future = CALCULATE([OI_Monthly_BUD_FP], MONTH(OI_Budget_Pla
 //IF(MAX('pub dim_date'[Date]) <= TODAY(), [OI_Monthly_BUD_FP], BLANK())
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_BUD_combined = 
@@ -504,13 +504,13 @@ return
             IF(check_combination = "F", [OI_YTD_BUD_FP], "")))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_CY_formatted = DIVIDE([OI_CY], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_BUD_combined_no_future = 
@@ -527,49 +527,49 @@ return
             IF(check_combination = "F", [OI_YTD_BUD_FP_no_future], "")))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_BUD_FP_no_future = CALCULATE([OI_YTD_BUD_FP], ALL('pub dim_date'[Date]), 'pub dim_date'[Month] < MONTH(TODAY()))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_BUD_IP_no_future = CALCULATE([OI_YTD_BUD_IP], ALL('pub dim_date'[Date]), 'pub dim_date'[Month] < MONTH(TODAY()))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_per_P_formatted = DIVIDE([OI_per_P], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_per_P_BUD_C_YTD_formatted = DIVIDE([OI_per_P_BUD_combined_YTD], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_per_P_PY_YTD_formatted = DIVIDE([OI_per_P_PY_YTD], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 aaa_monthly_unequal_ytd = IF([OI_Monthly] <> CALCULATE(SUM('msr v_fc_order_income_accumulated'[order_income_total]), 'msr v_fc_order_income_accumulated'[report_month_id] = "06.2023"), 1, 0)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 aaa_oi_07_2023 = CALCULATE(SUM('msr v_fc_order_income_accumulated'[order_income_total]), 'msr v_fc_order_income_accumulated'[report_month_id] = "07.2023")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 aaa_7_but_no_6 = IF(ISBLANK(CALCULATE([aaa_sum_total], 'msr v_fc_order_income_accumulated'[report_month_id] = "07.2023")) && NOT(ISBLANK(CALCULATE([aaa_sum_total], 'msr v_fc_order_income_accumulated'[report_month_id] = "06.2023"))), 1, 
@@ -581,13 +581,13 @@ aaa_7_but_no_6 = IF(ISBLANK(CALCULATE([aaa_sum_total], 'msr v_fc_order_income_ac
                     0))))))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 aaa_sum_total = SUM('msr v_fc_order_income_accumulated'[order_income_total])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_BUD_combined_no_future = 
@@ -604,37 +604,37 @@ return
             IF(check_combination = "F", [OI_Monthly_BUD_FP_no_future], "")))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_BUD_C_no_future_OLD = IF(MAX('pub dim_date'[Date]) <= TODAY(), [OI_Monthly_BUD_C], BLANK())
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_PY_formatted = DIVIDE([OI_Monthly_PY], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_PY_NEW = TOTALYTD([OI_Monthly_for_YTD], 'pub dim_date'[Date])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_YTD_PY_NEW_2 = CALCULATE([OI_YTD_PY_NEW], SAMEPERIODLASTYEAR('pub dim_date'[Date]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 OI_Monthly_for_YTD = SUM('msr v_fc_order_income_accumulated'[order_income_current_dax])
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -642,53 +642,19 @@ OpenAI API Key is not configured
 order_income_current_dax_formatted = DIVIDE('msr v_fc_order_income_accumulated'[order_income_current_dax], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 order_income_GROSS_formatted = DIVIDE('msr v_fc_order_income_accumulated'[order_income_GROSS], 1000)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 order_income_current_dax = IF(MONTH('msr v_fc_order_income_accumulated'[report_month_previous]) = 12, 'msr v_fc_order_income_accumulated'[order_income_total], 'msr v_fc_order_income_accumulated'[order_income_total] - 'msr v_fc_order_income_accumulated'[order_income_previous])
 ```
 
-OpenAI API Key is not configured
-## Table: Temp_values
 
-### Calculated Columns:
-
-
-```dax
-Net_order_income_ΔBUD = 405000
-```
-
-OpenAI API Key is not configured
-
-```dax
-Net_order_income_ΔPY = 385000
-```
-
-OpenAI API Key is not configured
-
-```dax
-Net_order_income_per_P = 6800
-```
-
-OpenAI API Key is not configured
-
-```dax
-Net_order_income_per_P_ΔBUD = 6600
-```
-
-OpenAI API Key is not configured
-
-```dax
-Net_order_income_per_P_ΔPY = 6900
-```
-
-OpenAI API Key is not configured
 ## Table: Refresh_Timestamp
 
 ### Calculated Columns:
@@ -698,7 +664,7 @@ OpenAI API Key is not configured
 Calendarweek = "CW-" & WEEKNUM(Refresh_Timestamp[Last_refresh_local])
 ```
 
-OpenAI API Key is not configured
+
 ## Table: OI_Budget_Countries
 
 ### Measures:
@@ -708,7 +674,7 @@ OpenAI API Key is not configured
 RLS_country = IF(SUM(RLS_active_role[role_id])=3, TRUE(), FALSE())
 ```
 
-OpenAI API Key is not configured
+
 ## Table: pub v_ll_company_to_region
 
 ### Calculated Columns:
@@ -718,7 +684,7 @@ OpenAI API Key is not configured
 mapping_budget = IF('pub v_ll_company_to_region'[company] = "RB Int", "Global Adjustment", IF('pub v_ll_company_to_region'[region_reporting_level1] IN {"Non-operational companies", "Other RB companies", "Holding"}, BLANK(), 'pub v_ll_company_to_region'[country_code_iso3]))
 ```
 
-OpenAI API Key is not configured
+
 ## Table: msr v_fc_project_data
 
 ### Calculated Columns:
@@ -728,7 +694,7 @@ OpenAI API Key is not configured
 project_client_short = IF(CONTAINSSTRING('msr v_fc_project_data'[project_client], "Roland Berger"), LOOKUPVALUE('pub v_ll_company_to_region'[region_reporting_level3], 'pub v_ll_company_to_region'[org_unit_id], 'msr v_fc_project_data'[responsible_unit_byd_id]), 'msr v_fc_project_data'[project_client])
 ```
 
-OpenAI API Key is not configured
+
 ## Table: sec acp_orderIncome_byMonth
 
 ### Calculated Columns:
@@ -738,27 +704,7 @@ OpenAI API Key is not configured
 orderIncome_formatted = DIVIDE('sec acp_orderIncome_byMonth'[orderIncome], 1000)
 ```
 
-OpenAI API Key is not configured
-## Table: msr v_fc_order_income_budget_platform
 
-### Calculated Columns:
-
-
-```dax
-test = DIVIDE('msr v_fc_order_income_budget_platform'[order_income_budget], 10000)
-```
-
-OpenAI API Key is not configured
-## Table: RLS_active_role
-
-### Measures:
-
-
-```dax
-active_role = SUM(RLS_active_role[role_id])
-```
-
-OpenAI API Key is not configured
 ## Table: nxtgn_opportunityregistrations
 
 ### Calculated Columns:
@@ -768,7 +714,7 @@ OpenAI API Key is not configured
 estrevenue_base = nxtgn_opportunityregistrations[nxtgn_estrevenue] / RELATED(transactioncurrencies[exchangerate])
 ```
 
-OpenAI API Key is not configured
+
 ## Table: nxtgn_shareofwallets
 
 ### Measures:
@@ -798,13 +744,13 @@ Weighted Forecast Calculated = CALCULATE(
 )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Weighted Forecast Formatted = [Weighted Forecast Calculated] * 0.001 * 0.001
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -812,13 +758,13 @@ OpenAI API Key is not configured
 expected_order_income = nxtgn_shareofwallets[nxtgn_countrypercentage] * 0.01 * RELATED(nxtgn_opportunityregistrations[estrevenue_base])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 weighted_order_income = RELATED(nxtgn_opportunityregistrations[nxtgn_probability]) * 0.01 * nxtgn_shareofwallets[expected_order_income]
 ```
 
-OpenAI API Key is not configured
+
 ## Table: Top Clients/Projects/DMs
 
 
@@ -830,7 +776,7 @@ OpenAI API Key is not configured
 }
 ```
 
-OpenAI API Key is not configured
+
 ### Measures:
 
 
@@ -838,13 +784,13 @@ OpenAI API Key is not configured
 Chart Title Gross = SELECTEDVALUE('Top Clients/Projects/DMs'[Name]) & " (gross)"
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Chart Title Net = SELECTEDVALUE('Top Clients/Projects/DMs'[Name]) & " (net)"
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -852,4 +798,3 @@ OpenAI API Key is not configured
 Name = 'Top Clients/Projects/DMs'[Top Clients/Projects/DMs]
 ```
 
-OpenAI API Key is not configured

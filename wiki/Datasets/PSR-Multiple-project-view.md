@@ -19,3 +19,4 @@
 |Report|Workspace|
 | :--- | :--- |
 |[PSR Multiple project view](../Reports/PSR-Multiple-project-view.md)|[IFRS_Reporting [QA]](../Workspaces/IFRS_Reporting-[QA].md)|
+|[[App] PSR Multiple project view](../Reports/[App]-PSR-Multiple-project-view.md)|[IFRS_Reporting [QA]](../Workspaces/IFRS_Reporting-[QA].md)|

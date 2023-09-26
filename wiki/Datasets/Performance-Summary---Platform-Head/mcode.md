@@ -19,7 +19,7 @@ in
     Publish
 ```
 
-OpenAI API Key is not configured
+
 ## Table: msr v_hr_employee_job_matrix
 
 
@@ -31,7 +31,7 @@ in
     Publish
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_hr_employee
 
 
@@ -43,7 +43,7 @@ in
     Publish
 ```
 
-OpenAI API Key is not configured
+
 ## Table: pub dim_date
 
 
@@ -59,7 +59,7 @@ in
     #"Inserted Text After Delimiter"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: Refresh_Timestamp
 
 
@@ -134,7 +134,7 @@ in
     #"Removed Columns"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: utilization_budgets
 
 
@@ -147,7 +147,7 @@ in
     #"Changed Type"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: msr v_fc_order_income_accumulated
 
 
@@ -158,7 +158,7 @@ in
     Source
 ```
 
-OpenAI API Key is not configured
+
 ## Table: OI_Budget_Countries
 
 
@@ -169,7 +169,7 @@ in
     Source
 ```
 
-OpenAI API Key is not configured
+
 ## Table: OI_Budget_Platforms_Function
 
 
@@ -181,7 +181,7 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: pub v_ll_company_to_region
 
 
@@ -194,7 +194,7 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: Dim_Industries
 
 
@@ -208,7 +208,7 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: Dim_Functions
 
 
@@ -222,7 +222,7 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: OI_Budget_Platforms_Industry
 
 
@@ -234,4 +234,3 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured

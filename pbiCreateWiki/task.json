@@ -14,7 +14,7 @@
     "version": {
         "Major": "1",
         "Minor": "0",
-        "Patch": "17"
+        "Patch": "19"
     },
     "minimumAgentVersion": "1.83.0",
     "instanceNameFormat": "PBI Create Wiki $(message)",
@@ -24,7 +24,7 @@
             "type": "string",
             "label": "Working Directory",
             "defaultValue": "",
-            "required": true,
+            "required": false,
             "helpMarkDown": "Working Directory"
         },
         {

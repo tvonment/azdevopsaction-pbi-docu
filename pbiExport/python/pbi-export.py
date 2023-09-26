@@ -84,7 +84,7 @@ for chunk in workspace_chunks:
             print(json.dumps(scan_status_response.json(), indent=3))
         else:
             print(f"Error in API request: {scan_status_response.status_code}: {scan_status_response.text}")
-            exit(1)
+            #exit(1)
         time.sleep(2)
 
     scan_result_url = f"https://api.powerbi.com/v1.0/myorg/admin/workspaces/scanResult/{scan_id}"

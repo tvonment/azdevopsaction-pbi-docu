@@ -17,7 +17,7 @@
 Key = Geo[Land] & "," & Geo[PLZ]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Land (Gruppen) = SWITCH(
@@ -36,13 +36,13 @@ Land (Gruppen) = SWITCH(
 )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Location = IF(Geo[Land] = "Mexico", "Inland", "Ausland")
 ```
 
-OpenAI API Key is not configured
+
 ## Table: Sales
 
 ### Measures:
@@ -52,7 +52,7 @@ OpenAI API Key is not configured
 Total Sales = SUM(Sales[Umsatz])
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -60,10 +60,9 @@ OpenAI API Key is not configured
 Key = Sales[Ländername] &","& Sales[PLZ]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Stückpreis DAX = Sales[Umsatz]/Sales[Menge]
 ```
 
-OpenAI API Key is not configured

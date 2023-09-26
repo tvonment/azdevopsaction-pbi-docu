@@ -4,13 +4,13 @@
 
 # Capacity & Utilization - F&C
 
-|Dataset ID|aa8098b8-0be3-47c4-b036-ffb5cdb2aae2|
+|Dataset ID|82c1a8fc-5904-447b-a69e-f3e70b82e25c|
 | :--- | :--- |
-|Workspace|[IFRS_Reporting [QA]](../Workspaces/IFRS_Reporting-[QA].md)|
+|Workspace|[IFRS_Reporting [Prod]](../Workspaces/IFRS_Reporting-[Prod].md)|
 |Configured By|matthias.gessenay@org.rolandberger.com|
 |Target Storage Mode|Abf|
 |Content Provider Type|PbixInImportMode|
-|Created Date|September 11, 2023 13:51:50|
+|Created Date|September 11, 2023 14:05:47|
 |MCode|[M Code](./Capacity-&-Utilization---F&C/mcode.md)|
 |DAX|[DAX](./Capacity-&-Utilization---F&C/dax.md)|
 
@@ -18,5 +18,5 @@
 
 |Report|Workspace|
 | :--- | :--- |
-|[Capacity & Utilization - F&C](../Reports/Capacity-&-Utilization---F&C.md)|[IFRS_Reporting [QA]](../Workspaces/IFRS_Reporting-[QA].md)|
-|[[App] Capacity & Utilization - F&C](../Reports/[App]-Capacity-&-Utilization---F&C.md)|[IFRS_Reporting [QA]](../Workspaces/IFRS_Reporting-[QA].md)|
+|[Capacity & Utilization - F&C](../Reports/Capacity-&-Utilization---F&C.md)|[IFRS_Reporting [Prod]](../Workspaces/IFRS_Reporting-[Prod].md)|
+|[[App] Capacity & Utilization - F&C](../Reports/[App]-Capacity-&-Utilization---F&C.md)|[IFRS_Reporting [Prod]](../Workspaces/IFRS_Reporting-[Prod].md)|

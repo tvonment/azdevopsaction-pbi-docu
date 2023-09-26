@@ -21,7 +21,7 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_hr_employee
 
 
@@ -35,7 +35,7 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: pub dim_date
 
 
@@ -54,7 +54,7 @@ in
     #"Changed Type"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: msr v_fc_order_income_accumulated
 
 
@@ -93,25 +93,12 @@ let
     #"Replaced Value11" = Table.ReplaceValue(#"Replaced Value10","UK","United Kingdom",Replacer.ReplaceText,{"company_name"}),
     #"Merged Queries4" = Table.NestedJoin(#"Replaced Value11", {"industry_subject"}, subplatforms_industry, {"industry_subject"}, "subplatforms_industry", JoinKind.LeftOuter),
     #"Expanded subplatforms_industry" = Table.ExpandTableColumn(#"Merged Queries4", "subplatforms_industry", {"industry_subplatform"}, {"industry_subplatform"}),
-    #"Replaced Value12" = Table.ReplaceValue(#"Expanded subplatforms_industry","Turnaround Management GmbH","TMG",Replacer.ReplaceText,{"company_name"}),
-    #"Replaced Value13" = Table.ReplaceValue(#"Replaced Value12","test12345","test54321",Replacer.ReplaceText,{"project_number"})
+    #"Replaced Value12" = Table.ReplaceValue(#"Expanded subplatforms_industry","Turnaround Management GmbH","TMG",Replacer.ReplaceText,{"company_name"})
 in
-    #"Replaced Value13"
+    #"Replaced Value12"
 ```
 
-OpenAI API Key is not configured
-## Table: Temp_values
 
-
-```m
-let
-    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMjQAAaXYWAA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Net_order_income = _t]),
-    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Net_order_income", Int64.Type}})
-in
-    #"Changed Type"
-```
-
-OpenAI API Key is not configured
 ## Table: Refresh_Timestamp
 
 
@@ -186,19 +173,7 @@ in
     #"Removed Columns"
 ```
 
-OpenAI API Key is not configured
-## Table: Temp_values_slicer
 
-
-```m
-let
-    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45Wcs4vzSspqlQoy0wtV9JRMlSK1YlWCshJLEnLL8qFiRpBRIvys1KTS2CCxmBBx6RiBX9PINcEzPX3VChILVIIAAqYggXOTXEKdVEFcs2g3IBIEM9cKTYWAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Peergroup_Comparison_Slicer = _t, Sort = _t]),
-    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Peergroup_Comparison_Slicer", type text}})
-in
-    #"Changed Type"
-```
-
-OpenAI API Key is not configured
 ## Table: OI_Budget_Countries
 
 
@@ -234,7 +209,7 @@ in
     #"Replaced Value5"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: pub v_ll_company_to_region
 
 
@@ -249,7 +224,7 @@ in
     #"Added Conditional Column"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: msr v_fc_project_data
 
 
@@ -263,7 +238,7 @@ in
     #"Replaced Value"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: OI_Budget_Platforms_Function
 
 
@@ -292,7 +267,7 @@ in
     #"Filtered Rows1"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: sec acp_orderIncome_byMonth
 
 
@@ -307,7 +282,7 @@ in
     #"Changed Type"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_ll_head_region
 
 
@@ -319,7 +294,7 @@ in
     rep_v_ll_head_region
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_ll_head_platform_DACH_industry
 
 
@@ -332,7 +307,7 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_ll_head_platform_industry
 
 
@@ -345,7 +320,7 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_ll_head_country
 
 
@@ -358,44 +333,7 @@ in
     #"Renamed Columns"
 ```
 
-OpenAI API Key is not configured
-## Table: msr v_fc_order_income_budget_orgunit
 
-
-```m
-let
-    Source = Sql.Database("muc-mssql-2", "datahub"),
-    msr_v_fc_order_income_budget_orgunit = Source{[Schema="msr",Item="v_fc_order_income_budget_orgunit"]}[Data],
-    #"Filtered Rows" = Table.SelectRows(msr_v_fc_order_income_budget_orgunit, each true)
-in
-    #"Filtered Rows"
-```
-
-OpenAI API Key is not configured
-## Table: msr v_fc_order_income_budget_platform
-
-
-```m
-let
-    Source = Sql.Database("muc-mssql-2", "datahub"),
-    msr_v_fc_order_income_budget_platform = Source{[Schema="msr",Item="v_fc_order_income_budget_platform"]}[Data]
-in
-    msr_v_fc_order_income_budget_platform
-```
-
-OpenAI API Key is not configured
-## Table: RLS_active_role
-
-
-```m
-let
-    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45Wyk1R0lEyBGIQitWJVipKTc/MzwPyjCCCKal5mcV6KakF+aUVDkX5OYl5KUmpRempRXrJ+blgHcn5pXklRZVAtcYE1UMtKchJLEnLLwLxTZDshgnHpyQmZwAFTZHkshNBqs1gIrEA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [role_name = _t, role_id = _t, country_mapping = _t, region_mapping = _t]),
-    #"Changed Type" = Table.TransformColumnTypes(Source,{{"role_name", type text}, {"role_id", Int64.Type}})
-in
-    #"Changed Type"
-```
-
-OpenAI API Key is not configured
 ## Table: OI_Budget_Platforms_Industry
 
 
@@ -424,7 +362,7 @@ in
     #"Filtered Rows1"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: platforms_industry
 
 
@@ -439,7 +377,7 @@ in
     #"Removed Duplicates"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: platforms_function
 
 
@@ -454,7 +392,7 @@ in
     #"Removed Duplicates"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_ll_head_platform_DACH_function
 
 
@@ -467,7 +405,7 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_ll_head_platform_function
 
 
@@ -481,7 +419,7 @@ in
     #"Replaced Value"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_II_head_region_country
 
 
@@ -493,7 +431,7 @@ in
     #"Filtered Rows"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: nxtgn_opportunityregistrations
 
 
@@ -513,7 +451,7 @@ in
     #"Inserted Text Before Delimiter1"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: nxtgn_shareofwallets
 
 
@@ -528,7 +466,7 @@ in
     #"Reordered Columns"
 ```
 
-OpenAI API Key is not configured
+
 ## Table: transactioncurrencies
 
 
@@ -542,7 +480,7 @@ in
     #"Reordered Columns"
 ```
 
-OpenAI API Key is not configured
+
 ## Roles
 
 ### Admin
@@ -560,7 +498,7 @@ rep v_ll_head_platform_industry
 [email] = username()
 ```
 
-OpenAI API Key is not configured
+
 
 rep v_ll_head_platform_DACH_industry
 
@@ -568,7 +506,7 @@ rep v_ll_head_platform_DACH_industry
 [email] = username()
 ```
 
-OpenAI API Key is not configured
+
 
 rep v_ll_head_platform_DACH_function
 
@@ -576,7 +514,7 @@ rep v_ll_head_platform_DACH_function
 [email] = username()
 ```
 
-OpenAI API Key is not configured
+
 
 rep v_ll_head_platform_function
 
@@ -584,7 +522,7 @@ rep v_ll_head_platform_function
 [email] = username()
 ```
 
-OpenAI API Key is not configured
+
 
 rep v_II_head_region_country
 
@@ -592,4 +530,3 @@ rep v_II_head_region_country
 [email] = username()
 ```
 
-OpenAI API Key is not configured

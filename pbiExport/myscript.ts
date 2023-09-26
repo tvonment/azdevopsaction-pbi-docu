@@ -50,7 +50,7 @@ async function run() {
         const appId = tl.getInput('appId', true) || "";
         const appSecret = tl.getInput('appSecret', true) || "";
         const groupId = tl.getInput('groupId', false) || "";
-        const workingDirectory = tl.getVariable('System.DefaultWorkingDirectory') || "";
+        const workingDirectory = tl.getInput('workDir', false) || tl.getVariable('Build.SourcesDirectory') || "";
         const pat = tl.getVariable('pat') || tl.getInput('pat', false) || "";
 
         const path = require('path');

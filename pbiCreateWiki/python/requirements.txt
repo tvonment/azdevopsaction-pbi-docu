@@ -1,2 +1,3 @@
 mdutils
 openai
+azure-cosmos

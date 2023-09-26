@@ -17,7 +17,7 @@
 Key = Geo[Country]&","&Geo[Postalcode]
 ```
 
-OpenAI API Key is not configured
+
 ## Table: Sales
 
 ### Measures:
@@ -30,7 +30,7 @@ Total Units = SUM(Sales[Amount])
 
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -38,4 +38,3 @@ OpenAI API Key is not configured
 Key = Sales[Country name]&","&Sales[Postalcode]
 ```
 
-OpenAI API Key is not configured

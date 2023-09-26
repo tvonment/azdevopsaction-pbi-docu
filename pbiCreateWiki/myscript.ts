@@ -46,7 +46,7 @@ const runScript = (scriptPath: string, args: string[]): Promise<string> => {
 
 async function run() {
     try {
-        const workingDirectory = tl.getVariable('System.DefaultWorkingDirectory') || "";
+        const workingDirectory = tl.getInput('workDir', false) || tl.getVariable('Build.SourcesDirectory') || "";
         const pat = tl.getVariable('pat') || tl.getInput('pat', false) || "";
         const openaiUrl = tl.getInput('openaiUrl') || "";
         const openaiModelname = tl.getInput('openaiModelname') || "";

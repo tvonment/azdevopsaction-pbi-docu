@@ -51,11 +51,11 @@ const runScript = (scriptPath, args) => {
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const workingDirectory = tl.getVariable('System.DefaultWorkingDirectory') || "";
+            const workingDirectory = tl.getInput('workDir', false) || tl.getVariable('Build.SourcesDirectory') || "";
             const pat = tl.getVariable('pat') || tl.getInput('pat', false) || "";
             const openaiUrl = tl.getInput('openaiUrl') || "";
             const openaiModelname = tl.getInput('openaiModelname') || "";
-            const openaiKey = tl.getVariable('openaiKey') || tl.getInput('openaiKey') || "";
+            const openaiKey = tl.getInput('openaiKey') || "";
             const path = require('path');
             const scriptPath = path.join(__dirname, 'python/create-wiki.py');
             console.log("Working directory: " + workingDirectory);

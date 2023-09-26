@@ -4,9 +4,9 @@
 
 # DAX
 
-|Dataset|[Project Status Report](./../Project-Status-Report.md)|
+|Dataset|[project status report](./../project-status-report.md)|
 | :--- | :--- |
-|Workspace|[IFRS_Reporting [QA]](../../Workspaces/IFRS_Reporting-[QA].md)|
+|Workspace|[FC_PSR](../../Workspaces/FC_PSR.md)|
 
 ## Table: dim_employee
 
@@ -17,13 +17,13 @@
 debug userprincipalname = userprincipalname()
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 debug is admin user = CONTAINS('rep v_fc_psr_permisson_admin','rep v_fc_psr_permisson_admin'[email], USERPRINCIPALNAME(), 'rep v_fc_psr_permisson_admin'[report_id],100)
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -31,19 +31,19 @@ OpenAI API Key is not configured
 Employee = dim_employee[last_name] & ", " & dim_employee[first_name] 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 All Employees = "All"
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Employee Id and Name = CONCATENATE(CONCATENATE(dim_employee[emp_id]," - "), dim_employee[Employee])
 ```
 
-OpenAI API Key is not configured
+
 ## Table: dim_project
 
 ### Measures:
@@ -58,7 +58,7 @@ return if(
     , "")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Client (short) = 
@@ -69,7 +69,7 @@ return if(
     , "")
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -77,37 +77,37 @@ OpenAI API Key is not configured
 Main Project Number = CALCULATE(min(dim_project_hierarchy[master_project_number]),dim_project_hierarchy[project_number] = earlier(dim_project[project_number]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 IsMaster = CONTAINS(dim_project_hierarchy, dim_project_hierarchy[project_number], dim_project[project_number], dim_project_hierarchy[is_master], TRUE())
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 MP Project Name = if(dim_project[IsMaster],dim_project[project_name],Blank())
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 PM Name = LOOKUPVALUE(dim_employee[last_name], dim_employee[emp_id], dim_project[pm_emp_id]) & ", "  & LOOKUPVALUE(dim_employee[first_name], dim_employee[emp_id], dim_project[pm_emp_id])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Accounting Responsible = dim_project[responsible_accounting]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 IsMasterFormat = if(dim_project[IsMaster],1,Blank())
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Project Time Completion Col = //percent completed, 1 if closed, otherwise calculated by dates
@@ -117,7 +117,7 @@ var res2  = if(res > 1, 1, res)
 return res2
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Fee Budget (part) = if(dim_project[IsMaster]=TRUE()
@@ -125,7 +125,7 @@ Fee Budget (part) = if(dim_project[IsMaster]=TRUE()
     ,[Fee Budget]) 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 IE Budget (part) = if(dim_project[IsMaster]=TRUE()
@@ -133,13 +133,13 @@ IE Budget (part) = if(dim_project[IsMaster]=TRUE()
     ,[IE Budget]) 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Total Budget (part) = dim_project[Fee Budget (part)] + dim_project[IE Budget (part)]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Invoiced Fee (part) = if(dim_project[IsMaster]=TRUE()
@@ -147,7 +147,7 @@ Invoiced Fee (part) = if(dim_project[IsMaster]=TRUE()
     ,[Invoiced Fee]) 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Invoiced IE (part) = if(dim_project[IsMaster]=TRUE()
@@ -155,19 +155,19 @@ Invoiced IE (part) = if(dim_project[IsMaster]=TRUE()
     ,[Invoiced IE]) 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Total Invoiced Revenue (part) = dim_project[Invoiced Fee (part)] + dim_project[Invoiced IE (part)]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Main Project Filter = if(dim_project[IsMaster]=FALSE(),Blank(), dim_project[Main Project Number] & " -- " & dim_project[project_client] & " -- " & dim_project[MP Project Name] & " -- " & dim_project[project_status])
 ```
 
-OpenAI API Key is not configured
+
 ## Table: fact_project_invoices_ppo
 
 ### Measures:
@@ -177,14 +177,14 @@ OpenAI API Key is not configured
 Cleared Invoice Amount = sum(fact_project_invoices_ppo[cleared_amount])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Net Value = Sum(fact_project_invoices_ppo[net_value]) 
 
 ```
 
-OpenAI API Key is not configured
+
 ## Table: fact_project_oview_budget_costs
 
 ### Measures:
@@ -194,19 +194,19 @@ OpenAI API Key is not configured
 Indicative IE Rev Incomplete = CALCULATE(if([IE internal costs] > [IE Budget], [IE Budget], [IE internal costs]), dim_project[project_status] <>"Closed")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Indicative IE Rev Completed = CALCULATE([Invoiced IE], dim_project[project_status]="Closed")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Indicative Fee Completed = CALCULATE([Invoiced Fee],dim_project[project_status] = "Closed")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Indicative Fee Incomplete = 
@@ -221,25 +221,25 @@ return Calculate(
 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Internal (not I/C) costs = sum(fact_project_oview_budget_costs[internal_costs_not_ic_eur])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Indicative IE Rev Incomplete (main) = CALCULATE(if([IE internal costs incl. Sub] > [IE Budget], [IE Budget], [IE internal costs incl. Sub]), dim_project[project_status] <>"Closed")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Product97 = CALCULATE( sum(fact_project_oview_budget_costs[invoiced_fee_eur]), FILTER(fact_project_oview_budget_costs, fact_project_oview_budget_costs[product_id] = 97))
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -251,13 +251,13 @@ Indicative Rev. Col =
           , 100))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Fee value depending on product = if(fact_project_oview_budget_costs[product_id] = 97, fact_project_oview_budget_costs[revenue_eur],  fact_project_oview_budget_costs[budget_fee_eur]* fact_project_oview_budget_costs[project_completion] /100 )
 ```
 
-OpenAI API Key is not configured
+
 ## Table: fact_project_time_recording
 
 ### Measures:
@@ -267,13 +267,13 @@ OpenAI API Key is not configured
 Actual Days = sum(fact_project_time_recording[actual_work_days])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Actual Days To Date = CALCULATE([Actual Days], Filter(all(fact_project_time_recording[day_of_work]), fact_project_time_recording[day_of_work]<= max(fact_project_time_recording[day_of_work]))) 
 ```
 
-OpenAI API Key is not configured
+
 ## Table: fact_project_time_planned
 
 ### Measures:
@@ -283,7 +283,7 @@ OpenAI API Key is not configured
 Planned Days = sum(fact_project_time_planned[estimated_work_days])
 ```
 
-OpenAI API Key is not configured
+
 ## Table: fact_sales_order_items
 
 ### Measures:
@@ -297,7 +297,7 @@ if(HASONEVALUE(dim_project[Main Project Number])
 )
 ```
 
-OpenAI API Key is not configured
+
 ## Table: _Project Measures (budget/cost)
 
 ### Measures:
@@ -307,25 +307,25 @@ OpenAI API Key is not configured
 Actual IE Ratio as of Fee = DIVIDE([IE internal costs],[Fee Budget])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Actual OD Fee = [Fee internal costs @100%] - [Indicative Fee Revenue]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Actual OD Fee % = DIVIDE([Actual OD Fee], [Indicative Fee Revenue])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Actual Overdraft IE = [IE internal costs] - [IE Budget]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Fee internal costs @100% = 
@@ -336,7 +336,7 @@ calculate(
     )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Fee Budget = 
@@ -349,7 +349,7 @@ calculate(
 return if(calc=blank(),0,calc)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 IE internal costs = 
@@ -360,7 +360,7 @@ IE internal costs =
     ) 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 IE Budget = 
@@ -370,7 +370,7 @@ IE Budget =
     )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Indicative Fee Revenue = 
@@ -381,25 +381,25 @@ Indicative Fee Revenue =
     )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Indicative IE Revenue = [Indicative IE Rev Completed] + [Indicative IE Rev Incomplete]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Internal (not I/C) costs @ 100% = [Σ Fee Used] + [Σ IE Used]// [Fee internal costs @100%] + [IE internal costs]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Invoiced and Paid = [Net Value]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Invoiced Fee = 
@@ -409,7 +409,7 @@ calculate(
     )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Invoiced IE = 
@@ -419,25 +419,25 @@ calculate(
     )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Invoiced Revenue = [Invoiced Fee] + [Invoiced IE] 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Open WIP Fee = [Indicative Fee Revenue]-[Invoiced Fee]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Planned IE Ratio as of Fee = DIVIDE([IE Budget],[Fee Budget])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Project Fee Completion = 
@@ -447,7 +447,7 @@ if(HASONEVALUE(dim_project[Main Project Number])
     )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Project IE Completion = 
@@ -457,49 +457,49 @@ if(HASONEVALUE(dim_project[Main Project Number])
     )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Project Margin = [Invoiced Revenue] - [Internal (not I/C) costs]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Project Margin % = Divide ([Project Margin], [Invoiced Revenue])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Project Time Completion = AVERAGE(dim_project[Project Time Completion Col])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Total Actual Overdraft = [Actual OD Fee] + [Actual Overdraft IE] 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Total Budget = [Fee Budget] + [IE Budget]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Total Indicative Revenue = [Indicative Fee Revenue] + [Indicative IE Revenue] 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Unpaid Invoices = [Invoiced Revenue] - [Invoiced and Paid]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Fee internal costs @100% incl. Sub = 
@@ -509,81 +509,81 @@ if(HASONEVALUE(dim_project[Main Project Number])
 )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 IE internal costs incl. Sub = 
 CALCULATE([Σ IE Used], filter(All(dim_project), dim_project[Main Project Number] in Values(dim_project[Main Project Number]) ), All(dim_employee))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Internal (not I/C) costs @ 100% incl. Sub = [Fee internal costs @100% incl. Sub] + [IE internal costs incl. Sub]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Actual OD Fee incl. Sub = [Fee internal costs @100% incl. Sub] - [Indicative Fee Revenue]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Actual Overdraft IE incl. Sub = [IE internal costs incl. Sub] - [IE Budget]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Total Actual Overdraft incl. Sub = [Actual OD Fee incl. Sub] + [Actual Overdraft IE incl. Sub] 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Actual IE Ratio as of Fee incl. Sub = DIVIDE([IE internal costs incl. Sub],[Fee Budget])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Project Margin incl. Sub = if(and(HASONEVALUE(dim_project[project_status]),min(dim_project[project_status])="Closed"),[Invoiced Revenue] -([Fee internal costs @100% incl. Sub] + [IE internal costs incl. Sub]- [Fee internal costs @100% employee incl. Sub]*0.35), Blank())
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Internal (not I/C) costs incl. Sub = 
 CALCULATE([Internal (not I/C) costs], filter(All(dim_project), dim_project[Main Project Number] in Values(dim_project[Main Project Number])))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Project Margin % incl. Sub = Divide ([Project Margin incl. Sub], [Invoiced Revenue])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Actual OD Fee % incl. Sub = DIVIDE([Actual OD Fee incl. Sub], [Indicative Fee Revenue])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Indicative IE Revenue (main) = [Indicative IE Rev Completed] + [Indicative IE Rev Incomplete (main)]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Total Indicative Revenue (main) = [Indicative Fee Revenue] + [Indicative IE Revenue (main)] 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Project IE Completion (main) = 
@@ -593,38 +593,38 @@ if(HASONEVALUE(dim_project[Main Project Number])
     )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 TOOLTIP_PATTERN = 
 "                                                           "
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 SEMI_TRANSPARENT = "#55555555"
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Fee Indicative Remaining (main) = [Fee Budget] - [Indicative Fee Revenue]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Measure = min (dim_project[project_status])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Project Margin incl. Sub 2 = if(and(HASONEVALUE(dim_project[project_status]),min(dim_project[project_status])="Closed"),[Invoiced Revenue] - [Internal (not I/C) costs incl. Sub], Blank())
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Fee internal costs @100% employee incl. Sub = 
@@ -634,7 +634,7 @@ if(HASONEVALUE(dim_project[Main Project Number])
 )
 ```
 
-OpenAI API Key is not configured
+
 ## Table: DisplayProjectTableData
 
 ### Measures:
@@ -676,7 +676,7 @@ Switch(min(DisplayProjectTableData[Field])
 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Dynamic Table Percent = 
@@ -692,7 +692,7 @@ Switch(min(DisplayProjectTableData[Field])
 , Blank()) 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Dynamic Table Value Meta = 
@@ -702,9 +702,6 @@ Switch(min(DisplayProjectTableData[Field])    ,"RB Company",min(dim_project[resp
 
     ,"Project Title", min(dim_project[project_name])
     ,"Customer", min(dim_project[project_client])
-
-
-
     ,"Industry", min(dim_project[dm_cc])
     ,"Project Manager", min(dim_project[PM Name])
     ,"Delivery Manager", min(dim_project[delivery_manager])
@@ -714,7 +711,7 @@ Switch(min(DisplayProjectTableData[Field])    ,"RB Company",min(dim_project[resp
 
 ```
 
-OpenAI API Key is not configured
+
 ## Table: Distinct Main Project Numbers
 
 
@@ -722,7 +719,7 @@ OpenAI API Key is not configured
 Filter(VALUES(dim_project[Main Project Number]), dim_project[Main Project Number] <> Blank())
 ```
 
-OpenAI API Key is not configured
+
 ### Measures:
 
 
@@ -730,7 +727,7 @@ OpenAI API Key is not configured
 Selected Main Project = if(HASONEVALUE('Distinct Main Project Numbers'[Main Project Number]), min('Distinct Main Project Numbers'[Main Project Filter]),"Project Selection")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Multiple Selected Main Projects = 
@@ -754,7 +751,7 @@ RETURN
 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Selected Client = 
@@ -770,7 +767,7 @@ if(ISFILTERED('Distinct Main Project Numbers'[Project Client])
  )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Multiple Selected Client = 
@@ -782,7 +779,7 @@ if(ISFILTERED('dim_project'[project_client])
 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Multiple Scelected Delivery Manager = if(ISFILTERED('dim_project'[delivery_manager])
@@ -791,7 +788,7 @@ Multiple Scelected Delivery Manager = if(ISFILTERED('dim_project'[delivery_manag
     ,"[optionally filter by selecting one or more delivery managers]")
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Multiple Projects - nothing selected = 
@@ -804,7 +801,7 @@ RETURN
     IsItFiltered
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -812,25 +809,25 @@ OpenAI API Key is not configured
 Main Project Filter = LOOKUPVALUE(dim_project[Main Project Filter],dim_project[project_number],'Distinct Main Project Numbers'[Main Project Number])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 StartDate = LOOKUPVALUE(dim_project[project_startdate], dim_project[project_number], 'Distinct Main Project Numbers'[Main Project Number]) 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Project Client = LOOKUPVALUE(dim_project[project_client], dim_project[project_number], 'Distinct Main Project Numbers'[Main Project Number]) 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Project Status = LOOKUPVALUE(dim_project[project_status], dim_project[project_number], 'Distinct Main Project Numbers'[Main Project Number]) 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Has Success Fee = 
@@ -838,7 +835,7 @@ var lu = LOOKUPVALUE(dim_project[has_success_fee], dim_project[project_number], 
 return if (lu = blank(), "No", lu)
 ```
 
-OpenAI API Key is not configured
+
 ## Table: _progressMeasures by status date
 
 ### Measures:
@@ -848,19 +845,19 @@ OpenAI API Key is not configured
 PGR Earliest Start = min(dim_project[project_startdate])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 PGR Latest Finish = max(dim_project[project_planned_end])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 PGR Total Days = DATEDIFF([PGR Earliest Start], [PGR Latest Finish], DAY)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 PGR Days to Status Date = 
@@ -873,19 +870,19 @@ if([PGR Earliest Start] > [StatusDate]
 )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 PGR Remaining Days = [PGR Total Days] - [PGR Days to Status Date]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 PGR Progress by Status Date = DIVIDE([PGR Days to Status Date], [PGR Total Days], 0) 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Linear Planned Days to Status = if(
@@ -893,13 +890,13 @@ Linear Planned Days to Status = if(
         ,blank(),  [PGR Progress by Status Date] * [Planned Days])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 PGR Progess by Actuals vs Planned by Status Date = DIVIDE([PGR Actual Days To Status Date] , [Linear Planned Days to Status], 0)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 StatusDate = 
@@ -909,7 +906,7 @@ return
 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 PGR Actual Days To Date = 
@@ -924,13 +921,13 @@ if(And(max(Dates[Date]) > [PGR Latest Finish] , max(Dates[Date]) > max(fact_proj
      
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Max stat date = max(Dates[Date]) 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 PGR Days to Date = 
@@ -943,19 +940,19 @@ if([PGR Earliest Start] > [Max stat date]
 )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 PGR Progress by Date = if(max(Dates[Date])>[PGR Latest Finish],blank(), DIVIDE([PGR Days to Date], [PGR Total Days], 0) )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Linear Planned Days to Date = if(max(Dates[Date])> [PGR Latest Finish],blank(), [PGR Progress by Date] * [Planned Days])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 AvgActualsPerDay = 
@@ -964,7 +961,7 @@ if([Total Actuals (date independent)] > 0
     , [LinearPlannedPerDay])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 PGR Actual Days To Status Date = 
@@ -972,25 +969,25 @@ PGR Actual Days To Status Date =
 
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 PGR Progess by Actuals vs Planned by Status Date (valid dates) = if(max(Dates[Date])> [lastActualDate by date],blank(), [PGR Progess by Actuals vs Planned by Status Date] )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Goal 100% = if(or( max(Dates[Date])> [lastActualDate by date], max(Dates[Date])<[PGR Earliest Start]) ,blank(), 1)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 LinearPlannedPerDay = DIVIDE( [Planned Days], [PGR Total Days], Blank())
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 linear Forecast until planned project end = 
@@ -1003,7 +1000,7 @@ return if(or(or(or( calcDate > [PGR Latest Finish], lastActualDate >= calcDate),
 )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 lastActualDate by date = 
@@ -1011,13 +1008,13 @@ var _max = calculate(max(fact_project_time_recording[day_of_work]), All(Dates[Da
 return if(_max < TODAY(), TODAY(),  _max)
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Total Actuals (date independent) = CALCULATE([Actual Days], All(Dates[Date]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Forecast Result = 
@@ -1027,7 +1024,7 @@ if(min(dim_project[project_status]) = "Closed"
      )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Max of Status or Finish Date = 
@@ -1037,7 +1034,7 @@ Max of Status or Finish Date =
    )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Forecast Result (bar) = 
@@ -1047,14 +1044,14 @@ if(min(dim_project[project_status]) = "Closed"
      )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 PGR Actual Days To Last Actual = if(min(Dates[Date])> [lastActualDate by date], blank(), 
      CALCULATE([Actual Days], Filter(all(Dates[Date]), Dates[Date]<= [StatusDate] && Dates[Date] <= max(Dates[Date]))))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Forecast Result (trend) = 
@@ -1065,14 +1062,14 @@ if(min(Dates[Date]) <  [lastActualDate by date]
      ))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Planned Days (in project duration) = 
 if(or(max(Dates[Date]) < [PGR Earliest Start] ,min(Dates[Date]) > [PGR Latest Finish]), blank(), [Planned Days])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 firstActualDate by date = 
@@ -1080,14 +1077,14 @@ var _min = calculate(min(fact_project_time_recording[day_of_work]), All(Dates[Da
 return  _min
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Difference = //f([Planned Days] == blank(), blank(), [Planned Days] - [Actual Days])
 [Planned Days] - [Actual Days]
 ```
 
-OpenAI API Key is not configured
+
 ## Table: Dates
 
 
@@ -1095,7 +1092,7 @@ OpenAI API Key is not configured
 CALENDAR(Date(2018,01,01), DATE(2023,12,31 ))
 ```
 
-OpenAI API Key is not configured
+
 ## Table: ReportingDates
 
 
@@ -1103,7 +1100,7 @@ OpenAI API Key is not configured
 CALENDAR(min(fact_project_oview_budget_costs[accounting_period_date]), max(fact_project_oview_budget_costs[accounting_period_date]))
 ```
 
-OpenAI API Key is not configured
+
 ### Measures:
 
 
@@ -1111,7 +1108,7 @@ OpenAI API Key is not configured
 Reporting Date = max(ReportingDates[Date])
 ```
 
-OpenAI API Key is not configured
+
 ### Calculated Columns:
 
 
@@ -1119,13 +1116,13 @@ OpenAI API Key is not configured
 YearMonth = CONCATENATE( Format(Year(ReportingDates[Date]),"####"), Format(Month(ReportingDates[Date]),"00"))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Period = CONCATENATE(Format(ReportingDates[Date],"MMMM"), Format(YEAR(ReportingDates[Date])," ####"))
 ```
 
-OpenAI API Key is not configured
+
 ## Table: rep v_fc_psr_invoice
 
 ### Measures:
@@ -1135,7 +1132,7 @@ OpenAI API Key is not configured
 OPEN AMOUNT = sumx('rep v_fc_psr_invoice', if('rep v_fc_psr_invoice'[STATUS]="Canceled",0, 'rep v_fc_psr_invoice'[AMOUNT_TC] -  'rep v_fc_psr_invoice'[CLEARED_AMOUNT_TC] ))
 ```
 
-OpenAI API Key is not configured
+
 ## Table: v_fc_psr_byd_project_internal_incurred_costs
 
 ### Measures:
@@ -1153,31 +1150,31 @@ if(HASONEVALUE(dim_employee[emp_id]) && HASONEVALUE(dim_service[service_desc]) &
     )
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Σ Fee Used = calculate(Sum(v_fc_psr_byd_project_internal_incurred_costs[fee_internal_costs_100pct_eur]))
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Σ IE Used = Sum(v_fc_psr_byd_project_internal_incurred_costs[ie_internal_costs_eur])
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Σ Total Used = [Σ Fee Used] + [Σ IE Used]
 ```
 
-OpenAI API Key is not configured
+
 
 ```dax
 Σ Fee Used employee = calculate(Sum(v_fc_psr_byd_project_internal_incurred_costs[fee_internal_costs_100pct_eur]),Filter(dim_employee, dim_employee[emp_id] <> blank() && dim_employee[emp_id] <> "-999"))
 ```
 
-OpenAI API Key is not configured
+
 ## Table: v_fc_psr_byd_sales_order_acquisition_performance
 
 ### Calculated Columns:
@@ -1187,4 +1184,17 @@ OpenAI API Key is not configured
 Employee = LOOKUPVALUE(dim_employee[Employee Id and Name], dim_employee[emp_id], v_fc_psr_byd_sales_order_acquisition_performance[emp_id])
 ```
 
-OpenAI API Key is not configured
+
+
+```dax
+ParPriCluster = 
+var job = LOOKUPVALUE(dim_employee[jobcode], dim_employee[emp_id], v_fc_psr_byd_sales_order_acquisition_performance[emp_id])
+
+return switch(true()
+        , CONTAINSSTRING(job, "partner"), " PAR"
+        , CONTAINSSTRING(job, "principal"), " PRI"
+        , "other"
+)
+
+```
+
