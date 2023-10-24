@@ -40,6 +40,9 @@ const runScript = (scriptPath: string, args: string[]): Promise<string> => {
             console.log('child process exited with code ', code);
             console.log('Script output:', scriptOutput);
             resolve(scriptOutput);
+            if (code != 0) {
+                reject(`Script exited with code ${code}`);
+            }
         });
     });
 }
@@ -62,7 +65,7 @@ async function run() {
 
         const dep = await installPythonPackages(path.join(__dirname, 'python/requirements.txt'));
         // Run the python script with input as argument
-        const data = await runScript(scriptPath, [workingDirectory, pat, openaiUrl, openaiModelname, openaiKey]);
+        const data = await runScript(scriptPath, [workingDirectory, pat, openaiUrl, openaiModelname, openaiKey, 'false']);
         console.log(data);
     }
     catch (err) {

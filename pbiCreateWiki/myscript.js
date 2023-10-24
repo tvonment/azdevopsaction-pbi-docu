@@ -45,6 +45,9 @@ const runScript = (scriptPath, args) => {
             console.log('child process exited with code ', code);
             console.log('Script output:', scriptOutput);
             resolve(scriptOutput);
+            if (code != 0) {
+                reject(`Script exited with code ${code}`);
+            }
         });
     });
 };
@@ -64,7 +67,7 @@ function run() {
             console.log("OpenAI Model name: " + openaiModelname);
             const dep = yield installPythonPackages(path.join(__dirname, 'python/requirements.txt'));
             // Run the python script with input as argument
-            const data = yield runScript(scriptPath, [workingDirectory, pat, openaiUrl, openaiModelname, openaiKey]);
+            const data = yield runScript(scriptPath, [workingDirectory, pat, openaiUrl, openaiModelname, openaiKey, 'false']);
             console.log(data);
         }
         catch (err) {
