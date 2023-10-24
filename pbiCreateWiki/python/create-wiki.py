@@ -321,9 +321,16 @@ def create_mdDataset(workspace_name, dataset, wiki_path, wiki_name, list_of_tota
     for report in list_of_total_reports:
         if report['datasetId'] == dataset['id']:
             list_of_reports.extend([f"[{report['name']}](../Reports/{get_clean_file_name(report['name'])})", f"[{workspace_name}](../Workspaces/{get_clean_file_name(workspace_name)})"])
-    
     columns = 2
     mdDataset.new_table(columns=columns, rows=len(list_of_reports)//columns, text=list_of_reports, text_align='left')
+
+    mdDataset.new_header(level=2, title='Tables')
+    list_of_tables = []
+    list_of_tables.extend(['Table', 'Workspace'])
+    for table in dataset['tables']:
+        list_of_tables.extend([f"[{table['name']}](./{get_clean_name(dataset['name'])}/{get_clean_file_name(table['name'])})", f"[{workspace_name}](../Workspaces/{get_clean_file_name(workspace_name)})"])
+    columns = 2
+    mdDataset.new_table(columns=columns, rows=len(list_of_tables)//columns, text=list_of_tables, text_align='left')
 
     mdDataset.create_md_file()
     print(f"File {os.path.join(datasets_path, wiki_name)} created")
