@@ -128,7 +128,7 @@ def create_mdTables(workspace_name, dataset, dataset_path, list_of_total_reports
                 list_of_mc_found = []
                 list_of_mc_found.extend(['Report', 'Dataset', 'Workspace'])
                 for mc in list_mcreports_found:
-                    list_of_mc_found.extend([f"[{mc['report']['name']}](../../Reports/{get_clean_file_name(mc['report']['name'])}",f"[{mc['datasetName']}](../../Datasets/{get_clean_file_name( mc['datasetName'] )}", f"[{mc['workspace']}](../../Workspaces/{get_clean_file_name( mc['workspace'] )})"])
+                    list_of_mc_found.extend([f"[{mc['report']['name']}](../../Reports/{get_clean_file_name(mc['report']['name'])})",f"[{mc['datasetName']}](../../Datasets/{get_clean_file_name( mc['datasetName'] )})", f"[{mc['workspace']}](../../Workspaces/{get_clean_file_name( mc['workspace'] )})"])
                 columns = 3
                 mdTable.new_table(columns=columns, rows=len(list_of_mc_found)//columns, text=list_of_mc_found, text_align='left')
         mdTable.create_md_file()
