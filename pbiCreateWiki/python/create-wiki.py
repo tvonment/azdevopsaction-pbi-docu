@@ -63,7 +63,7 @@ def get_openai_explanation(systemmessage, text, openai_config):
 
     matching = next((item for item in openai_content if item["text"] == text), None)
     if matching is not None:
-        print(f"OpenAI {text[:20]}... explanation found".replace("\n", ""))
+        #print(f"OpenAI {text[:20]}... explanation found".replace("\n", ""))
         return matching["content"]
 
     if (openai_config['url'] is None or openai_config['url'] == '') or (openai_config['modelname'] is None or openai_config['modelname'] == '') or (openai_config['api_key'] is None or openai_config['api_key'] == ''): 
@@ -253,6 +253,18 @@ def create_mdWorkspace(workspace, wiki_path, wiki_name, list_of_total_reports, l
     list_of_rows.extend(['State', workspace['state']])
     mdWorkspace.new_table(columns=2, rows=3, text=list_of_rows, text_align='left')
 
+    if 'users' in workspace and len(workspace['users']) > 0:
+        mdWorkspace.new_header(level=2, title='Users')
+        list_of_users = []
+        list_of_users.extend(['User', 'User Type', 'Email', 'Workspace Access'])
+        for user in workspace['users']:
+            list_of_users.extend([f"[{user['displayName']}](../Users/{get_clean_file_name(user['displayName'])})", user['userType'], user['emailAddress'], user['groupUserAccessRight']])
+        columns = 4
+        mdWorkspace.new_table(columns=columns, rows=len(list_of_users)//columns, text=list_of_users, text_align='left')
+    else:
+        mdWorkspace.new_header(level=2, title='Users')
+        mdWorkspace.new_paragraph('No users found')
+
     datasets = workspace['datasets']
 
     mdWorkspace.new_header(level=2, title=workspace['name'])
@@ -311,6 +323,18 @@ def create_mdDataset(workspace_name, dataset, wiki_path, wiki_name, list_of_tota
     columns = 2
     mdDataset.new_table(columns=columns, rows=len(list_of_rows)//columns, text=list_of_rows, text_align='left')
     
+    if 'users' in dataset and len(dataset['users']) > 0:
+        mdDataset.new_header(level=2, title='Users')
+        list_of_users = []
+        list_of_users.extend(['User', 'User Type', 'Email', 'Dataset Access'])
+        for user in dataset['users']:
+            list_of_users.extend([f"[{user['displayName']}](../Users/{get_clean_file_name(user['displayName'])})", user['userType'], user['emailAddress'], user['datasetUserAccessRight']])
+        columns = 4
+        mdDataset.new_table(columns=columns, rows=len(list_of_users)//columns, text=list_of_users, text_align='left')
+    else:
+        mdDataset.new_header(level=2, title='Users')
+        mdDataset.new_paragraph('No users found')
+
     create_mdTables(workspace_name, dataset, os.path.join(datasets_path, wiki_name),list_of_total_reports, list_of_total_mcode, openai_config)
     create_mdMCode(workspace_name, dataset, os.path.join(datasets_path, wiki_name),list_of_total_mcode, openai_config)
     create_mdDAX(workspace_name, dataset, os.path.join(datasets_path, wiki_name), openai_config)
@@ -359,34 +383,35 @@ def create_mdReport(workspace_name, report, wiki_path, wiki_name, dataset_name):
 
     columns = 2
     mdReport.new_table(columns=columns, rows=len(list_of_rows)//columns, text=list_of_rows, text_align='left')
+    
+    if 'users' in report and len(report['users']) > 0:
+        mdReport.new_header(level=2, title='Users')
+        list_of_users = []
+        list_of_users.extend(['User', 'User Type', 'Email', 'Report Access'])
+        for user in report['users']:
+            list_of_users.extend([f"[{user['displayName']}](../Users/{get_clean_file_name(user['displayName'])})", user['userType'], user['emailAddress'], user['reportUserAccessRight']])
+        columns = 4
+        mdReport.new_table(columns=columns, rows=len(list_of_users)//columns, text=list_of_users, text_align='left')
+    else:
+        mdReport.new_header(level=2, title='Users')
+        mdReport.new_paragraph('No users found')
     mdReport.create_md_file()
     print(f"File {os.path.join(report_path, wiki_name)} created")
 
-def create_mdWorkspaces(workspaces, wiki_path, scan_date, openai_config):
+def create_mdWorkspaces(workspaces, wiki_path, scan_date, list_of_total_reports, list_of_total_mcode, openai_config):
+    list_of_workspaces = []
+    list_of_workspaces.extend(['Workspace Name', 'ID'])
+    
     mdWorkspaces = mdutils.MdUtils(file_name=os.path.join(wiki_path, 'Workspaces'))
     mdWorkspaces.new_header(level=1, title='Workspace List')
     mdWorkspaces.new_paragraph("Last Scan: " + scan_date)
     mdWorkspaces.new_paragraph("Last Wiki updated: " + datetime.now().strftime('%B %d, %Y %H:%M:%S'))
     mdWorkspaces.new_line()
-    list_of_workspaces = []
-    list_of_workspaces.extend(['Workspace Name', 'ID'])
-    list_of_total_reports = []
-    list_of_total_mcode = []
-
-    for workspace in workspaces:
-        for report in workspace['reports']:
-            list_of_total_reports.append({'workspace': workspace['name'], 'id': report['id'], 'name': report['name'], 'datasetId': report.get('datasetId', 'not set')})
-        for dataset in workspace['datasets']:
-            for table in dataset['tables']:
-                if table.get('source') is not None:
-                    mcode = table['source'][0]['expression']
-                    list_of_total_mcode.append({'workspace': workspace['name'], 'datasetId': dataset['id'], 'datasetName': dataset.get('name', 'not set'), 'mcode': mcode})
-
 
     for workspace in workspaces:
         workspace_wiki_name = get_clean_name(workspace['name'])
         workspace_wiki_url = f"[{workspace['name']}](./Workspaces/{get_clean_file_name(workspace['name'])})"
-        create_mdWorkspace(workspace, wiki_path, workspace_wiki_name, list_of_total_reports, list_of_total_mcode,openai_config)
+        create_mdWorkspace(workspace, wiki_path, workspace_wiki_name, list_of_total_reports, list_of_total_mcode, openai_config)
         list_of_workspaces.extend([workspace_wiki_url, workspace['id']])
         mdWorkspaces.new_line()
 
@@ -394,12 +419,137 @@ def create_mdWorkspaces(workspaces, wiki_path, scan_date, openai_config):
     mdWorkspaces.create_md_file()
     print(f"File {os.path.join(wiki_path, 'Workspaces')} created")
 
+def create_mdUsers(workspaces, wiki_path):
+    users_path = os.path.join(wiki_path, "Users")
+    if not os.path.exists(users_path):
+        os.makedirs(users_path)
+
+    users = []
+    for workspace in workspaces:
+        for user in workspace['users']:
+            if next((item for item in users if item["identifier"] == user['identifier']), None) is not None:
+                for i, u in enumerate(users):
+                    if u['identifier'] == user['identifier']:
+                        users[i]['workspaces'].append({'workspaceName': workspace['name'], 'workspaceId': workspace['id'], 'groupUserAccessRight': user['groupUserAccessRight']})
+            else: 
+                users.append({
+                    'identifier': user['identifier'], 
+                    'displayName': user['displayName'],
+                    'userType': user['userType'], 
+                    'emailAddress': user['emailAddress'], 
+                    'workspaces': 
+                        [{'workspaceName': workspace['name'], 
+                          'workspaceId': workspace['id'], 
+                          'groupUserAccessRight': user['groupUserAccessRight']
+                          }], 
+                    'reports': [], 
+                    'datasets': []
+                })
+        for report in workspace['reports']:
+            for user in report['users']:
+                for i, u in enumerate(users):
+                    if u['identifier'] == user['identifier']:
+                        if users[i].get('reports') is None:
+                            users[i]['reports'] = []
+                        users[i]['reports'].append({'reportName': report['name'], 'reportId': report['id'], 'reportUserAccessRight': user['reportUserAccessRight']})
+                        break
+        for dataset in workspace['datasets']:
+            for user in dataset['users']:
+                for i, u in enumerate(users):
+                    if u['identifier'] == user['identifier']:
+                        users[i]['datasets'].append({'datasetName': dataset['name'], 'datasetId': dataset['id'], 'datasetUserAccessRight': user['datasetUserAccessRight']})
+                        break
+    mdUsers = mdutils.MdUtils(file_name=os.path.join(wiki_path, 'Users'))
+    mdUsers.new_header(level=1, title='User List')
+    list_of_users = []
+    list_of_users.extend(['User Name', 'Email', 'User Type', 'Workspaces', 'Reports', 'Datasets'])
+    for user in users:
+        list_of_users.extend([f"[{user['displayName']}](./Users/{get_clean_file_name(user['displayName'])})", user['emailAddress'], user['userType'], len(user['workspaces']), len(user['reports']), len(user['datasets'])])
+        mdUser = mdutils.MdUtils(file_name=os.path.join(wiki_path, 'Users', get_clean_name(user['displayName'])))
+        mdUser.new_header(level=1, title=user['displayName'])
+        if user['emailAddress'] is not None:
+            mdUser.new_paragraph('Email: ' + user['emailAddress'])
+        if user['userType'] is not None:
+            mdUser.new_paragraph('User Type: ' + user['userType'])
+        if len(user['workspaces']) > 0:
+            mdUser.new_header(level=2, title='Workspaces')
+            list_of_workspaces = []
+            list_of_workspaces.extend(['Workspace', 'Workspace ID', 'Workspace Access'])
+            for workspace in user['workspaces']:
+                list_of_workspaces.extend([f"[{workspace['workspaceName']}](./../Workspaces/{get_clean_file_name(workspace['workspaceName'])})", workspace['workspaceId'], workspace['groupUserAccessRight']])
+            columns = 3
+            mdUser.new_table(columns=columns, rows=len(list_of_workspaces)//columns, text=list_of_workspaces, text_align='left')
+        if len(user['reports']) > 0:
+            mdUser.new_header(level=2, title='Reports')
+            list_of_reports = []
+            list_of_reports.extend(['Report', 'Report ID', 'Report Access'])
+            for report in user['reports']:
+                list_of_reports.extend([f"[{report['reportName']}](./../Reports/{get_clean_file_name(report['reportName'])})", report['reportId'], report['reportUserAccessRight']])
+            columns = 3
+            mdUser.new_table(columns=columns, rows=len(list_of_reports)//columns, text=list_of_reports, text_align='left')
+        if len(user['datasets']) > 0:
+            mdUser.new_header(level=2, title='Datasets')
+            list_of_datasets = []
+            list_of_datasets.extend(['Dataset', 'Dataset ID', 'Dataset Access'])
+            for dataset in user['datasets']:
+                list_of_datasets.extend([f"[{dataset['datasetName']}](./../Datasets/{get_clean_file_name(dataset['datasetName'])})", dataset['datasetId'], dataset['datasetUserAccessRight']])
+            columns = 3
+            mdUser.new_table(columns=columns, rows=len(list_of_datasets)//columns, text=list_of_datasets, text_align='left')
+        mdUser.create_md_file()
+        print(f"File {os.path.join(wiki_path, 'Users', get_clean_name(user['displayName']))} created")
+    columns = 6
+    mdUsers.new_table(columns=columns, rows=len(list_of_users)//columns, text=list_of_users, text_align='left')
+    mdUsers.create_md_file()
+    print(f"File {os.path.join(wiki_path, 'Users')} created")
+
+def create_mdDatasets(list_of_total_datasets, wiki_path):
+    mdDatasets = mdutils.MdUtils(file_name=os.path.join(wiki_path, 'Datasets')) 
+    mdDatasets.new_header(level=1, title='Dataset List')
+    list_of_datasets = []
+    list_of_datasets.extend(['Dataset Name', 'Dataset ID', 'Workspace'])
+    for dataset in list_of_total_datasets:
+        list_of_datasets.extend([f"[{dataset['name']}](./Datasets/{get_clean_file_name(dataset['name'])})", dataset['id'], f"[{dataset['workspace']}](./Workspaces/{get_clean_file_name(dataset['workspace'])})"])
+    columns = 3
+    mdDatasets.new_table(columns=columns, rows=len(list_of_datasets)//columns, text=list_of_datasets, text_align='left')
+    mdDatasets.create_md_file()
+    print(f"File {os.path.join(wiki_path, 'Datasets')} created")
+
+def create_mdReports(list_of_total_reports, wiki_path):
+    mdReports = mdutils.MdUtils(file_name=os.path.join(wiki_path, 'Reports')) 
+    mdReports.new_header(level=1, title='Report List')
+    list_of_reports = []
+    list_of_reports.extend(['Report Name', 'Report ID', 'Workspace', 'Dataset'])
+    for report in list_of_total_reports:
+        list_of_reports.extend([f"[{report['name']}](./Reports/{get_clean_file_name(report['name'])})", report['id'], report['workspace'], report['datasetId']])
+    columns = 4
+    mdReports.new_table(columns=columns, rows=len(list_of_reports)//columns, text=list_of_reports, text_align='left')
+    mdReports.create_md_file()
+    print(f"File {os.path.join(wiki_path, 'Reports')} created")
+                
 def create_wiki(workspaces, work_dir, scan_date, openai_config):
     wiki_path = os.path.join(work_dir, 'wiki')
     if not os.path.exists(wiki_path):
         os.makedirs(wiki_path)
 
-    create_mdWorkspaces(workspaces, wiki_path, scan_date, openai_config)
+    list_of_total_reports = []
+    list_of_total_datasets = []
+    list_of_total_mcode = []
+
+    for workspace in workspaces:
+        for report in workspace['reports']:
+            list_of_total_reports.append({'workspace': workspace['name'], 'id': report['id'], 'name': report['name'], 'datasetId': report.get('datasetId', 'not set')})
+        for dataset in workspace['datasets']:
+            list_of_total_datasets.append({'workspace': workspace['name'], 'id': dataset['id'], 'name': dataset['name']})
+            for table in dataset['tables']:
+                if table.get('source') is not None:
+                    mcode = table['source'][0]['expression']
+                    list_of_total_mcode.append({'workspace': workspace['name'], 'datasetId': dataset['id'], 'datasetName': dataset.get('name', 'not set'), 'mcode': mcode})
+
+
+    create_mdWorkspaces(workspaces, wiki_path, scan_date, list_of_total_reports=list_of_total_reports, list_of_total_mcode=list_of_total_mcode, openai_config=openai_config)
+    create_mdUsers(workspaces, wiki_path)
+    create_mdDatasets(list_of_total_datasets, wiki_path)
+    create_mdReports(list_of_total_reports, wiki_path)
     print('WIKI created')
 
 def main():
