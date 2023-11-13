@@ -51,6 +51,7 @@ async function run() {
         const appSecret = tl.getInput('appSecret', true) || "";
         const groupId = tl.getInput('groupId', false) || "";
         const workingDirectory = tl.getInput('workDir', false) || tl.getVariable('Build.SourcesDirectory') || "";
+        const newBranchName = tl.getInput('newBranchName', false) || "";
         const pat = tl.getVariable('pat') || tl.getInput('pat', false) || "";
 
         const path = require('path');
@@ -61,7 +62,7 @@ async function run() {
         console.log("Script path: " + scriptPath);
         const dep = await installPythonPackages(path.join(__dirname, 'python/requirements.txt'));
         // Run the python script with input as argument
-        const data = await runScript(scriptPath, [tenantId, appId, appSecret, groupId, workingDirectory, pat]);
+        const data = await runScript(scriptPath, [tenantId, appId, appSecret, groupId, workingDirectory, newBranchName, pat]);
         console.log(data);
     }
     catch (err) {

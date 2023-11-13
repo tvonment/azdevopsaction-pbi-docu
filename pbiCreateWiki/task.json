@@ -14,7 +14,7 @@
     "version": {
         "Major": "1",
         "Minor": "0",
-        "Patch": "38"
+        "Patch": "39"
     },
     "minimumAgentVersion": "1.83.0",
     "instanceNameFormat": "PBI Create Wiki $(message)",

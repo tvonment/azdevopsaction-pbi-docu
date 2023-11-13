@@ -49,6 +49,7 @@ const runScript = (scriptPath: string, args: string[]): Promise<string> => {
 
 async function run() {
     try {
+        const newBranchName = tl.getInput('newBranchName', false) || "";
         const workingDirectory = tl.getInput('workDir', false) || tl.getVariable('Build.SourcesDirectory') || "";
         const pat = tl.getVariable('pat') || tl.getInput('pat', false) || "";
         const openaiUrl = tl.getInput('openaiUrl') || "";
@@ -65,7 +66,7 @@ async function run() {
 
         const dep = await installPythonPackages(path.join(__dirname, 'python/requirements.txt'));
         // Run the python script with input as argument
-        const data = await runScript(scriptPath, [workingDirectory, pat, openaiUrl, openaiModelname, openaiKey, 'false']);
+        const data = await runScript(scriptPath, [workingDirectory, pat, openaiUrl, openaiModelname, openaiKey, newBranchName, 'false']);
         console.log(data);
     }
     catch (err) {

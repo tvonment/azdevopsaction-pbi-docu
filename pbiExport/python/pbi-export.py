@@ -13,7 +13,8 @@ client_id = sys.argv[2]
 client_secret = sys.argv[3]
 group_id = sys.argv[4]
 work_dir = sys.argv[5]
-pat = sys.argv[6]
+branch_name = sys.argv[6]
+pat = sys.argv[7]
 
 # Obtain an access token using the client credentials flow
 token_url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/token"
@@ -121,7 +122,9 @@ if pat is None:
 
 # Encode the PAT in base64
 b64_pat = base64.b64encode(f":{pat}".encode()).decode()
-branch_name = f"api-{current_date}"
+
+if branch_name is None or branch_name == "":
+    branch_name = f"api-{current_date}"
 # Run the git commands with the encoded PAT
 try:
     subprocess.run(["git", "config", "--global", "user.email", "azure-pipeline@coso.com"], check=True)

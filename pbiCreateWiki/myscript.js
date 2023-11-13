@@ -54,6 +54,7 @@ const runScript = (scriptPath, args) => {
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            const newBranchName = tl.getInput('newBranchName', false) || "";
             const workingDirectory = tl.getInput('workDir', false) || tl.getVariable('Build.SourcesDirectory') || "";
             const pat = tl.getVariable('pat') || tl.getInput('pat', false) || "";
             const openaiUrl = tl.getInput('openaiUrl') || "";
@@ -67,7 +68,7 @@ function run() {
             console.log("OpenAI Model name: " + openaiModelname);
             const dep = yield installPythonPackages(path.join(__dirname, 'python/requirements.txt'));
             // Run the python script with input as argument
-            const data = yield runScript(scriptPath, [workingDirectory, pat, openaiUrl, openaiModelname, openaiKey, 'false']);
+            const data = yield runScript(scriptPath, [workingDirectory, pat, openaiUrl, openaiModelname, openaiKey, newBranchName, 'false']);
             console.log(data);
         }
         catch (err) {

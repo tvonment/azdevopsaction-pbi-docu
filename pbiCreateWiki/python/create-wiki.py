@@ -30,10 +30,11 @@ def load_data(filename):
     with open(filename, 'r') as file:
         return json.load(file)
         
-def git_operations(pat):
-    current_date = datetime.now().strftime('%Y-%m-%d-%H-%M')
-    b64_pat = base64.b64encode(f":{pat}".encode()).decode()
-    branch_name = f"wiki-{current_date}"
+def git_operations(pat, branch_name):
+    if branch_name is None or branch_name == '':
+        current_date = datetime.now().strftime('%Y-%m-%d-%H-%M')
+        b64_pat = base64.b64encode(f":{pat}".encode()).decode()
+        branch_name = f"wiki-{current_date}"
 
     try:
         subprocess.run(["git", "config", "--global", "user.email", "azure-pipeline@coso.com"], check=True)
@@ -558,7 +559,8 @@ def main():
     openai_url = sys.argv[3]
     openai_modelname = sys.argv[4]
     openai_api_key = sys.argv[5]
-    debug = sys.argv[6]
+    branch_name = sys.argv[6]
+    debug = sys.argv[7]
 
     openai_config = {"url": openai_url, "modelname": openai_modelname, "api_key": openai_api_key}
 
@@ -577,7 +579,7 @@ def main():
     create_wiki(workspaces, work_dir, scan_date, openai_config)
 
     if debug != 'true':
-        git_operations(pat)
+        git_operations(pat, branch_name)
     else:
         print('Debug mode enabled. Git operations are not executed.')
 
