@@ -14,7 +14,7 @@
     "version": {
         "Major": "1",
         "Minor": "0",
-        "Patch": "7"
+        "Patch": "8"
     },
     "minimumAgentVersion": "1.83.0",
     "instanceNameFormat": "PBI Export $(message)",
@@ -58,6 +58,14 @@
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "Working Directory"
+        },
+        {
+            "name": "newBranchName",
+            "type": "string",
+            "label": "New Branch Name",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "branch name for new export"
         },
         {
             "name": "pat",

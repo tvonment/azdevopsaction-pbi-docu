@@ -14,7 +14,7 @@
     "version": {
         "Major": "1",
         "Minor": "0",
-        "Patch": "39"
+        "Patch": "40"
     },
     "minimumAgentVersion": "1.83.0",
     "instanceNameFormat": "PBI Create Wiki $(message)",
@@ -26,6 +26,14 @@
             "defaultValue": "",
             "required": false,
             "helpMarkDown": "Working Directory"
+        },
+        {
+            "name": "newBranchName",
+            "type": "string",
+            "label": "New Branch Name",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "branch name for new export"
         },
         {
             "name": "pat",
