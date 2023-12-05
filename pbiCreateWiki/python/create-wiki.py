@@ -314,16 +314,35 @@ def create_mdDataset(workspace_name, dataset, wiki_path, wiki_name, list_of_tota
     list_of_rows.extend(['Configured By', dataset.get('configuredBy', 'not set')])
     list_of_rows.extend(['Target Storage Mode', dataset.get('targetStorageMode', 'not set')])
     list_of_rows.extend(['Content Provider Type', dataset.get('contentProviderType', 'not set')])
+    if 'refreshSchedule' in dataset:
+        list_of_rows.extend(['Refresh Schedule', ', '.join(dataset['refreshSchedule']['days']) + ' / ' + ', '.join(dataset['refreshSchedule']['times'])])
+
+    if 'directQueryRefreshSchedule' in dataset:
+        list_of_rows.extend(['Direct Query Refresh Schedule', dataset['directQueryRefreshSchedule']['frequency']])
+    
+    if 'refreshSchedule' and 'directQueryRefreshSchedule' not in dataset:
+        list_of_rows.extend(['Refresh Schedule', 'not set'])
+    
     try:
         list_of_rows.extend(['Created Date', datetime.strptime(dataset['createdDate'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
     except:
         list_of_rows.extend(['Created Date', dataset['createdDate']]) 
+
+    try:
+        if 'roles' in dataset and len(dataset['roles']) > 0:
+            list_of_rows.extend(['Row Level Security', 'Yes'])
+        else:
+            list_of_rows.extend(['Row Level Security', 'No'])
+    except:
+        list_of_rows.extend(['Row Level Security', 'unknown'])
+
+    
     list_of_rows.extend(['MCode', f"[M Code](./{wiki_name}/mcode.md)"])
     list_of_rows.extend(['DAX', f"[DAX](./{wiki_name}/dax.md)"])
     
     columns = 2
     mdDataset.new_table(columns=columns, rows=len(list_of_rows)//columns, text=list_of_rows, text_align='left')
-    
+
     if 'users' in dataset and len(dataset['users']) > 0:
         mdDataset.new_header(level=2, title='Users')
         list_of_users = []
@@ -335,6 +354,25 @@ def create_mdDataset(workspace_name, dataset, wiki_path, wiki_name, list_of_tota
     else:
         mdDataset.new_header(level=2, title='Users')
         mdDataset.new_paragraph('No users found')
+
+    if 'roles' in dataset and len(dataset['roles']) > 0:
+        roles = dataset['roles']
+        mdDataset.new_header(level=2, title='Roles')
+        for role in roles:
+            mdDataset.new_header(level=3, title=role['name'])
+            mdDataset.new_paragraph('Model Permission: ' + role['modelPermission'])
+            if 'tablePermissions' in role and len(role['tablePermissions']) > 0:
+                for table_row in role['tablePermissions']:
+                    mdDataset.new_paragraph(table_row['name'])
+                    mdDataset.insert_code(table_row['filterExpression'], 'm')
+            if 'members' in role and len(role['members']) > 0:
+                list_of_members = []
+                list_of_members.extend(['Member Type', 'Member Name'])
+                for member in role['members']:
+                    list_of_members.extend([member['memberType'], member['memberName']])
+                columns = 2
+                mdDataset.new_table(columns=columns, rows=len(list_of_members)//columns, text=list_of_members, text_align='left')
+
 
     create_mdTables(workspace_name, dataset, os.path.join(datasets_path, wiki_name),list_of_total_reports, list_of_total_mcode, openai_config)
     create_mdMCode(workspace_name, dataset, os.path.join(datasets_path, wiki_name),list_of_total_mcode, openai_config)
@@ -553,6 +591,34 @@ def create_wiki(workspaces, work_dir, scan_date, openai_config):
     create_mdReports(list_of_total_reports, wiki_path)
     print('WIKI created')
 
+def create_wiki_datasources(datasources, work_dir):
+    wiki_path = os.path.join(work_dir, 'wiki')
+    if not os.path.exists(wiki_path):
+        os.makedirs(wiki_path)
+
+    mdDatasources = mdutils.MdUtils(file_name=os.path.join(wiki_path, 'Datasources')) 
+    mdDatasources.new_header(level=1, title='Datasource List')
+    list_of_datasources = []
+    list_of_datasources.extend(['Datasource Type', 'Datasource ID', 'Gateway ID', 'Connection Details'])
+    for datasource in datasources:
+        list_of_datasources.extend([datasource['datasourceType'], datasource['datasourceId'], datasource['gatewayId'], ' - '.join(map(str, datasource['connectionDetails'].values()))])
+    columns = 4
+    mdDatasources.new_table(columns=columns, rows=len(list_of_datasources)//columns, text=list_of_datasources, text_align='left')
+    mdDatasources.create_md_file()
+    print(f"File {os.path.join(wiki_path, 'Datasources')} created")
+
+def create_orderfile():
+    orderfile_path = os.path.join('wiki')
+    if not os.path.exists(orderfile_path):
+        os.makedirs(orderfile_path)
+    with open(os.path.join(orderfile_path, '.order'), 'w') as file:
+        file.write('Workspaces\n')
+        file.write('Datasets\n')
+        file.write('Reports\n')
+        file.write('Users\n')
+        file.write('Datasources\n')
+    print('Orderfile created')
+
 def main():
     work_dir = sys.argv[1]
     pat = sys.argv[2]
@@ -571,12 +637,16 @@ def main():
     print('OpenAI API Key: ' + openai_config['api_key'])
 
     workspaces = []
+    datasources = []
     for file in os.listdir('export'):
         if file.startswith('scanResult'):
             data = load_data(os.path.join('export', file))
             workspaces.extend(data['workspaces'])
+            datasources.extend(data['datasourceInstances'])
             scan_date = data['lastScanDate']
     create_wiki(workspaces, work_dir, scan_date, openai_config)
+    create_wiki_datasources(datasources, work_dir)
+    create_orderfile()
 
     if debug != 'true':
         git_operations(pat, branch_name)
