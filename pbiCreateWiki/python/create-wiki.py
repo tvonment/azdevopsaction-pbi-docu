@@ -194,10 +194,11 @@ def create_mdMCode(workspace_name, dataset, dataset_path,list_of_total_mcode, op
             mdMCode.new_paragraph('Model Permission: ' + role['modelPermission'])
             if 'tablePermissions' in role and len(role['tablePermissions']) > 0:
                 for table_row in role['tablePermissions']:
-                    mdMCode.new_paragraph(table_row['name'])
-                    mdMCode.insert_code(table_row['filterExpression'], 'm')
-                    gpt_response = get_openai_explanation("Explain the following M Code of a Role:", table_row['filterExpression'], openai_config) 
-                    mdMCode.new_paragraph(gpt_response)
+                    if table_row.get('filterExpression') is not None:
+                        mdMCode.new_paragraph(table_row['name'])
+                        mdMCode.insert_code(table_row['filterExpression'], 'm')
+                        gpt_response = get_openai_explanation("Explain the following M Code of a Role:", table_row['filterExpression'], openai_config) 
+                        mdMCode.new_paragraph(gpt_response)
 
     mdMCode.create_md_file()
     print(f"File {os.path.join(dataset_path, 'mcode')} created")
@@ -365,7 +366,8 @@ def create_mdDataset(workspace_name, dataset, wiki_path, wiki_name, list_of_tota
             if 'tablePermissions' in role and len(role['tablePermissions']) > 0:
                 for table_row in role['tablePermissions']:
                     mdDataset.new_paragraph(table_row['name'])
-                    mdDataset.insert_code(table_row['filterExpression'], 'm')
+                    if table_row.get('filterExpression') is not None:
+                        mdDataset.insert_code(table_row['filterExpression'], 'm')
             if 'members' in role and len(role['members']) > 0:
                 list_of_members = []
                 list_of_members.extend(['Member Type', 'Member Name'])
