@@ -31,15 +31,14 @@ def load_data(filename):
         return json.load(file)
         
 def git_operations(pat, branch_name):
-    if branch_name is None or branch_name == '':
-        current_date = datetime.now().strftime('%Y-%m-%d-%H-%M')
-        b64_pat = base64.b64encode(f":{pat}".encode()).decode()
-        branch_name = f"wiki-{current_date}"
-
     try:
         subprocess.run(["git", "config", "--global", "user.email", "azure-pipeline@coso.com"], check=True)
         subprocess.run(["git", "config", "--global", "user.name", "Azure Pipeline"], check=True)
-        subprocess.run(["git", "checkout", "-b", branch_name], check=True)
+        if branch_name is None or branch_name == '':
+            current_date = datetime.now().strftime('%Y-%m-%d-%H-%M')
+            b64_pat = base64.b64encode(f":{pat}".encode()).decode()
+            branch_name = f"wiki-{current_date}"
+            subprocess.run(["git", "checkout", "-b", branch_name], check=True)
         subprocess.run(["git", "-c", f"http.extraHeader=Authorization: Basic {b64_pat}", "add", "."], check=True, capture_output=True)
         subprocess.run(["git", "-c", f"http.extraHeader=Authorization: Basic {b64_pat}", "commit", "-m", "Update WIKI"], check=True, capture_output=True)
         subprocess.run(["git", "-c", f"http.extraHeader=Authorization: Basic {b64_pat}", "push", "--set-upstream", "origin", branch_name ], check=True, capture_output=True)
@@ -565,7 +564,7 @@ def create_mdReports(list_of_total_reports, wiki_path):
     mdReports.create_md_file()
     print(f"File {os.path.join(wiki_path, 'Reports')} created")
                 
-def create_wiki(workspaces, work_dir, scan_date, openai_config):
+def create_wiki_workspaces(workspaces, work_dir, scan_date, openai_config):
     wiki_path = os.path.join(work_dir, 'wiki')
     if not os.path.exists(wiki_path):
         os.makedirs(wiki_path)
@@ -644,14 +643,14 @@ def main():
             workspaces.extend(data['workspaces'])
             datasources.extend(data['datasourceInstances'])
             scan_date = data['lastScanDate']
-    create_wiki(workspaces, work_dir, scan_date, openai_config)
+    create_wiki_workspaces(workspaces, work_dir, scan_date, openai_config)
     create_wiki_datasources(datasources, work_dir)
     create_orderfile()
 
-    if debug != 'true':
+    if debug != 'true' or pat != '':
         git_operations(pat, branch_name)
     else:
-        print('Debug mode enabled. Git operations are not executed.')
+        print('Debug mode enabled or PAT empty. Git operations are not executed.')
 
 if __name__ == '__main__':
     main()

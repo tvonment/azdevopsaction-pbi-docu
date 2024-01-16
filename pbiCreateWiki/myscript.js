@@ -66,6 +66,7 @@ function run() {
             console.log("Script path: " + scriptPath);
             console.log("OpenAI URL: " + openaiUrl);
             console.log("OpenAI Model name: " + openaiModelname);
+            console.log("New Branch Name: " + newBranchName);
             const dep = yield installPythonPackages(path.join(__dirname, 'python/requirements.txt'));
             // Run the python script with input as argument
             const data = yield runScript(scriptPath, [workingDirectory, pat, openaiUrl, openaiModelname, openaiKey, newBranchName, 'false']);

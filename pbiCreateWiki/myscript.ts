@@ -63,6 +63,7 @@ async function run() {
         console.log("Script path: " + scriptPath);
         console.log("OpenAI URL: " + openaiUrl);
         console.log("OpenAI Model name: " + openaiModelname);
+        console.log("New Branch Name: " + newBranchName);
 
         const dep = await installPythonPackages(path.join(__dirname, 'python/requirements.txt'));
         // Run the python script with input as argument
