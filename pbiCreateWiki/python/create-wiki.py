@@ -1,3 +1,4 @@
+import csv
 import os
 import openai
 import json
@@ -241,7 +242,7 @@ def create_mdDAX(workspace_name, dataset, dataset_path, openai_config):
     mdDAX.create_md_file()
     print(f"File {os.path.join(dataset_path, 'dax')} created")
 
-def create_mdWorkspace(workspace, wiki_path, wiki_name, list_of_total_reports, list_of_total_mcode,  openai_config):
+def create_mdWorkspace(workspace, work_dir, wiki_path, wiki_name, list_of_total_reports, list_of_total_mcode,  openai_config):
     workspace_path = os.path.join(wiki_path, "Workspaces")
     if not os.path.exists(workspace_path):
         os.makedirs(workspace_path)
@@ -280,7 +281,7 @@ def create_mdWorkspace(workspace, wiki_path, wiki_name, list_of_total_reports, l
             list_of_datasets.extend([f"[{dataset['name']}](../Datasets/{get_clean_file_name(dataset['name'])})", datetime.strptime(dataset['createdDate'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%B %d, %Y %H:%M:%S')])
         except:
             list_of_datasets.extend([f"[{dataset['name']}](../Datasets/{get_clean_file_name(dataset['name'])})", dataset['createdDate']])
-        create_mdDataset(workspace['name'], dataset, wiki_path, get_clean_name(dataset['name']), list_of_total_reports, list_of_total_mcode,openai_config) 
+        create_mdDataset(workspace['name'], dataset, work_dir, wiki_path, get_clean_name(dataset['name']), list_of_total_reports, list_of_total_mcode,openai_config) 
 
     mdWorkspace.new_table(columns=2, rows=len(list_of_datasets)//2, text=list_of_datasets, text_align='left')
     mdWorkspace.new_header(level=3, title='Reports')
@@ -302,7 +303,7 @@ def create_mdWorkspace(workspace, wiki_path, wiki_name, list_of_total_reports, l
     mdWorkspace.create_md_file()
     print(f"File {os.path.join(workspace_path, wiki_name)} created")
 
-def create_mdDataset(workspace_name, dataset, wiki_path, wiki_name, list_of_total_reports, list_of_total_mcode, openai_config):
+def create_mdDataset(workspace_name, dataset, work_dir, wiki_path, wiki_name, list_of_total_reports, list_of_total_mcode, openai_config):
     datasets_path = os.path.join(wiki_path, "Datasets")
     if not os.path.exists(datasets_path):
         os.makedirs(datasets_path)
@@ -398,6 +399,10 @@ def create_mdDataset(workspace_name, dataset, wiki_path, wiki_name, list_of_tota
     columns = 2
     mdDataset.new_table(columns=columns, rows=len(list_of_tables)//columns, text=list_of_tables, text_align='left')
 
+    for report in list_of_total_reports:
+        for table in dataset['tables']:
+            append_csv(work_dir, {'Table Name': table.get('name'), 'Report Name': report['name'], 'Report ID': report['id']})
+
     mdDataset.create_md_file()
     print(f"File {os.path.join(datasets_path, wiki_name)} created")
 
@@ -441,7 +446,7 @@ def create_mdReport(workspace_name, report, wiki_path, wiki_name, dataset_name):
     mdReport.create_md_file()
     print(f"File {os.path.join(report_path, wiki_name)} created")
 
-def create_mdWorkspaces(workspaces, wiki_path, scan_date, list_of_total_reports, list_of_total_mcode, openai_config):
+def create_mdWorkspaces(workspaces, work_dir, wiki_path, scan_date, list_of_total_reports, list_of_total_mcode, openai_config):
     list_of_workspaces = []
     list_of_workspaces.extend(['Workspace Name', 'ID'])
     
@@ -454,7 +459,7 @@ def create_mdWorkspaces(workspaces, wiki_path, scan_date, list_of_total_reports,
     for workspace in workspaces:
         workspace_wiki_name = get_clean_name(workspace['name'])
         workspace_wiki_url = f"[{workspace['name']}](./Workspaces/{get_clean_file_name(workspace['name'])})"
-        create_mdWorkspace(workspace, wiki_path, workspace_wiki_name, list_of_total_reports, list_of_total_mcode, openai_config)
+        create_mdWorkspace(workspace, work_dir, wiki_path, workspace_wiki_name, list_of_total_reports, list_of_total_mcode, openai_config)
         list_of_workspaces.extend([workspace_wiki_url, workspace['id']])
         mdWorkspaces.new_line()
 
@@ -573,33 +578,18 @@ def create_mdReports(list_of_total_reports, wiki_path):
     mdReports.create_md_file()
     print(f"File {os.path.join(wiki_path, 'Reports')} created")
                 
-def create_wiki_workspaces(workspaces, work_dir, scan_date, openai_config):
+def create_wiki_workspaces(workspaces, list_of_total_reports, list_of_total_datasets, list_of_total_mcode, work_dir, scan_date, openai_config):
     wiki_path = os.path.join(work_dir, 'wiki')
     if not os.path.exists(wiki_path):
         os.makedirs(wiki_path)
 
-    list_of_total_reports = []
-    list_of_total_datasets = []
-    list_of_total_mcode = []
-
-    for workspace in workspaces:
-        for report in workspace['reports']:
-            list_of_total_reports.append({'workspace': workspace['name'], 'id': report['id'], 'name': report['name'], 'datasetId': report.get('datasetId', 'not set')})
-        for dataset in workspace['datasets']:
-            list_of_total_datasets.append({'workspace': workspace['name'], 'id': dataset['id'], 'name': dataset['name']})
-            for table in dataset['tables']:
-                if table.get('source') is not None:
-                    mcode = table['source'][0]['expression']
-                    list_of_total_mcode.append({'workspace': workspace['name'], 'datasetId': dataset['id'], 'datasetName': dataset.get('name', 'not set'), 'mcode': mcode})
-
-
-    create_mdWorkspaces(workspaces, wiki_path, scan_date, list_of_total_reports=list_of_total_reports, list_of_total_mcode=list_of_total_mcode, openai_config=openai_config)
+    create_mdWorkspaces(workspaces, work_dir, wiki_path, scan_date, list_of_total_reports=list_of_total_reports, list_of_total_mcode=list_of_total_mcode, openai_config=openai_config)
     create_mdUsers(workspaces, wiki_path)
     create_mdDatasets(list_of_total_datasets, wiki_path)
     create_mdReports(list_of_total_reports, wiki_path)
     print('WIKI created')
 
-def create_wiki_datasources(datasources, work_dir):
+def create_wiki_datasources(datasources, list_of_total_datasets, list_of_total_reports, work_dir):
     wiki_path = os.path.join(work_dir, 'wiki')
     if not os.path.exists(wiki_path):
         os.makedirs(wiki_path)
@@ -610,10 +600,60 @@ def create_wiki_datasources(datasources, work_dir):
     list_of_datasources.extend(['Datasource Type', 'Datasource ID', 'Gateway ID', 'Connection Details'])
     for datasource in datasources:
         list_of_datasources.extend([datasource['datasourceType'], datasource['datasourceId'], datasource['gatewayId'], ' - '.join(map(str, datasource['connectionDetails'].values()))])
+        create_mdDatasource(datasource, list_of_total_datasets, list_of_total_reports, wiki_path, work_dir)
     columns = 4
     mdDatasources.new_table(columns=columns, rows=len(list_of_datasources)//columns, text=list_of_datasources, text_align='left')
     mdDatasources.create_md_file()
     print(f"File {os.path.join(wiki_path, 'Datasources')} created")
+
+def create_mdDatasource(datasource, datasets, reports, wiki_path, work_dir):
+    wiki_path = os.path.join(wiki_path, "Datasources")
+    if not os.path.exists(wiki_path):
+        os.makedirs(wiki_path)
+    mdDatasource = mdutils.MdUtils(file_name=os.path.join(wiki_path, datasource.get('datasourceId'))) 
+    mdDatasource.new_header(level=1, title=datasource.get('datasourceId'))
+    mdDatasource.new_paragraph('Datasource Type: ' + datasource.get('datasourceType'))
+    mdDatasource.new_paragraph('Gateway ID: ' + datasource.get('gatewayId'))
+    mdDatasource.new_paragraph('Connection Details: ' + ' - '.join(map(str, datasource['connectionDetails'].values())))
+    mdDatasource.new_header(level=2, title='Datasets')
+    list_of_datasets = []
+    list_of_datasets.extend(['Dataset'])
+    used_datasets = []
+    for dataset in datasets:
+        if dataset.get('datasourceUsages') is not None and len(dataset['datasourceUsages']) > 0:
+            for ds in dataset['datasourceUsages']:
+                if ds['datasourceInstanceId'] == datasource['datasourceId']:
+                    list_of_datasets.extend([f"[{dataset['name']}](../Datasets/{get_clean_file_name(dataset['name'])})"])
+                    used_datasets.append(dataset)
+    columns = 1
+    mdDatasource.new_table(columns=columns, rows=len(list_of_datasets)//columns, text=list_of_datasets, text_align='left')
+    
+    list_of_reports = []
+    list_of_reports.extend(['Report'])
+    mdDatasource.new_header(level=2, title='Reports')
+    for report in reports:
+        if report.get('datasetId') is not None:
+            for dataset in used_datasets:
+                if report['datasetId'] == dataset['id']:
+                    list_of_reports.extend([f"[{report['name']}](../Reports/{get_clean_file_name(report['name'])})"])
+    columns = 1
+    mdDatasource.new_table(columns=columns, rows=len(list_of_reports)//columns, text=list_of_reports, text_align='left')
+    mdDatasource.create_md_file()
+    print(f"File {os.path.join(wiki_path, 'Datasource')} created")
+
+def create_csv(work_dir):
+    export_path = os.path.join(work_dir, 'export')  
+    with open(os.path.join(export_path, "tables.csv"), 'w') as csvfile:
+        fieldnames = ['Table Name', 'Report Name', 'Report ID']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+
+def append_csv(work_dir, object):
+    export_path = os.path.join(work_dir, 'export')  
+    with open(os.path.join(export_path, "tables.csv"), 'a') as csvfile:
+        fieldnames = ['Table Name', 'Report Name', 'Report ID']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writerow(object)
 
 def create_orderfile():
     orderfile_path = os.path.join('wiki')
@@ -652,8 +692,23 @@ def main():
             workspaces.extend(data['workspaces'])
             datasources.extend(data['datasourceInstances'])
             scan_date = data['lastScanDate']
-    create_wiki_workspaces(workspaces, work_dir, scan_date, openai_config)
-    create_wiki_datasources(datasources, work_dir)
+
+    list_of_total_reports = []
+    list_of_total_datasets = []
+    list_of_total_mcode = []
+
+    for workspace in workspaces:
+        for report in workspace['reports']:
+            list_of_total_reports.append({'workspace': workspace['name'], 'id': report['id'], 'name': report['name'], 'datasetId': report.get('datasetId', 'not set')})
+        for dataset in workspace['datasets']:
+            list_of_total_datasets.append({'workspace': workspace['name'], 'id': dataset['id'], 'name': dataset['name'], 'datasourceUsages': dataset.get('datasourceUsages', None)})
+            for table in dataset['tables']:
+                if table.get('source') is not None:
+                    mcode = table['source'][0]['expression']
+                    list_of_total_mcode.append({'workspace': workspace['name'], 'datasetId': dataset['id'], 'datasetName': dataset.get('name', 'not set'), 'mcode': mcode})
+    create_csv(work_dir)
+    create_wiki_workspaces(workspaces, list_of_total_reports, list_of_total_datasets, list_of_total_mcode, work_dir, scan_date, openai_config)
+    create_wiki_datasources(datasources, list_of_total_datasets, list_of_total_reports, work_dir)
     create_orderfile()
 
     if debug != 'true' or pat != '':
