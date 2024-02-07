@@ -38,34 +38,40 @@ headers = {
     "Authorization": f"Bearer {access_token}",
 }
 
-get_capacities_url = "https://api.powerbi.com/v1.0/myorg/admin/capacities"
-get_capacities_response = requests.get(get_capacities_url, headers=headers)
-capacities = get_capacities_response.json().get('value', [])
-# Filter capacities to only include the ones with SKU starting with 'F'
-capacities = [c for c in capacities if c.get('sku', '').startswith('F')]
-capacities_ids = [c.get('id', '') for c in capacities]
-#print(f"Capacities: {json.dumps(get_capacities_response.json(), indent=3)}")
+use_filtered_workspaces = True
+
+if use_filtered_workspaces:
+    get_capacities_url = "https://api.powerbi.com/v1.0/myorg/admin/capacities"
+    get_capacities_response = requests.get(get_capacities_url, headers=headers)
+    capacities = get_capacities_response.json().get('value', [])
+    # Filter capacities to only include the ones with SKU starting with 'F'
+    capacities = [c for c in capacities if c.get('sku', '').startswith('F')]
+    capacities_ids = [c.get('id', '') for c in capacities]
+    #print(f"Capacities: {json.dumps(get_capacities_response.json(), indent=3)}")
+    print(f"Capacity IDs: {capacities_ids}")
 
 if group_id is None or group_id == "": # If no group id is provided, get all workspaces
     # Get all workspaces
-    if len(capacities_ids) > 0:
+    workspaces = []
+    if not use_filtered_workspaces:
         workspaces_url = f"https://api.powerbi.com/v1.0/myorg/admin/groups?$top=1000&$filter=type eq 'Workspace'"
+        get_workspaces_response = requests.get(workspaces_url, headers=headers)
+        if get_workspaces_response.status_code == 200 or get_workspaces_response.status_code == 202:
+            workspaces.extend(get_workspaces_response.json().get('value', []))
+        else:
+            print(f"Error in API request: {get_workspaces_response.status_code}: {get_workspaces_response.text}")
+            exit(1)
     else:
-        # Join the capacity IDs with commas and enclose them in parentheses
-        capacity_ids_str = '(' + ', '.join(f"'{id}'" for id in capacities_ids) + ')'
-        print(f"Filtered Capacity IDs: {capacity_ids_str}")
-        workspaces_url = f"https://api.powerbi.com/v1.0/myorg/admin/groups?$top=1000&$filter=type eq 'Workspace' and capacityId in {capacity_ids_str}"    
-    
-    get_workspaces_response = requests.get(workspaces_url, headers=headers)
-
-    if get_workspaces_response.status_code == 200 or get_workspaces_response.status_code == 202:
-        #print(json.dumps(get_workspaces_response.json(), indent=3))
-        print(f"Workspaces Count: {len(get_workspaces_response.json()['value'])}")
-    else:
-        print(f"Error in API request: {get_workspaces_response.status_code}: {get_workspaces_response.text}")
-        exit(1)
-
-    workspaces_ids = [item['id'] for item in get_workspaces_response.json()['value']]
+        for capacity_id in capacities_ids:
+            workspaces_url = f"https://api.powerbi.com/v1.0/myorg/admin/groups?$top=1000&$filter=type eq 'Workspace' and capacityId eq '{capacity_id}'"
+            get_workspaces_response = requests.get(workspaces_url, headers=headers)
+            if get_workspaces_response.status_code == 200 or get_workspaces_response.status_code == 202:
+                workspaces.extend(get_workspaces_response.json().get('value', []))
+            else:
+                print(f"Error in API request: {get_workspaces_response.status_code}: {get_workspaces_response.text}")
+                exit(1)
+    print(f"Workspaces Count: {len(workspaces)}")
+    workspaces_ids = [item['id'] for item in workspaces]
 else:
     workspaces_ids = [group_id]
 
