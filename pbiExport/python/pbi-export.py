@@ -16,6 +16,19 @@ work_dir = sys.argv[5]
 branch_name = sys.argv[6]
 pat = sys.argv[7]
 
+# remove old scanReports
+old_scan_reports = os.path.join(work_dir, 'export')
+if os.path.exists(old_scan_reports):
+    for file in os.listdir(old_scan_reports):
+        if file.startswith('scanResult-'):
+            file_path = os.path.join(old_scan_reports, file)
+            try:
+                if os.path.isfile(file_path):
+                    os.unlink(file_path)
+                    print(f"Deleted file {file_path}")
+            except Exception as e:
+                print(f"An error occurred while deleting file {file_path}: {str(e)}")
+
 # Obtain an access token using the client credentials flow
 token_url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/token"
 token_data = {
