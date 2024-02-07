@@ -38,13 +38,29 @@ headers = {
     "Authorization": f"Bearer {access_token}",
 }
 
+get_capacities_url = "https://api.powerbi.com/v1.0/myorg/admin/capacities"
+get_capacities_response = requests.get(get_capacities_url, headers=headers)
+capacities = get_capacities_response.json().get('value', [])
+# Filter capacities to only include the ones with SKU starting with 'F'
+capacities = [c for c in capacities if c.get('sku', '').startswith('F')]
+capacities_ids = [c.get('id', '') for c in capacities]
+#print(f"Capacities: {json.dumps(get_capacities_response.json(), indent=3)}")
+
 if group_id is None or group_id == "": # If no group id is provided, get all workspaces
     # Get all workspaces
-    workspaces_url = f"https://api.powerbi.com/v1.0/myorg/admin/groups?$top=1000&$filter=type eq 'Workspace'"
+    if len(capacities_ids) > 0:
+        workspaces_url = f"https://api.powerbi.com/v1.0/myorg/admin/groups?$top=1000&$filter=type eq 'Workspace'"
+    else:
+        # Join the capacity IDs with commas and enclose them in parentheses
+        capacity_ids_str = '(' + ', '.join(f"'{id}'" for id in capacities_ids) + ')'
+        print(f"Filtered Capacity IDs: {capacity_ids_str}")
+        workspaces_url = f"https://api.powerbi.com/v1.0/myorg/admin/groups?$top=1000&$filter=type eq 'Workspace' and capacityId in {capacity_ids_str}"    
+    
     get_workspaces_response = requests.get(workspaces_url, headers=headers)
 
     if get_workspaces_response.status_code == 200 or get_workspaces_response.status_code == 202:
-        print(json.dumps(get_workspaces_response.json(), indent=3))
+        #print(json.dumps(get_workspaces_response.json(), indent=3))
+        print(f"Workspaces Count: {len(get_workspaces_response.json()['value'])}")
     else:
         print(f"Error in API request: {get_workspaces_response.status_code}: {get_workspaces_response.text}")
         exit(1)
@@ -66,7 +82,8 @@ for chunk in workspace_chunks:
     scan_start_response = requests.post(start_scan_url, headers=headers, data=workspaces)
 
     if scan_start_response.status_code == 200 or scan_start_response.status_code == 202:
-        print(json.dumps(scan_start_response.json(), indent=3))
+        #print(json.dumps(scan_start_response.json(), indent=3))
+        print(f"Scan started for {len(chunk)} workspaces")
     else:
         print(f"Error in API request: {scan_start_response.status_code}: {scan_start_response.text}")
 
@@ -82,7 +99,8 @@ for chunk in workspace_chunks:
         if scan_status_response.status_code == 200:
             scan_status_data = scan_status_response.json()
             scan_status = scan_status_data["status"]
-            print(json.dumps(scan_status_response.json(), indent=3))
+            #print(json.dumps(scan_status_response.json(), indent=3))
+            print(f"Scan status: {scan_status}")
         else:
             print(f"Error in API request: {scan_status_response.status_code}: {scan_status_response.text}")
             #exit(1)
@@ -92,7 +110,8 @@ for chunk in workspace_chunks:
     scan_result_response = requests.get(scan_result_url, headers=headers)
 
     if scan_result_response.status_code == 200:
-        print(json.dumps(scan_result_response.json(), indent=3))
+        #print(json.dumps(scan_result_response.json(), indent=3))
+        print(f"Scan result received for {len(chunk)} workspaces")
     else:
         print(f"Error in API request: {scan_result_response.status_code}: {scan_result_response.text}")
 

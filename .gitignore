@@ -6,3 +6,4 @@ wiki
 *.vsix
 *.zip
 .taskkey
+.env
