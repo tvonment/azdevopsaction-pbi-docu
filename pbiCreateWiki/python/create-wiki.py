@@ -12,6 +12,8 @@ from datetime import datetime
 
 invalid_chars_regex = re.compile(r'[<>:"/\\|?*#\x00-\x1F]')
 schema_item_regex = r'Schema="(.+?)",Item="(.+?)"'
+filecontent_item_regex = r'File\.Contents\("([^"]+)'
+combine_item_regex = r'Table\.Combine\(\{([^}]+)\}\)'
 
 def check_schema_item_in_string(s, schema, item):
     # Create the regular expression pattern using the provided schema and item
@@ -99,39 +101,42 @@ def get_openai_explanation(systemmessage, text, openai_config):
 
 def create_mdTables(workspace_name, dataset, dataset_path, list_of_total_reports, list_of_total_mcode, openai_config):
     for table in dataset['tables']:
+        match = False
         if not os.path.exists(dataset_path):
             os.makedirs(dataset_path)
         mdTable = mdutils.MdUtils(file_name=os.path.join(dataset_path, get_clean_name(table['name'])))
         mdTable.new_header(level=1, title='Table: ' + table['name'])
         if table.get('source') is not None:
+            match = re.search(schema_item_regex, table['source'][0]['expression']);
             gpt_response = get_openai_explanation("Explain the following M Code:", table['source'][0]['expression'], openai_config)
             mdTable.new_paragraph(gpt_response)
             mdTable.insert_code(table['source'][0]['expression'], 'm')
-             # if schame and item is available, add it to the wiki
-            match = re.search(schema_item_regex, table['source'][0]['expression'])
-            list_mcreports_found = []
-            if match:
-                schema, item = match.groups()
-                #print(f'Schema: {schema}, Item: {item}')
-                for mc in list_of_total_mcode:
-                    if check_schema_item_in_string(mc['mcode'], schema=schema, item=item):
-                        datasetid = mc['datasetId']
-                        reports = [report for report in list_of_total_reports if report['datasetId'] == datasetid]
-                        for report in reports:
-                            #print(f"Found MCode '{schema}' item '{item}':{report['name']} - {mc['datasetId']} - {mc['workspace']}")
-                            mcr = mc.copy()
-                            mcr['report'] = report
-                            list_mcreports_found.append(mcr)
-                        #print(f"Found MCode '{schema}' item '{item}': {mc['datasetId']} - {mc['datasetName']} - {mc['workspace']}")
-            if len(list_mcreports_found) > 0:
-                mdTable.new_header(level=2, title='Usage of similar Table')
-                mdTable.new_paragraph('The following reports are using a similar table:')
-                list_of_mc_found = []
-                list_of_mc_found.extend(['Report', 'Dataset', 'Workspace'])
-                for mc in list_mcreports_found:
-                    list_of_mc_found.extend([f"[{mc['report']['name']}](../../Reports/{get_clean_file_name(mc['report']['name'])})",f"[{mc['datasetName']}](../../Datasets/{get_clean_file_name( mc['datasetName'] )})", f"[{mc['workspace']}](../../Workspaces/{get_clean_file_name( mc['workspace'] )})"])
-                columns = 3
-                mdTable.new_table(columns=columns, rows=len(list_of_mc_found)//columns, text=list_of_mc_found, text_align='left')
+
+            # if schame and item is available, add it to the wiki
+        list_mcreports_found = []
+        if match:
+            #schema, item = match.groups()
+            #print(f'Schema: {schema}, Item: {item}')
+            schema, item = match.groups()
+            for mc in list_of_total_mcode:
+                if check_schema_item_in_string(mc['mcode'], schema=schema, item=item):
+                    datasetid = mc['datasetId']
+                    reports = [report for report in list_of_total_reports if report['datasetId'] == datasetid]
+                    for report in reports:
+                        #print(f"Found MCode '{schema}' item '{item}':{report['name']} - {mc['datasetId']} - {mc['workspace']}")
+                        mcr = mc.copy()
+                        mcr['report'] = report
+                        list_mcreports_found.append(mcr)
+                    #print(f"Found MCode '{schema}' item '{item}': {mc['datasetId']} - {mc['datasetName']} - {mc['workspace']}")
+        if len(list_mcreports_found) > 0:
+            mdTable.new_header(level=2, title='Usage of similar Table')
+            mdTable.new_paragraph('The following reports are using a similar table:')
+            list_of_mc_found = []
+            list_of_mc_found.extend(['Report', 'Dataset', 'Workspace'])
+            for mc in list_mcreports_found:
+                list_of_mc_found.extend([f"[{mc['report']['name']}](../../Reports/{get_clean_file_name(mc['report']['name'])})",f"[{mc['datasetName']}](../../Datasets/{get_clean_file_name( mc['datasetName'] )})", f"[{mc['workspace']}](../../Workspaces/{get_clean_file_name( mc['workspace'] )})"])
+            columns = 3
+            mdTable.new_table(columns=columns, rows=len(list_of_mc_found)//columns, text=list_of_mc_found, text_align='left')
         mdTable.create_md_file()
         print(f"File {os.path.join(dataset_path, get_clean_name(table['name']))} created")
         
@@ -393,16 +398,44 @@ def create_mdDataset(workspace_name, dataset, work_dir, wiki_path, wiki_name, li
 
     mdDataset.new_header(level=2, title='Tables')
     list_of_tables = []
-    list_of_tables.extend(['Table', 'Workspace'])
+    list_of_tables.extend(['Table', 'Datasource', 'Workspace'])
     for table in dataset['tables']:
-        list_of_tables.extend([f"[{table['name']}](./{get_clean_name(dataset['name'])}/{get_clean_file_name(table['name'])})", f"[{workspace_name}](../Workspaces/{get_clean_file_name(workspace_name)})"])
-    columns = 2
+        schema_field = ''
+        if table.get('source') is not None:
+            match = re.search(schema_item_regex, table['source'][0]['expression'])
+            filematch = re.search(filecontent_item_regex, table['source'][0]['expression'])
+            combinematch = re.search(combine_item_regex, table['source'][0]['expression'])
+            if match:
+                schema, item = match.groups()
+                schema_field = f"sql: {schema} {item}"
+            elif filematch:
+                item = filematch.groups()[0]
+                schema_field = f"file: {item}"
+            elif combinematch:
+                item = combinematch.groups()[0]
+                schema_field = f"appended: {item}"
+        list_of_tables.extend([f"[{table['name']}](./{get_clean_name(dataset['name'])}/{get_clean_file_name(table['name'])})", schema_field, f"[{workspace_name}](../Workspaces/{get_clean_file_name(workspace_name)})"])
+    columns = 3
     mdDataset.new_table(columns=columns, rows=len(list_of_tables)//columns, text=list_of_tables, text_align='left')
 
     for report in list_of_total_reports:
         for table in dataset['tables']:
-            append_csv(work_dir, {'Table Name': table.get('name'), 'Report Name': report['name'], 'Report ID': report['id']})
-
+            if table.get('source') is not None:
+                match = re.search(schema_item_regex, table['source'][0]['expression'])
+                matchfile = re.search(filecontent_item_regex, table['source'][0]['expression'])
+                matchcombine = re.search(combine_item_regex, table['source'][0]['expression'])
+                if match:
+                    schema, item = match.groups()
+                    append_csv(work_dir, {'Display Name': table.get('name'), 'Datasource': f"sql: {schema} {item}", 'Report Name': report['name']})
+                else:
+                    if matchfile:
+                        item = matchfile.groups()[0]
+                        append_csv(work_dir, {'Display Name': table.get('name'), 'Datasource': f"file: {item}", 'Report Name': report['name']})
+                    else:
+                        if matchcombine:
+                            item = matchcombine.groups()[0]
+                            append_csv(work_dir, {'Display Name': table.get('name'), 'Datasource': f"appended: {item}", 'Report Name': report['name']})
+                        append_csv(work_dir, {'Display Name': table.get('name'), 'Datasource': '', 'Report Name': report['name']})
     mdDataset.create_md_file()
     print(f"File {os.path.join(datasets_path, wiki_name)} created")
 
@@ -644,14 +677,14 @@ def create_mdDatasource(datasource, datasets, reports, wiki_path, work_dir):
 def create_csv(work_dir):
     export_path = os.path.join(work_dir, 'export')  
     with open(os.path.join(export_path, "tables.csv"), 'w') as csvfile:
-        fieldnames = ['Table Name', 'Report Name', 'Report ID']
+        fieldnames = ['Display Name', 'Datasource', 'Report Name']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
 
 def append_csv(work_dir, object):
     export_path = os.path.join(work_dir, 'export')  
     with open(os.path.join(export_path, "tables.csv"), 'a') as csvfile:
-        fieldnames = ['Table Name', 'Report Name', 'Report ID']
+        fieldnames = ['Display Name', 'Datasource', 'Report Name']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writerow(object)
 
