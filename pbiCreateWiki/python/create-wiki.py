@@ -687,6 +687,81 @@ def append_csv(work_dir, object):
         fieldnames = ['Display Name', 'Datasource', 'Report Name']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writerow(object)
+        
+def create_infos_report_csv(work_dir):
+    export_path = os.path.join(work_dir, 'export')  
+    with open(os.path.join(export_path, "infos_report.csv"), 'w') as csvfile:
+        fieldnames = [
+            'workspace name', 'dataset name', 'capacity id', 'refresh schedule', 
+            'directQueryRefreshSchedule', 'owner semantic model', 'gatewayid', 
+            'server', 'database'
+        ]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        print(f"CSV file {os.path.join(export_path, 'infos_report.csv')} created successfully.")
+
+def append_to_infos_report_csv(workspaces, datasources, work_dir):
+    export_path = os.path.join(work_dir, 'export')
+    file_path = os.path.join(export_path, "infos_report.csv")
+
+    with open(file_path, 'a', newline='') as csvfile:
+        fieldnames = [
+            'workspace name', 'dataset name', 'capacity id', 'refresh schedule', 
+            'directQueryRefreshSchedule', 'owner semantic model', 'gatewayid', 
+            'server', 'database'
+        ]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        for workspace in workspaces:
+            workspace_name = workspace.get('name', '')
+            capacity_id = workspace.get('capacityId', '')
+            for dataset in workspace.get('datasets', []):
+                dataset_name = dataset.get('name', '')
+                refresh_schedule = dataset.get('refreshSchedule', {}).get('enabled', '')
+                owner_semantic_model = dataset.get('configuredBy', '')
+                direct_query_refresh_schedule = dataset.get('directQueryRefreshSchedule', {}).get('frequency', '')
+
+                # Check for datasource usages
+                datasource_usages = dataset.get('datasourceUsages', [])
+                if not datasource_usages:
+                    writer.writerow({
+                        'workspace name': workspace_name,
+                        'dataset name': dataset_name,
+                        'capacity id': capacity_id,
+                        'refresh schedule': refresh_schedule,
+                        'directQueryRefreshSchedule': direct_query_refresh_schedule,
+                        'owner semantic model': owner_semantic_model,
+                        'gatewayid': '',
+                        'server': '',
+                        'database': ''
+                    })
+                else:
+                    for datasource_usage in datasource_usages:
+                        gateway_id = ''
+                        server = ''
+                        database = ''
+                        datasource_instance_id = datasource_usage.get('datasourceInstanceId')
+
+                        for datasource_instance in datasources:
+                            if datasource_instance.get('datasourceId') == datasource_instance_id and 'Sql' in datasource_instance.get('datasourceType', ''):
+                                gateway_id = datasource_instance.get('gatewayId', '')
+                                server = datasource_instance.get('connectionDetails', {}).get('server', '')
+                                database = datasource_instance.get('connectionDetails', {}).get('database', '')
+                                break
+
+                        writer.writerow({
+                            'workspace name': workspace_name,
+                            'dataset name': dataset_name,
+                            'capacity id': capacity_id,
+                            'refresh schedule': refresh_schedule,
+                            'directQueryRefreshSchedule': direct_query_refresh_schedule,
+                            'owner semantic model': owner_semantic_model,
+                            'gatewayid': gateway_id,
+                            'server': server,
+                            'database': database
+                        })
+
+    print(f"Appended data to {file_path} successfully.")
 
 def create_orderfile():
     orderfile_path = os.path.join('wiki')
@@ -740,6 +815,8 @@ def main():
                     mcode = table['source'][0]['expression']
                     list_of_total_mcode.append({'workspace': workspace['name'], 'datasetId': dataset['id'], 'datasetName': dataset.get('name', 'not set'), 'mcode': mcode})
     create_csv(work_dir)
+    create_infos_report_csv(work_dir)
+    append_to_infos_report_csv(workspaces, datasources, work_dir)
     create_wiki_workspaces(workspaces, list_of_total_reports, list_of_total_datasets, list_of_total_mcode, work_dir, scan_date, openai_config)
     create_wiki_datasources(datasources, list_of_total_datasets, list_of_total_reports, work_dir)
     create_orderfile()
