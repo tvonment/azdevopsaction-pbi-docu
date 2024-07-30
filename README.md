@@ -42,5 +42,11 @@ Refer to the official documentation of Azure DevOps and Power BI for detailed AP
 
 ## Build and Test
 To test the installation, run the main pipeline. The wiki should be created and visible in the overview.
-Use to compile TypeScript into JavaScript: 'tsc'
-Use to create Package: 'tfx extension create --manifest-globs vss-extension.json'
+Use to compile TypeScript into JavaScript: 
+```bash
+tsc
+```
+Use to create Package:
+```bash
+tfx extension create --manifest-globs vss-extension.json
+```
